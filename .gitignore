@@ -399,3 +399,7 @@ FodyWeavers.xsd
 
 
 *.docx
+*.xlsx
+*.drawio
+Docs/Entrega1/Casos de uso/PlantillaCU.pdf
+nada.txt
