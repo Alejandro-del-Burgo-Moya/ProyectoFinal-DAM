@@ -1,3 +1,24 @@
 <resources>
-    <string name="app_name">ProyectoFinal_Android</string>
+    <string name="app_name" translatable="false">ProyectoFinal_Android</string>
+
+    <!-- Opciones drawer -->
+    <string name="nav_incidencias">Incidencias</string>
+    <string name="nav_mis_incidencias">Mis incidencias</string>
+    <string name="nav_tipos">Tipos de incidencias</string>
+    <string name="nav_admin">Administrador</string>
+    <string name="nav_cerrar_sesion">Cerrar sesión</string>
+    <string name="nav_acerca_de">Acerca de</string>
+
+    <!--  -->
+    <string name="abrir_nav">Abrir navegación</string>
+    <string name="cerrar_nav">Cerrar navegación</string>
+
+    <!-- Cabecera drawer -->
+    <string name="nombre_usuario_logueado">nombre usuario logueado</string>
+    <string name="nombre_proyecto">NombreProyecto</string>
+
+    <!-- Incidencias -->
+    <string name="incidencias_ordenar_por">Ordenar por</string>
+    <string name="incidencias_filtro">Filtro</string>
+
 </resources>

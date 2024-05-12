@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group
+        android:id="@+id/menu_1"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_incidencias"
+            android:icon="@drawable/ic_incidencias"
+            android:title="@string/nav_incidencias" />
+        <item
+            android:id="@+id/nav_mis_incidencias"
+            android:icon="@drawable/ic_incidencias"
+            android:title="@string/nav_mis_incidencias" />
+        <item
+            android:id="@+id/nav_tipos"
+            android:icon="@drawable/ic_tipos_incidencia"
+            android:title="@string/nav_tipos" />
+        <item
+            android:id="@+id/nav_admin"
+            android:icon="@drawable/ic_admin"
+            android:title="@string/nav_admin" />
+    </group>
+
+    <group android:id="@+id/menu_2">
+        <item
+            android:id="@+id/nav_acerca_de"
+            android:icon="@drawable/ic_acerca_de"
+            android:title="@string/nav_acerca_de" />
+    </group>
+
+    <item
+        android:id="@+id/nav_cerrar_sesion"
+        android:icon="@drawable/ic_cerrar_sesion"
+        android:title="@string/nav_cerrar_sesion" />
+
+</menu>
