@@ -429,6 +429,24 @@ Android/es.dic
 Android/.idea/dictionaries/aleja.xml
 
 
+Android/.gradle
+Android/local.properties
+Android/.idea/caches
+Android/.idea/libraries
+Android/.idea/modules.xml
+Android/.idea/workspace.xml
+Android/.idea/navEditor.xml
+Android/.idea/assetWizardSettings.xml
+Android/.DS_Store
+Android/build
+Android/captures
+Android/.externalNativeBuild
+Android/.cxx
+Android/local.properties
+
+Android/.idea/shelf/
+Android/.idea/workspace.xml
+
 # Visual Studio
 
 Android/.idea/.gitignore

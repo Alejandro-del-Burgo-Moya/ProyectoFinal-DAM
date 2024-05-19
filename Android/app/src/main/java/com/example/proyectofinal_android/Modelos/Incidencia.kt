@@ -1,12 +1,12 @@
-package com.example.proyectofinal_android
+package com.example.proyectofinal_android.Modelos
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import java.time.LocalDate
 
 class Incidencia() {
     private lateinit var _nombre: String
     private lateinit var _descripcion: String
-    private lateinit var _elemento: Elemento
-    private lateinit var _tipo: Tipo
     private lateinit var _prioridad: Prioridad
     private lateinit var _estado: Estado
     private lateinit var _fechaCreacion: LocalDate
@@ -15,62 +15,52 @@ class Incidencia() {
     private lateinit var _creadaPor: Persona
     private lateinit var _asignadaA: Persona
     private lateinit var _resueltaPor: Persona
-    private var nombre: String
+    var nombre: String
         get() = _nombre
         set(value) {
             _nombre = value
         }
-    private var descripcion: String
+    var descripcion: String
         get() = _descripcion
         set(value) {
             _descripcion = value
         }
-    private var elemento: Elemento
-        get() = _elemento
-        set(value) {
-            _elemento = value
-        }
-    private var tipo: Tipo
-        get() = _tipo
-        set(value) {
-            _tipo = value
-        }
-    private var prioridad: Prioridad
+    var prioridad: Prioridad
         get() = _prioridad
         set(value) {
             _prioridad = value
         }
-    private var estado: Estado
+    var estado: Estado
         get() = _estado
         set(value) {
             _estado = value
         }
-    private var fechaCreacion: LocalDate
+    var fechaCreacion: LocalDate
         get() = _fechaCreacion
         set(value) {
             _fechaCreacion = value
         }
-    private var fechaAsignacion: LocalDate
+    var fechaAsignacion: LocalDate
         get() = _fechaAsignacion
         set(value) {
             _fechaAsignacion = value
         }
-    private var fechaResolucion: LocalDate
+    var fechaResolucion: LocalDate
         get() = _fechaResolucion
         set(value) {
             _fechaResolucion = value
         }
-    private var creadaPor: Persona
+    var creadaPor: Persona
         get() = _creadaPor
         set(value) {
             _creadaPor = value
         }
-    private var asignadaA: Persona
+    var asignadaA: Persona
         get() = _asignadaA
         set(value) {
             _asignadaA = value
         }
-    private var resueltaPor: Persona
+    var resueltaPor: Persona
         get() = _resueltaPor
         set(value) {
             _resueltaPor = value
@@ -78,15 +68,12 @@ class Incidencia() {
 
     constructor(
         nombre: String, descripcion: String,
-        elemento: Elemento, tipo: Tipo,
         prioridad: Prioridad, estado: Estado,
         fechaCreacion: LocalDate, fechaAsignacion: LocalDate, fechaResolucion: LocalDate,
         creadaPor: Persona, asignadaA: Persona, resultaPor: Persona
     ) : this() {
         this.nombre = nombre
         this.descripcion = descripcion
-        this.elemento = elemento
-        this.tipo = tipo
         this.prioridad = prioridad
         this.estado = estado
         this.fechaCreacion = fechaCreacion
@@ -97,25 +84,26 @@ class Incidencia() {
         this.resueltaPor = resultaPor
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun crearIncidencia(
-        persona: Persona, n: String, d: String, el: Elemento, t: Tipo, p: Prioridad, es: Estado
+        persona: Persona, n: String, d: String, p: Prioridad, es: Estado
     ) {
         creadaPor = persona
         fechaCreacion = LocalDate.now()
 
         nombre = n
         descripcion = d
-        elemento = el
-        tipo = t
         prioridad = p
         estado = es
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun asignarIncidencia(persona: Persona) {
         asignadaA = persona
         fechaAsignacion = LocalDate.now()
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun resolverIncidencia(persona: Persona) {
         resueltaPor = persona
         fechaResolucion = LocalDate.now()

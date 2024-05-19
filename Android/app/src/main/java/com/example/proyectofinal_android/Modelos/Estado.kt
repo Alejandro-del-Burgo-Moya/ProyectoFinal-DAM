@@ -1,4 +1,4 @@
-package com.example.proyectofinal_android
+package com.example.proyectofinal_android.Modelos
 
 /**
  * Indica el estado de resolución en el que se encuentra la incidencia

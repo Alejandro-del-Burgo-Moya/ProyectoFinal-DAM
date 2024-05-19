@@ -1,4 +1,4 @@
-package com.example.proyectofinal_android
+package com.example.proyectofinal_android.Modelos
 
 /**
  * Indica la prioridad de la incidencia
