@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProyectoFinalDAM.Resources.Idiomas.Espanol">
+
+    <!-- VistaIncidencias -->
+    <x:String x:Key="incidencias">Incidencias</x:String>
+    <x:String x:Key="ordenar">Ordenar por</x:String>
+    <x:String x:Key="filtrar">Filtrar</x:String>
+    <x:String x:Key="btn_crear_incidencia">Crear incidencia</x:String>
+    <x:String x:Key="btn_borrar_filtros">Borrar filtros</x:String>
+    <x:String x:Key="picker_estado">Estado</x:String>
+    <x:String x:Key="picker_prioridad">Prioridad</x:String>
+    <x:String x:Key="picker_sin_filtrar">Sin filtrar</x:String>
+    
+    
+    <!-- VistaCrearIncidencia -->
+    <x:String x:Key="nombre_incidencia">Incidencia</x:String>
+    <x:String x:Key="descripcion_incidencia">Descripción</x:String>
+    <x:String x:Key="estado_incidencia">Estado</x:String>
+    <x:String x:Key="prioridad_incidencia">Prioridad</x:String>
+    <x:String x:Key="falta_nombre">Error - Nombre incidencia</x:String>
+    <x:String x:Key="falta_nombre_desc">Debes introducir un nombre descriptivo para la incidencia</x:String>
+
+
+    <!-- VistaConfiguracion -->
+    <x:String x:Key="configuracion">Configuración</x:String>
+    
+    <!-- VistaAdministrador -->
+    <x:String x:Key="administrador">Administrador</x:String>
+    
+    
+    <!-- VistaAdministradorUsuarios -->
+    <x:String x:Key="ges_usuarios">Gestión de usuarios</x:String>
+    <x:String  x:Key="btn_agregar_usuario">Agregar usuario</x:String>
+    <x:String  x:Key="btn_borrar_usuario">Borrar usuario</x:String>
+    <x:String  x:Key="btn_moodificar_usuario">Modificar usuario</x:String>
+    
+    
+    <!-- VistaAdministradorIncidencias -->
+    <x:String x:Key="ges_incidencias">Gestión de incidencias</x:String>
+    <x:String  x:Key="btn_asiganar_incidencia">Asignar incidencia</x:String>
+    <x:String  x:Key="btn_borrar_incidencia">Borrar incidencia</x:String>
+    <x:String  x:Key="btn_modificar_incidencia">Modificar incidencia</x:String>
+
+
+    <!-- VistaAyuda -->
+    <x:String x:Key="ayuda">Ayuda</x:String>
+    
+    
+    <!-- VistaAcercaDe-->
+    <x:String x:Key="acerca_de">Acerca de</x:String>
+
+
+    <!-- Botones -->
+    <x:String x:Key="btn_aceptar">Aceptar</x:String>
+    <x:String x:Key="btn_cancelar">Cancelar</x:String>
+    <x:String x:Key="btn_borrar">Borrar</x:String>
+
+    
+    <!-- Footer -->
+    <x:String x:Key="creador_app">Alejadro del Burgo Moya</x:String>
+    <x:String x:Key="version_app">Versión 0.1</x:String>
+    
+</ResourceDictionary>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProyectoFinalDAM.Vista.VistaIncidencias"
+             Title="{DynamicResource incidencias}">
+
+    <Grid
+        ColumnDefinitions="*"
+        RowDefinitions="Auto, *">
+        <Grid
+            Grid.Column="0"
+            Grid.Row="0"
+            ColumnDefinitions="Auto, *, *"
+            RowDefinitions="Auto,Auto"
+            ColumnSpacing="10"
+            RowSpacing="10"
+            Padding="10">
+            <Label
+                Grid.Column="0"
+                Grid.Row="0"
+                Text="{DynamicResource ordenar}"
+                VerticalOptions="Center"/>
+            <Picker
+                x:Name="PickerOrden"
+                Grid.Column="1"
+                Grid.Row="0"
+                Grid.ColumnSpan="2"
+                HorizontalOptions="Fill"
+                SelectedIndexChanged="PickerOrden_SelectedIndexChanged"/>
+
+            <Label
+                Grid.Column="0"
+                Grid.Row="1"
+                Text="{DynamicResource filtrar}"
+                VerticalOptions="Center"/>
+            <Picker
+                x:Name="PickerFiltroEstado"
+                Grid.Column="1"
+                Grid.Row="1"
+                Title="{DynamicResource picker_estado}"
+                HorizontalOptions="Fill"
+                SelectedIndexChanged="PickerFiltroEstado_SelectedIndexChanged"/>
+            <Picker
+                x:Name="PickerFiltroPrioridad"
+                Grid.Column="2"
+                Grid.Row="1"
+                Title="{DynamicResource picker_prioridad}"
+                HorizontalOptions="Fill"
+                SelectedIndexChanged="PickerFiltroPrioridad_SelectedIndexChanged"/>
+        </Grid>
+
+        <ScrollView
+            Grid.Column="0"
+            Grid.Row="1">
+            <VerticalStackLayout
+                x:Name="ListaIncidencias"
+                Padding="10"
+                Spacing="10">
+
+            </VerticalStackLayout>
+
+        </ScrollView>
+
+        <VerticalStackLayout
+            Grid.Column="0"
+            Grid.Row="1"
+            HorizontalOptions="End"
+            VerticalOptions="End"
+            Margin="0,0,40,40"
+            Spacing="10">
+            <Button
+                x:Name="BtnBorrarFiltros"
+                Text="{DynamicResource btn_borrar_filtros}"
+                Clicked="BtnBorrarFiltros_Clicked"/>
+
+            <Button
+                x:Name="BtnCrearIncidencia"
+                Text="{DynamicResource btn_crear_incidencia}"
+                Clicked="BtnCrearIncidencia_Clicked"/>
+
+        </VerticalStackLayout>
+    </Grid>
+
+</ContentPage>

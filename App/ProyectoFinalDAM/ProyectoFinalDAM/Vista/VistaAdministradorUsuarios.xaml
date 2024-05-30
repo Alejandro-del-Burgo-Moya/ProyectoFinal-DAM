@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProyectoFinalDAM.Vista.VistaAdministradorUsuarios"
+             Title="{DynamicResource administrador}">
+    <Grid
+        ColumnDefinitions="*"
+        RowDefinitions="*, Auto">
+        <ScrollView
+            x:Name="ListaUsuarios"
+            Grid.Column="0"
+            Grid.Row="0">
+
+        </ScrollView>
+
+        <VerticalStackLayout
+            Grid.Column="0"
+            Grid.Row="1"
+            Padding="20"
+            Spacing="10">
+            <Button
+                Text="{DynamicResource btn_agregar_usuario}"/>
+
+            <Button
+                Text="{DynamicResource btn_borrar_usuario}"/>
+
+            <Button
+                Text="{DynamicResource btn_moodificar_usuario}"/>
+
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

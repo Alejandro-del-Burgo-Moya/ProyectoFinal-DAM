@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="ProyectoFinalDAM.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:ProyectoFinalDAM"
+    Shell.FlyoutBehavior="Flyout"
+    x:Name="shell"
+    Title="ProyectoFinalDAM">
+
+    <Shell.FlyoutHeader>
+        <Label Text="Aquí irá una imagen del proyecto o de la organiación"/>
+    </Shell.FlyoutHeader>
+
+    <Shell.ToolbarItems>
+        <ToolbarItem x:Name="usuarioLogeado" Text="Hola" Order="Primary" IsEnabled="False"/>
+    </Shell.ToolbarItems>
+
+    <Shell.FlyoutFooter>
+        <VerticalStackLayout
+            HorizontalOptions="Center"
+            Padding="10">
+            <Label Text="{DynamicResource creador_app}"
+                HorizontalTextAlignment="Center"/>
+
+            <Label Text="{DynamicResource version_app}"
+                HorizontalTextAlignment="Center"/>
+
+        </VerticalStackLayout>
+    </Shell.FlyoutFooter>
+
+</Shell>

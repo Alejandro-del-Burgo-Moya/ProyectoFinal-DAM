@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProyectoFinalDAM.Vista.VistaCrearIncidencia">
+
+    <Grid
+        ColumnDefinitions="Auto, *"
+        RowDefinitions="Auto, *, Auto, Auto"
+        ColumnSpacing="10"
+        RowSpacing="10"
+        Padding="20">
+        <Label
+            Grid.Column="0"
+            Grid.Row="0"
+            VerticalOptions="Center"
+            Text="{DynamicResource nombre_incidencia}"/>
+
+        <Entry
+            x:Name="TxtIncidencia"
+            Grid.Column="1"
+            Grid.Row="0"
+            Placeholder="{DynamicResource nombre_incidencia}"/>
+
+
+        <Label
+            Grid.Column="0"
+            Grid.Row="1"
+            Text="{DynamicResource descripcion_incidencia}"/>
+
+        <Entry
+            x:Name="TxtDescripcion"
+            Grid.Column="1"
+            Grid.Row="1"
+            VerticalTextAlignment="Start"
+            Placeholder="{DynamicResource descripcion_incidencia}"/>
+
+        <Label
+            Grid.Column="0"
+            Grid.Row="2"
+            VerticalOptions="Center"
+            Text="{DynamicResource prioridad_incidencia}"/>
+
+        <Picker
+            x:Name="PickerPrioridad"
+            Grid.Column="1"
+            Grid.Row="2"/>
+
+        <HorizontalStackLayout
+            Grid.Column="0"
+            Grid.Row="3"
+            Grid.ColumnSpan="2"
+            HorizontalOptions="End"
+            Spacing="10">
+            <Button
+                x:Name="BtnBorrarCampos"
+                Text="{DynamicResource btn_borrar}"
+                Clicked="BtnBorrarCampos_Clicked"/>
+            
+            <Button
+                x:Name="BtnCancelar"
+                Text="{DynamicResource btn_cancelar}"
+                Clicked="BtnCancelar_Clicked"/>
+            
+            <Button
+                x:Name="BtnCrearIncidencia"
+                Text="{DynamicResource btn_crear_incidencia}"
+                Clicked="BtnCrearIncidencia_Clicked"/>
+            
+        </HorizontalStackLayout>
+
+    </Grid>
+</ContentPage>
