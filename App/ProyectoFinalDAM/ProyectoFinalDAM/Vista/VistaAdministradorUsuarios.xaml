@@ -7,9 +7,14 @@
         ColumnDefinitions="*"
         RowDefinitions="*, Auto">
         <ScrollView
-            x:Name="ListaUsuarios"
             Grid.Column="0"
             Grid.Row="0">
+            <VerticalStackLayout
+                x:Name="ListaAdministradorUsuarios"
+                Padding="10"
+                Spacing="10">
+
+            </VerticalStackLayout>
 
         </ScrollView>
 
@@ -25,7 +30,7 @@
                 Text="{DynamicResource btn_borrar_usuario}"/>
 
             <Button
-                Text="{DynamicResource btn_moodificar_usuario}"/>
+                Text="{DynamicResource btn_modificar_usuario}"/>
 
         </VerticalStackLayout>
     </Grid>

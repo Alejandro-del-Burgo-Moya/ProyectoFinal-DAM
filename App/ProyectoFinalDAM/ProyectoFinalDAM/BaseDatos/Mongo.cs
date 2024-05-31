@@ -8,12 +8,12 @@ namespace ProyectoFinalDAM.BaseDatos
     public class Mongo
     {
         //mongodb+srv://adburgom01:b8nl7320c@proyectofinaldam.q49ehh3.mongodb.net/?retryWrites=true&w=majority&appName=ProyectoFinalDAM
-        //private readonly string URIConexion = "mongodb+srv://adburgom01:b8nl7320c@proyectofinaldam.q49ehh3.mongodb.net/?retryWrites=true&w=majority&appName=ProyectoFinalDAM";
         //mongodb+srv://adburgom01:b8nl7320c@proyectofinaldam.q49ehh3.mongodb.net/test?retryWrites=true&w=majority
+        private readonly string URIConexion = "mongodb+srv://adburgom01:b8nl7320c@proyectofinaldam.q49ehh3.mongodb.net/?retryWrites=true&w=majority&appName=ProyectoFinalDAM";
+        //private readonly string URIConexion = "mongodb://adburgom01:b8nl7320c@proyectofinaldam.q49ehh3.mongodb.net/test?retryWrites=true&w=majority&appName=ProyectoFinalDAM";
         private readonly string nombreBaseDatos = "ProyectoFinalDAM";
         private readonly string coleccionIncidencias = "Incidencias";
         private readonly string coleccionPersonas = "Personas";
-        private readonly string URIConexion = "mongodb://adburgom01:b8nl7320c@proyectofinaldam.q49ehh3.mongodb.net/?retryWrites=true&w=majority&appName=ProyectoFinalDAM";
         private readonly MongoClient _client;
         private readonly IMongoCollection<Incidencia> _coleccionIncidencias;
         private readonly IMongoCollection<Persona> _coleccionPersonas;
@@ -29,9 +29,9 @@ namespace ProyectoFinalDAM.BaseDatos
 
         #region "Incidencias"
 
-        public async Task<List<Incidencia>> LeerIncidenciasAsync()
+        public List<Incidencia> LeerIncidencias()
         {
-            return await _coleccionIncidencias.AsQueryable().ToListAsync<Incidencia>();
+            return [.. _coleccionIncidencias.AsQueryable().Where(i => i.Nombre != "")];
         }
 
         public List<Incidencia> LeerIncidenciasFiltroEstado(Estado estado)
@@ -49,11 +49,11 @@ namespace ProyectoFinalDAM.BaseDatos
             return orden switch
             {
                 0 => [.. _coleccionIncidencias.AsQueryable().OrderBy(i => i.FCreacion)],
-                1 => [.. _coleccionIncidencias.AsQueryable().OrderBy(i => i.FCreacion).Reverse()],
-                2 => [.. _coleccionIncidencias.AsQueryable().OrderBy(i => i.Prioridad)],
-                3 => [.. _coleccionIncidencias.AsQueryable().OrderBy(i => i.Prioridad).Reverse()],
-                4 => [.. _coleccionIncidencias.AsQueryable().OrderBy(i => i.Estado)],
-                5 => [.. _coleccionIncidencias.AsQueryable().OrderBy(i => i.Estado).Reverse()],
+                1 => [.. _coleccionIncidencias.AsQueryable().OrderByDescending(i => i.FCreacion)],
+                2 => [.. _coleccionIncidencias.AsQueryable().OrderByDescending(i => i.Prioridad)],
+                3 => [.. _coleccionIncidencias.AsQueryable().OrderBy(i => i.Prioridad)],
+                4 => [.. _coleccionIncidencias.AsQueryable().OrderByDescending(i => i.Estado)],
+                5 => [.. _coleccionIncidencias.AsQueryable().OrderBy(i => i.Estado)],
                 _ => throw new OrdenIncidenciasException("Se ha introducido un orden no controlado => " + orden),
             };
         }
@@ -67,9 +67,9 @@ namespace ProyectoFinalDAM.BaseDatos
 
         #region "Personas"
 
-        public async Task<List<Persona>> LeerPersoansAsyn()
+        public List<Persona> LeerPersoans()
         {
-            return await _coleccionPersonas.AsQueryable().ToListAsync<Persona>();
+            return [.. _coleccionPersonas.AsQueryable().Where(p => p.Nombre != "")];
         }
 
         public async Task AgregarPersonaAsync(Persona persona)

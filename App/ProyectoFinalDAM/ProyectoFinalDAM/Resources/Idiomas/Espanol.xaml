@@ -34,7 +34,7 @@
     <x:String x:Key="ges_usuarios">Gestión de usuarios</x:String>
     <x:String  x:Key="btn_agregar_usuario">Agregar usuario</x:String>
     <x:String  x:Key="btn_borrar_usuario">Borrar usuario</x:String>
-    <x:String  x:Key="btn_moodificar_usuario">Modificar usuario</x:String>
+    <x:String  x:Key="btn_modificar_usuario">Modificar usuario</x:String>
     
     
     <!-- VistaAdministradorIncidencias -->

@@ -1,4 +1,5 @@
-﻿using ProyectoFinalDAM.Modelo.Enums;
+﻿using MongoDB.Bson;
+using ProyectoFinalDAM.Modelo.Enums;
 
 namespace ProyectoFinalDAM.Modelo
 {
@@ -15,6 +16,7 @@ namespace ProyectoFinalDAM.Modelo
         private Persona? _asignada;
         private Persona? _resuelta;
 
+        public ObjectId Id { get; set; }
         public string? Nombre { get => _nombre; set => _nombre = value; }
         public string? Decripcion { get => _decripcion; set => _decripcion = value; }
         public Prioridad Prioridad { get => _prioridad; set => _prioridad = value; }

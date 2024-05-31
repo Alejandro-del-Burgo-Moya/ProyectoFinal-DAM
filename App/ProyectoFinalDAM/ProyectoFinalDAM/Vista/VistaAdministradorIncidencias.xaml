@@ -7,9 +7,14 @@
         ColumnDefinitions="*"
         RowDefinitions="*, Auto">
         <ScrollView
-            x:Name="ListaIncidencias"
             Grid.Column="0"
             Grid.Row="0">
+            <VerticalStackLayout
+                x:Name="ListaAdministradorIncidencias"
+                Padding="10"
+                Spacing="10">
+
+            </VerticalStackLayout>
 
         </ScrollView>
 
