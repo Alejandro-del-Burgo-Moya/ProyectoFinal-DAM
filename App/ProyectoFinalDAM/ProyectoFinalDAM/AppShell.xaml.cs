@@ -5,7 +5,6 @@ namespace ProyectoFinalDAM
 {
     public partial class AppShell : Shell
     {
-        public Mongo mongo = new();
         private readonly ShellContent VIncidencias = new() { Title = App.Current!.Resources.TryGetValue("incidencias", out object incidencias) ? (string)incidencias : "error", IsVisible = true, };
         private readonly ShellContent VConfiguracion = new() { Title = App.Current.Resources.TryGetValue("configuracion", out object configuracion) ? (string)configuracion : "error", IsVisible = true, };
         private readonly FlyoutItem VAdiminstrador = new() { Title = App.Current.Resources.TryGetValue("administrador", out object administrador) ? (string)administrador : "error", IsVisible = true, };
@@ -18,12 +17,12 @@ namespace ProyectoFinalDAM
 
 
             //Inicialización de las vistas
-            VIncidencias.Content = new VistaIncidencias(mongo);
+            VIncidencias.Content = new VistaIncidencias();
 
             VConfiguracion.Content = new VistaConfiguracion();
 
-            VAdiminstrador.Items.Add(new ShellContent() { ContentTemplate = new DataTemplate(typeof(VistaAdministradorUsuarios)), Title = App.Current.Resources.TryGetValue("ges_usuarios", out object ges_usuarios) ? (string)ges_usuarios : "error" });
-            VAdiminstrador.Items.Add(new ShellContent() { ContentTemplate = new DataTemplate(typeof(VistaAdministradorIncidencias)), Title = App.Current.Resources.TryGetValue("ges_incidencias", out object ges_incidencias) ? (string)ges_incidencias : "error" });
+            VAdiminstrador.Items.Add(new ShellContent() { Content = new VistaAdministradorUsuarios(), Title = App.Current.Resources.TryGetValue("ges_usuarios", out object ges_usuarios) ? (string)ges_usuarios : "error" });
+            VAdiminstrador.Items.Add(new ShellContent() { Content = new VistaAdministradorIncidencias(), Title = App.Current.Resources.TryGetValue("ges_incidencias", out object ges_incidencias) ? (string)ges_incidencias : "error" });
 
             VAyuda.Content = new VistaAyuda();
 

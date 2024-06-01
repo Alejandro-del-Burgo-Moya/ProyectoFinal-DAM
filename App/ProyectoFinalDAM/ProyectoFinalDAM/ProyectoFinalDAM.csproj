@@ -103,14 +103,12 @@
 	  <MauiXaml Update="Vista\VistaCrearIncidencia.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Vista\VistaCrearUsuario.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Vista\VistaIncidencias.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Vista\Administrador\" />
-	  <Folder Include="Vista\Incidencia\" />
 	</ItemGroup>
 
 </Project>

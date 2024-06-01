@@ -27,11 +27,12 @@
             Grid.Row="1"
             Text="{DynamicResource descripcion_incidencia}"/>
 
-        <Entry
+        <Editor
             x:Name="TxtDescripcion"
             Grid.Column="1"
             Grid.Row="1"
             VerticalTextAlignment="Start"
+            AutoSize="TextChanges"
             Placeholder="{DynamicResource descripcion_incidencia}"/>
 
         <Label

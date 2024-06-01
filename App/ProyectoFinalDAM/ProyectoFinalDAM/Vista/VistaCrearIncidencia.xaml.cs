@@ -7,14 +7,12 @@ namespace ProyectoFinalDAM.Vista;
 public partial class VistaCrearIncidencia : ContentPage
 {
     private readonly Incidencia incidencia;
-    private readonly Mongo mongo;
 
-    public VistaCrearIncidencia(Mongo mongo)
+    public VistaCrearIncidencia()
     {
         InitializeComponent();
 
         this.incidencia = new();
-        this.mongo = mongo;
 
         List<string> Prioridades = [.. Enum.GetNames<Prioridad>()];
         PickerPrioridad.ItemsSource = null;
@@ -31,7 +29,7 @@ public partial class VistaCrearIncidencia : ContentPage
 
     private void BtnCancelar_Clicked(object sender, EventArgs e)
     {
-        Navigation.PopModalAsync();
+        Navigation.PopModalAsync(true);
     }
 
     private void BtnCrearIncidencia_Clicked(object sender, EventArgs e)
@@ -45,7 +43,7 @@ public partial class VistaCrearIncidencia : ContentPage
             incidencia.FCreacion = DateTime.Now;
             //incidencia.Creada = usuarioLogeado    //TODO manejar el usuario logeadop en la aplicación
 
-            _ = mongo.CrearIncidenciaAsync(incidencia);
+            _ = Mongo.CrearIncidenciaAsync(incidencia);
 
             Navigation.PopModalAsync(true);
         }

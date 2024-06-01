@@ -2,8 +2,8 @@
 {
     public enum Rol : int
     {
-        Administrador = 0,
+        Normal = 0,
         Tecnico = 1,
-        Normal = 2,
+        Administrador = 2,
     }
 }

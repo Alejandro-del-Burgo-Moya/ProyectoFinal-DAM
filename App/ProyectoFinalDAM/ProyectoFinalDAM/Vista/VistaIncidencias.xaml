@@ -6,44 +6,71 @@
 
     <Grid
         ColumnDefinitions="*"
-        RowDefinitions="Auto, *">
+        RowDefinitions="Auto, *"
+        ColumnSpacing="10"
+        RowSpacing="10"
+        Padding="10">
         <Grid
             Grid.Column="0"
             Grid.Row="0"
-            ColumnDefinitions="Auto, *, *"
-            RowDefinitions="Auto,Auto"
+            ColumnDefinitions="Auto, *, *, Auto"
+            RowDefinitions="Auto, Auto, Auto"
             ColumnSpacing="10"
-            RowSpacing="10"
-            Padding="10">
-            <Label
+            RowSpacing="10">
+            <Entry
+                x:Name="TxtBuscar"
                 Grid.Column="0"
                 Grid.Row="0"
+                Grid.ColumnSpan="3"
+                Placeholder="{DynamicResource buscar_incidencia}">
+                <FlyoutBase.ContextFlyout>
+                    <MenuFlyout>
+                        <MenuFlyoutItem Text="{DynamicResource buscar_incidencia}" Clicked="Buscar_Clicked">
+                            <MenuFlyoutItem.KeyboardAccelerators>
+                                <KeyboardAccelerator Modifiers="None" Key="Enter"/>
+                            </MenuFlyoutItem.KeyboardAccelerators>
+                        </MenuFlyoutItem>
+                    </MenuFlyout>
+                </FlyoutBase.ContextFlyout>
+            </Entry>
+
+            <Button
+                x:Name="BtnBuscar"
+                Grid.Column="3"
+                Grid.Row="0"
+                Text="{DynamicResource buscar_incidencia}"
+                Clicked="Buscar_Clicked"/>
+
+            <Label
+                Grid.Column="0"
+                Grid.Row="1"
                 Text="{DynamicResource ordenar}"
                 VerticalOptions="Center"/>
             <Picker
                 x:Name="PickerOrden"
                 Grid.Column="1"
-                Grid.Row="0"
-                Grid.ColumnSpan="2"
+                Grid.Row="1"
+                Grid.ColumnSpan="3"
                 HorizontalOptions="Fill"
                 SelectedIndexChanged="PickerOrden_SelectedIndexChanged"/>
 
             <Label
                 Grid.Column="0"
-                Grid.Row="1"
+                Grid.Row="2"
                 Text="{DynamicResource filtrar}"
                 VerticalOptions="Center"/>
             <Picker
                 x:Name="PickerFiltroEstado"
                 Grid.Column="1"
-                Grid.Row="1"
+                Grid.Row="2"
                 Title="{DynamicResource picker_estado}"
                 HorizontalOptions="Fill"
                 SelectedIndexChanged="PickerFiltroEstado_SelectedIndexChanged"/>
             <Picker
                 x:Name="PickerFiltroPrioridad"
                 Grid.Column="2"
-                Grid.Row="1"
+                Grid.Row="2"
+                Grid.ColumnSpan="2"
                 Title="{DynamicResource picker_prioridad}"
                 HorizontalOptions="Fill"
                 SelectedIndexChanged="PickerFiltroPrioridad_SelectedIndexChanged"/>
@@ -54,8 +81,16 @@
             Grid.Row="1">
             <VerticalStackLayout
                 x:Name="ListaIncidencias"
-                Padding="10"
                 Spacing="10">
+                <FlyoutBase.ContextFlyout>
+                    <MenuFlyout>
+                        <MenuFlyoutItem Text="{DynamicResource actualizar_lista}" Clicked="ActualizarListaIncidencias_Clicked">
+                            <MenuFlyoutItem.KeyboardAccelerators>
+                                <KeyboardAccelerator Modifiers="None" Key="F5"/>
+                            </MenuFlyoutItem.KeyboardAccelerators>
+                        </MenuFlyoutItem>
+                    </MenuFlyout>
+                </FlyoutBase.ContextFlyout>
 
             </VerticalStackLayout>
 
@@ -66,7 +101,7 @@
             Grid.Row="1"
             HorizontalOptions="End"
             VerticalOptions="End"
-            Margin="0,0,40,40"
+            Margin="0,0,10,10"
             Spacing="10">
             <Button
                 x:Name="BtnBorrarFiltros"

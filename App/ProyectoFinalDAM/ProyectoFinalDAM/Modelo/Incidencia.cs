@@ -5,6 +5,7 @@ namespace ProyectoFinalDAM.Modelo
 {
     public class Incidencia()
     {
+        private ObjectId _id;
         private string? _nombre;
         private string? _decripcion;
         private Prioridad _prioridad;
@@ -16,7 +17,7 @@ namespace ProyectoFinalDAM.Modelo
         private Persona? _asignada;
         private Persona? _resuelta;
 
-        public ObjectId Id { get; set; }
+        public ObjectId Id { get => _id; set => _id = value; }
         public string? Nombre { get => _nombre; set => _nombre = value; }
         public string? Decripcion { get => _decripcion; set => _decripcion = value; }
         public Prioridad Prioridad { get => _prioridad; set => _prioridad = value; }
