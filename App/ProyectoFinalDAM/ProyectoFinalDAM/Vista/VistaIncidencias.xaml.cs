@@ -100,7 +100,7 @@ public partial class VistaIncidencias : ContentPage
         Label descripcion = new() { Text = App.Current!.Resources.TryGetValue("descripcion_incidencia", out object descripcion_incidencia) ? (string)descripcion_incidencia : "Descripción" };
         grid.Add(descripcion, 0, 1);
 
-        Label descripcionIncidencia = new() { Text = incidencia.Decripcion?.Split("\n")[0] };
+        Label descripcionIncidencia = new() { Text = incidencia.Decripcion?.Split("\r")[0] };
         grid.Add(descripcionIncidencia);
         grid.SetRow(descripcionIncidencia, 1);
         grid.SetColumn(descripcionIncidencia, 1);
