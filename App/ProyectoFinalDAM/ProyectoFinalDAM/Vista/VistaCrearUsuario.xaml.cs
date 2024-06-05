@@ -69,7 +69,7 @@ public partial class VistaCrearUsuario : ContentPage
                         persona.Nombre = TxtNombreUsuario.Text;
                         persona.Email = TxtEmailUsuario.Text;
                         persona.Contrasena = TxtContrasenaUsuario.Text;
-                        persona.Rol = (Rol)PickerRolUsuario.SelectedIndex;
+                        persona.Rol = PickerRolUsuario.SelectedIndex;
 
                         _ = Mongo.AgregarPersonaAsync(persona);
 

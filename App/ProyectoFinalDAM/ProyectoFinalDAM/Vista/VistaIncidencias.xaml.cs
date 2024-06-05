@@ -6,12 +6,18 @@ namespace ProyectoFinalDAM.Vista;
 
 public partial class VistaIncidencias : ContentPage
 {
+    private int? estado = null;
+    private int? prioridad = null;
+    private int? orden = null;
+    private bool primeraCarga = true;
+
     public VistaIncidencias()
     {
         InitializeComponent();
 
         InicializarPickers();
-        RellenarListaIncidencias(Mongo.LeerIncidencias());
+        //if (primeraCarga) { primeraCarga = false; return; }
+        //RellenarListaIncidencias(Mongo.LeerIncidencias());
     }
 
 
@@ -30,7 +36,7 @@ public partial class VistaIncidencias : ContentPage
             "Menos avanzadas primero",
         ];
         PickerOrden.ItemsSource = filtroOrden;
-        PickerOrden.SelectedIndex = 0;
+        //PickerOrden.SelectedIndex = 0;
 
         InicializarPickerEstado();
         InicializarPickerPrioridad();
@@ -132,19 +138,22 @@ public partial class VistaIncidencias : ContentPage
 
     private void PickerFiltroEstado_SelectedIndexChanged(object sender, EventArgs e)
     {
-        RellenarListaIncidencias(Mongo.LeerIncidenciasFiltroEstado((Estado)PickerFiltroEstado.SelectedIndex));
+        estado = PickerFiltroEstado.SelectedIndex;
+        RellenarListaIncidencias(Mongo.LeerIncidenciasFiltroOrdenNombre(estado, prioridad, orden, TxtBuscar.Text));
     }
 
 
     private void PickerFiltroPrioridad_SelectedIndexChanged(object sender, EventArgs e)
     {
-        RellenarListaIncidencias(Mongo.LeerIncidenciasFiltroPrioridad((Prioridad)PickerFiltroPrioridad.SelectedIndex));
+        prioridad = PickerFiltroPrioridad.SelectedIndex;
+        RellenarListaIncidencias(Mongo.LeerIncidenciasFiltroOrdenNombre(estado, prioridad, orden, TxtBuscar.Text));
     }
 
 
     private void PickerOrden_SelectedIndexChanged(object sender, EventArgs e)
     {
-        RellenarListaIncidencias(Mongo.LeerIncidenciasOrden(PickerOrden.SelectedIndex));
+        orden = PickerOrden.SelectedIndex;
+        RellenarListaIncidencias(Mongo.LeerIncidenciasFiltroOrdenNombre(estado, prioridad, orden, TxtBuscar.Text));
     }
 
 
@@ -167,7 +176,7 @@ public partial class VistaIncidencias : ContentPage
 
     private void Buscar_Clicked(object sender, EventArgs e)
     {
-        RellenarListaIncidencias(Mongo.BuscarIncidencia(TxtBuscar.Text));
+        RellenarListaIncidencias(Mongo.LeerIncidenciasFiltroOrdenNombre(estado, prioridad, orden, TxtBuscar.Text));
     }
 
 

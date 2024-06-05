@@ -11,7 +11,7 @@ public partial class VistaAdministradorIncidencias : ContentPage
     {
         InitializeComponent();
 
-        RellenarListaIncidencias(Mongo.LeerIncidencias());
+        //RellenarListaIncidencias(Mongo.LeerIncidencias());
     }
 
 
@@ -64,7 +64,7 @@ public partial class VistaAdministradorIncidencias : ContentPage
         Label descripcion = new() { Text = App.Current!.Resources.TryGetValue("descripcion_incidencia", out object descripcion_incidencia) ? (string)descripcion_incidencia : "Descripción" };
         grid.Add(descripcion, 0, 1);
 
-        Label descripcionIncidencia = new() { Text = incidencia.Decripcion };
+        Label descripcionIncidencia = new() { Text = incidencia.Decripcion?.Split("\r")[0] };
         grid.Add(descripcionIncidencia);
         grid.SetRow(descripcionIncidencia, 1);
         grid.SetColumn(descripcionIncidencia, 1);
@@ -121,7 +121,7 @@ public partial class VistaAdministradorIncidencias : ContentPage
 
     private void BuscarGesInc_Clicked(object sender, EventArgs e)
     {
-        RellenarListaIncidencias(Mongo.BuscarIncidencia(TxtBuscarGesInc.Text));
+        RellenarListaIncidencias(Mongo.LeerIncidenciasFiltroOrdenNombre(null, null, null, TxtBuscarGesInc.Text));
     }
 
 
@@ -156,13 +156,13 @@ public partial class VistaAdministradorIncidencias : ContentPage
     {
         ObjectId idIncidencia = new(((Grid)((Microsoft.Maui.Controls.Element)sender!).Parent.Parent).ClassId);
         Incidencia incidencia = (Incidencia)Mongo.LeerIncidencias().Where(i => i.Id == idIncidencia).First();
-        if (incidencia.Estado != Estado.Resuelta)
+        if (incidencia.Estado != (int)Estado.Resuelta)
         {
             string nombre = await App.Current!.MainPage!.DisplayActionSheet(
                 App.Current!.Resources.TryGetValue("asignar_tecnico", out object asignar_tecnico) ? (string)asignar_tecnico : "Elige un técnico",
                 null,
                 null,
-                Mongo.LeerPersonas().Where(p => p.Rol == Rol.Tecnico).Select(p => p.NombreCompleto).ToArray());
+                Mongo.LeerPersonas().Where(p => p.Rol == (int)Rol.Tecnico).Select(p => p.NombreCompleto).ToArray());
             if (nombre != null)
             {
                 Persona persona = (Persona)Mongo.LeerPersonas().Where(p => p.NombreCompleto == nombre).First();

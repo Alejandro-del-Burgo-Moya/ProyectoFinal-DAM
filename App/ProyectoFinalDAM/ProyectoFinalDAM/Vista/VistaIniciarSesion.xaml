@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProyectoFinalDAM.Vista.VistaIniciarSesion"
+             Title="VistaIniciarSesion">
+
+    <VerticalStackLayout
+        HorizontalOptions="Center"
+        VerticalOptions="Center">
+        <FlyoutBase.ContextFlyout>
+            <MenuFlyout>
+                <MenuFlyoutItem Text="{DynamicResource btn_iniciar_sesion}" Clicked="BtnInicarSesion_Clicked">
+                    <MenuFlyoutItem.KeyboardAccelerators>
+                        <KeyboardAccelerator Modifiers="None" Key="Enter"/>
+                    </MenuFlyoutItem.KeyboardAccelerators>
+                </MenuFlyoutItem>
+            </MenuFlyout>
+        </FlyoutBase.ContextFlyout>
+        <Grid 
+            RowDefinitions="Auto,50,50,50"
+            ColumnDefinitions="30,*,30"
+            RowSpacing="10"
+            ColumnSpacing="10"
+            Padding="0,0,0,0"
+            HorizontalOptions="Center">
+
+            <Image
+                Source="dotnet_bot.png"
+                WidthRequest="300" HeightRequest="300"
+                Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="1"/>
+
+
+            <Entry 
+                x:Name="TxtUsuario"
+                Placeholder="{DynamicResource txt_usuario}"
+                Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="1"/>
+
+            <Entry 
+                x:Name="TxtContrasena"
+                IsPassword="True"
+                Placeholder="{DynamicResource txt_contrasena}" 
+                Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="1"/>
+
+            <Button
+                x:Name="BtnMostrarOcultar"
+                WidthRequest="50"
+                HeightRequest="50"
+                Padding="0"
+                HorizontalOptions="End"
+                Pressed="BtnMostrarOcultar_Pressed"
+                Released="BtnMostrarOcultar_Released"
+                Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="1"/>
+
+            <Button 
+                x:Name="BtnInicarSesion"
+                Text="{DynamicResource btn_iniciar_sesion}"
+                Clicked="BtnInicarSesion_Clicked"
+                Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="1"/>
+
+        </Grid>
+    </VerticalStackLayout>
+</ContentPage>

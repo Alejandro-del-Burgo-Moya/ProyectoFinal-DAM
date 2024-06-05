@@ -11,7 +11,7 @@ public partial class VistaAdministradorUsuarios : ContentPage
 	{
 		InitializeComponent();
 
-        RellenarListaUsuarios(Mongo.LeerPersonas());
+        //RellenarListaUsuarios(Mongo.LeerPersonas());
     }
 
 
@@ -116,7 +116,7 @@ public partial class VistaAdministradorUsuarios : ContentPage
     private void BtnAgregarUsuario_Clicked(object sender, EventArgs e)
     {
         _ = Navigation.PushModalAsync(new VistaCrearUsuario(), true);
-        RellenarListaUsuarios(Mongo.LeerPersonas());
+        //RellenarListaUsuarios(Mongo.LeerPersonas());
     }
 
 

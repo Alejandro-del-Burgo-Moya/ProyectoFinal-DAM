@@ -13,8 +13,8 @@
     <x:String x:Key="picker_prioridad">Prioridad</x:String>
     <x:String x:Key="picker_sin_filtrar">Sin filtrar</x:String>
     <x:String x:Key="buscar_incidencia">Buscar</x:String>
-    
-    
+
+
     <!-- VistaCrearIncidencia -->
     <x:String x:Key="nombre_incidencia">Incidencia</x:String>
     <x:String x:Key="descripcion_incidencia">Descripción</x:String>
@@ -26,18 +26,18 @@
 
     <!-- VistaConfiguracion -->
     <x:String x:Key="configuracion">Configuración</x:String>
-    
+
     <!-- VistaAdministrador -->
     <x:String x:Key="administrador">Administrador</x:String>
-    
-    
+
+
     <!-- VistaAdministradorUsuarios -->
     <x:String x:Key="ges_usuarios">Gestión de usuarios</x:String>
     <x:String x:Key="btn_agregar_usuario">Agregar usuario</x:String>
     <x:String x:Key="btn_borrar_usuario">Borrar usuario</x:String>
     <x:String x:Key="btn_modificar_usuario">Modificar usuario</x:String>
-    
-    
+
+
     <!-- VistaCrearUsuario -->
     <x:String x:Key="nombre_persona">Nombre</x:String>
     <x:String x:Key="apellido1_persona">Primer apellido</x:String>
@@ -60,8 +60,8 @@
     <x:String x:Key="falta_email_usuario">Error - Email de usuario</x:String>
     <x:String x:Key="falta_email_usuario_desc">Debes introducir un correo electrónico válido para el nuevo usuario</x:String>
     <x:String x:Key="info_contrasena">La contraseña debe tener al menos 6 caracteres, 1 mayúscula, 1 minúscula y 1 número.</x:String>
-    
-    
+
+
     <!-- VistaAdministradorIncidencias -->
     <x:String x:Key="ges_incidencias">Gestión de incidencias</x:String>
     <x:String x:Key="btn_asiganar_incidencia">Asignar incidencia</x:String>
@@ -72,10 +72,18 @@
     <x:String x:Key="error_asignar_incidencia_resuelta_desc">No se puede volver a asignar una incidencia resulta.</x:String>
 
 
+    <!-- VistaIniciarSesion -->
+    <!--título vista-->
+    <x:String x:Key="iniciar_sesion">Incicar Sesión</x:String>
+    <x:String x:Key="btn_iniciar_sesion">Iniciar sesión</x:String>
+    <x:String x:Key="txt_usuario">Usuario</x:String>
+    <x:String x:Key="txt_contrasena">Contraseña</x:String>
+
+
     <!-- VistaAyuda -->
     <x:String x:Key="ayuda">Ayuda</x:String>
-    
-    
+
+
     <!-- VistaAcercaDe-->
     <x:String x:Key="acerca_de">Acerca de</x:String>
 
@@ -86,9 +94,9 @@
     <x:String x:Key="btn_borrar">Borrar</x:String>
     <x:String x:Key="actualizar_lista">Actualizar lista</x:String>
 
-    
+
     <!-- Footer -->
     <x:String x:Key="creador_app">Alejadro del Burgo Moya</x:String>
     <x:String x:Key="version_app">Versión 0.1</x:String>
-    
+
 </ResourceDictionary>

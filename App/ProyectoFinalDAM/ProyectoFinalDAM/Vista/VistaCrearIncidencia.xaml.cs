@@ -38,8 +38,8 @@ public partial class VistaCrearIncidencia : ContentPage
         {
             incidencia.Nombre = TxtIncidencia.Text;
             incidencia.Decripcion = TxtDescripcion.Text;
-            incidencia.Estado = Estado.Abierta;
-            incidencia.Prioridad = (Prioridad)PickerPrioridad.SelectedIndex;
+            incidencia.Estado = (int)Estado.Abierta;
+            incidencia.Prioridad = PickerPrioridad.SelectedIndex;
             incidencia.FCreacion = DateTime.Now;
             //incidencia.Creada = usuarioLogeado    //TODO manejar el usuario logeadop en la aplicación
 
