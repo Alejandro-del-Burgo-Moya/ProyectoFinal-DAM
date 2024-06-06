@@ -9,7 +9,7 @@
         VerticalOptions="Center">
         <FlyoutBase.ContextFlyout>
             <MenuFlyout>
-                <MenuFlyoutItem Text="{DynamicResource btn_iniciar_sesion}" Clicked="BtnInicarSesion_Clicked">
+                <MenuFlyoutItem Text="{DynamicResource btn_iniciar_sesion}" Clicked="BtnIniciarSesion_Clicked">
                     <MenuFlyoutItem.KeyboardAccelerators>
                         <KeyboardAccelerator Modifiers="None" Key="Enter"/>
                     </MenuFlyoutItem.KeyboardAccelerators>
@@ -46,15 +46,16 @@
                 WidthRequest="50"
                 HeightRequest="50"
                 Padding="0"
+                ImageSource="dotnet_bot.png"
                 HorizontalOptions="End"
                 Pressed="BtnMostrarOcultar_Pressed"
                 Released="BtnMostrarOcultar_Released"
                 Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="1"/>
 
             <Button 
-                x:Name="BtnInicarSesion"
+                x:Name="BtnIniciarSesion"
                 Text="{DynamicResource btn_iniciar_sesion}"
-                Clicked="BtnInicarSesion_Clicked"
+                Clicked="BtnIniciarSesion_Clicked"
                 Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="1"/>
 
         </Grid>

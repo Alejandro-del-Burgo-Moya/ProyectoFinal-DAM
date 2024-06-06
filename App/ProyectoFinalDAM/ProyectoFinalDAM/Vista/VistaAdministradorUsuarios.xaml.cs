@@ -7,20 +7,17 @@ namespace ProyectoFinalDAM.Vista;
 
 public partial class VistaAdministradorUsuarios : ContentPage
 {
-	public VistaAdministradorUsuarios()
-	{
-		InitializeComponent();
-
-        var lista = Mongo.LeerPersonas();
-        lista.Wait();
-        RellenarListaUsuarios(lista.Result);
+    public VistaAdministradorUsuarios()
+    {
+        InitializeComponent();
     }
 
 
-    private void RellenarListaUsuarios(List<Persona> personas)
+    private async Task RellenarListaUsuarios()
     {
+        var lista = await Mongo.LeerPersonasFiltroNombre(TxtBuscarGesUsu.Text);
         ListaAdministradorUsuarios.Children.Clear();
-        foreach (var persona in personas)
+        foreach (var persona in lista)
         {
             ListaAdministradorUsuarios.Add(GenerarFramePersona(persona));
         }
@@ -111,14 +108,15 @@ public partial class VistaAdministradorUsuarios : ContentPage
 
     private void BuscarGesUsu_Clicked(object sender, EventArgs e)
     {
-        RellenarListaUsuarios(Mongo.BuscarPersona(TxtBuscarGesUsu.Text));
+        _ = RellenarListaUsuarios();
     }
 
 
     private void BtnAgregarUsuario_Clicked(object sender, EventArgs e)
     {
         _ = Navigation.PushModalAsync(new VistaCrearUsuario(), true);
-        //RellenarListaUsuarios(Mongo.LeerPersonas());
+
+        _ = RellenarListaUsuarios();
     }
 
 
@@ -126,9 +124,6 @@ public partial class VistaAdministradorUsuarios : ContentPage
     {
         TxtBuscarGesUsu.Text = null;
 
-        var lista = Mongo.LeerPersonas();
-        lista.Wait();
-
-        RellenarListaUsuarios(lista.Result);
+        _ = RellenarListaUsuarios();
     }
 }

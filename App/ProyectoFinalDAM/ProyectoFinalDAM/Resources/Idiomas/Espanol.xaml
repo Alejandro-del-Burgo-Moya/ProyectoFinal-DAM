@@ -78,7 +78,11 @@
     <x:String x:Key="btn_iniciar_sesion">Iniciar sesión</x:String>
     <x:String x:Key="txt_usuario">Usuario</x:String>
     <x:String x:Key="txt_contrasena">Contraseña</x:String>
-
+    
+    
+    <!-- CerrarSesion -->
+    <x:String x:Key="btn_cerrar_sesion">Cerrar sesión</x:String>
+    
 
     <!-- VistaAyuda -->
     <x:String x:Key="ayuda">Ayuda</x:String>

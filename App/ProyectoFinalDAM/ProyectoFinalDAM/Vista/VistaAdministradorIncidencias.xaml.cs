@@ -1,3 +1,4 @@
+using Microsoft.Maui.Controls;
 using MongoDB.Bson;
 using ProyectoFinalDAM.BaseDatos;
 using ProyectoFinalDAM.Modelo;
@@ -10,18 +11,15 @@ public partial class VistaAdministradorIncidencias : ContentPage
     public VistaAdministradorIncidencias()
     {
         InitializeComponent();
-
-        var lista = Mongo.LeerIncidencias();
-        lista.Wait();
-        RellenarListaIncidencias(lista.Result);
     }
 
 
 
-    private void RellenarListaIncidencias(List<Incidencia> incidencias)
+    private async Task RellenarListaIncidencias()
     {
+        var lista = await Mongo.LeerIncidenciasFiltroOrdenNombre(null, null, null, TxtBuscarGesInc.Text);
         ListaAdministradorIncidencias.Children.Clear();
-        foreach (var incidencia in incidencias)
+        foreach (var incidencia in lista)
         {
             ListaAdministradorIncidencias.Add(GenerarFrameIncidencia(incidencia));
         }
@@ -123,18 +121,14 @@ public partial class VistaAdministradorIncidencias : ContentPage
 
     private void BuscarGesInc_Clicked(object sender, EventArgs e)
     {
-        var lista = Mongo.LeerIncidenciasFiltroOrdenNombre(null, null, null, TxtBuscarGesInc.Text);
-        lista.Wait();
-        RellenarListaIncidencias(lista.Result);
+        _ = RellenarListaIncidencias();
     }
 
 
     private void ActualizarListaIncidenciasAdm_Clicked(object sender, EventArgs e)
     {
         TxtBuscarGesInc.Text = null;
-        var lista = Mongo.LeerIncidencias();
-        lista.Wait();
-        RellenarListaIncidencias(lista.Result);
+        _ = RellenarListaIncidencias();
     }
 
 
@@ -142,9 +136,7 @@ public partial class VistaAdministradorIncidencias : ContentPage
     private void BtnCrearIncidenciaAdministrador_Clicked(object sender, EventArgs e)
     {
         _ = Navigation.PushModalAsync(new VistaCrearIncidencia(), true);
-        var lista = Mongo.LeerIncidencias();
-        lista.Wait();
-        RellenarListaIncidencias(lista.Result);
+        _ = RellenarListaIncidencias();
     }
 
 
@@ -168,7 +160,7 @@ public partial class VistaAdministradorIncidencias : ContentPage
         Incidencia incidencia = (Incidencia)lista.Result.Where(i => i.Id == idIncidencia).First();
         if (incidencia.Estado != (int)Estado.Resuelta)
         {
-            var tecnicos = Mongo.LeerPersonas();
+            var tecnicos = Mongo.LeerPersonasFiltroNombre();
             tecnicos.Wait();
             string nombre = App.Current!.MainPage!.DisplayActionSheet(
                 App.Current!.Resources.TryGetValue("asignar_tecnico", out object asignar_tecnico) ? (string)asignar_tecnico : "Elige un técnico",

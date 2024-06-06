@@ -15,10 +15,6 @@ public partial class VistaIncidencias : ContentPage
         InitializeComponent();
 
         InicializarPickers();
-
-        var lista = Mongo.LeerIncidencias();
-        lista.Wait();
-        RellenarListaIncidencias(lista.Result);
     }
 
 
@@ -60,10 +56,11 @@ public partial class VistaIncidencias : ContentPage
     }
 
 
-    private void RellenarListaIncidencias(List<Incidencia> incidencias)
+    private async Task RellenarListaIncidencias()
     {
+        var lista = await Mongo.LeerIncidenciasFiltroOrdenNombre(estado, prioridad, orden, TxtBuscar.Text);
         ListaIncidencias.Children.Clear();
-        foreach (var incidencia in incidencias)
+        foreach (var incidencia in lista)
         {
             ListaIncidencias.Add(GenerarFrameIncidencia(incidencia));
         }
@@ -140,30 +137,21 @@ public partial class VistaIncidencias : ContentPage
     private void PickerFiltroEstado_SelectedIndexChanged(object sender, EventArgs e)
     {
         estado = PickerFiltroEstado.SelectedIndex;
-
-        var lista = Mongo.LeerIncidenciasFiltroOrdenNombre(estado, prioridad, orden, TxtBuscar.Text);
-        lista.Wait();
-        RellenarListaIncidencias(lista.Result);
+        _ = RellenarListaIncidencias();
     }
 
 
     private void PickerFiltroPrioridad_SelectedIndexChanged(object sender, EventArgs e)
     {
         prioridad = PickerFiltroPrioridad.SelectedIndex;
-
-        var lista = Mongo.LeerIncidenciasFiltroOrdenNombre(estado, prioridad, orden, TxtBuscar.Text);
-        lista.Wait();
-        RellenarListaIncidencias(lista.Result);
+        _ = RellenarListaIncidencias();
     }
 
 
     private void PickerOrden_SelectedIndexChanged(object sender, EventArgs e)
     {
         orden = PickerOrden.SelectedIndex;
-
-        var lista = Mongo.LeerIncidenciasFiltroOrdenNombre(estado, prioridad, orden, TxtBuscar.Text);
-        lista.Wait();
-        RellenarListaIncidencias(lista.Result);
+        _ = RellenarListaIncidencias();
     }
 
 
@@ -173,30 +161,20 @@ public partial class VistaIncidencias : ContentPage
         InicializarPickerPrioridad();
         PickerOrden.SelectedIndex = 0;
         TxtBuscar.Text = null;
-
-        var lista = Mongo.LeerIncidencias();
-        lista.Wait();
-
-        RellenarListaIncidencias(lista.Result);
+        _ = RellenarListaIncidencias();
     }
 
 
     private void BtnCrearIncidencia_Clicked(object sender, EventArgs e)
     {
         _ = Navigation.PushModalAsync(new VistaCrearIncidencia(), true);
-
-        var lista = Mongo.LeerIncidencias();
-        lista.Wait();
-
-        RellenarListaIncidencias(lista.Result);
+        _ = RellenarListaIncidencias();
     }
 
 
     private void Buscar_Clicked(object sender, EventArgs e)
     {
-        var lista = Mongo.LeerIncidenciasFiltroOrdenNombre(estado, prioridad, orden, TxtBuscar.Text);
-        lista.Wait();
-        RellenarListaIncidencias(lista.Result);
+        _ = RellenarListaIncidencias();
     }
 
 
@@ -207,9 +185,6 @@ public partial class VistaIncidencias : ContentPage
         PickerOrden.SelectedIndex = 0;
         TxtBuscar.Text = null;
 
-        var lista = Mongo.LeerIncidencias();
-        lista.Wait();
-
-        RellenarListaIncidencias(lista.Result);
+        _ = RellenarListaIncidencias();
     }
 }

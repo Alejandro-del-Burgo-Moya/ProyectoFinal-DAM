@@ -1,4 +1,5 @@
-﻿using MongoDB.Bson;
+﻿using Microsoft.Maui.Controls;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using ProyectoFinalDAM.Modelo;
 using ProyectoFinalDAM.Modelo.Enums;
@@ -22,9 +23,15 @@ namespace ProyectoFinalDAM.BaseDatos
 
         public static async Task IniciarSesion(string email, string contrasena)
         {
+            await CerrarSesion();
             if (App.RealmApp.CurrentUser == null)
             {
-                await App.RealmApp.EmailPasswordAuth.RegisterUserAsync(email, contrasena);
+                try
+                {
+                    await App.RealmApp.EmailPasswordAuth.RegisterUserAsync(email, contrasena);
+                }
+                catch (Exception) { }
+
                 user = await App.RealmApp.LogInAsync(Credentials.EmailPassword(email, contrasena));
             }
             else
@@ -86,7 +93,7 @@ namespace ProyectoFinalDAM.BaseDatos
                     };
                 }
 
-                if (nombre != null) { lista = lista.Where(i => i.Nombre!.Contains(nombre, StringComparison.CurrentCultureIgnoreCase)); }
+                if (!string.IsNullOrWhiteSpace(nombre)) { lista = lista.Where(i => i.Nombre!.Contains(nombre, StringComparison.CurrentCultureIgnoreCase)); }
 
                 realm.Subscriptions.Add(lista);
                 listaIncidencias = [.. lista];
@@ -150,30 +157,22 @@ namespace ProyectoFinalDAM.BaseDatos
 
         #region "Personas"
 
-        public static async Task<List<Persona>> LeerPersonas()
+        public static async Task<List<Persona>> LeerPersonasFiltroNombre(string? nombre = null)
         {
-            //realm ??= RealmDatabaseService.GetRealm();
-            //if (realm == null) { throw new ErrorInicioSesionException(); }
-            //listaPersonas = [.. realm!.All<Persona>()];
-            //return listaPersonas;
-
             realm ??= RealmDatabaseService.GetRealm();
+
             realm.Subscriptions.Update(() =>
             {
                 var lista = realm!.All<Persona>();
+
+                if (!string.IsNullOrWhiteSpace(nombre)) { lista = lista.Where(p => p.Nombre!.Contains(nombre, StringComparison.CurrentCultureIgnoreCase)); }
+
                 realm.Subscriptions.Add(lista);
                 listaPersonas = [.. lista];
             });
 
             await realm.Subscriptions.WaitForSynchronizationAsync();
 
-            return listaPersonas;
-        }
-
-        public static List<Persona> BuscarPersona(string nombre)
-        {
-            realm ??= RealmDatabaseService.GetRealm();
-            listaPersonas = listaPersonas.Where(p => p.Nombre!.Contains(nombre, StringComparison.CurrentCultureIgnoreCase)).ToList();
             return listaPersonas;
         }
 
@@ -187,7 +186,7 @@ namespace ProyectoFinalDAM.BaseDatos
         {
             realm ??= RealmDatabaseService.GetRealm();
 
-            var temp = LeerPersonas().Result;
+            var temp = LeerPersonasFiltroNombre().Result;
             Persona personaBorrar = (Persona)temp.Select(p => p.Id == id);
 
             await realm!.WriteAsync(() => realm.Remove(personaBorrar));

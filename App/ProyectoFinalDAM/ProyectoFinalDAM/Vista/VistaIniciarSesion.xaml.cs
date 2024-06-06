@@ -4,14 +4,19 @@ namespace ProyectoFinalDAM.Vista;
 
 public partial class VistaIniciarSesion : ContentPage
 {
-    public VistaIniciarSesion()
+    private readonly AppShell appShell;
+    public VistaIniciarSesion(AppShell appShell)
     {
         InitializeComponent();
+        this.appShell = appShell;
+        TxtUsuario.Text = "adburgom01@gmail.com";
+        TxtContrasena.Text = "";
     }
 
-    private void BtnInicarSesion_Clicked(object sender, EventArgs e)
+    private void BtnIniciarSesion_Clicked(object sender, EventArgs e)
     {
         _ = Mongo.IniciarSesion(TxtUsuario.Text, TxtContrasena.Text);
+        appShell.SesionIniciada();
     }
 
     private void BtnMostrarOcultar_Pressed(object sender, EventArgs e)
