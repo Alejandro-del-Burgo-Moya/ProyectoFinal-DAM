@@ -11,7 +11,9 @@ public partial class VistaAdministradorIncidencias : ContentPage
     {
         InitializeComponent();
 
-        //RellenarListaIncidencias(Mongo.LeerIncidencias());
+        var lista = Mongo.LeerIncidencias();
+        lista.Wait();
+        RellenarListaIncidencias(lista.Result);
     }
 
 
@@ -121,14 +123,18 @@ public partial class VistaAdministradorIncidencias : ContentPage
 
     private void BuscarGesInc_Clicked(object sender, EventArgs e)
     {
-        RellenarListaIncidencias(Mongo.LeerIncidenciasFiltroOrdenNombre(null, null, null, TxtBuscarGesInc.Text));
+        var lista = Mongo.LeerIncidenciasFiltroOrdenNombre(null, null, null, TxtBuscarGesInc.Text);
+        lista.Wait();
+        RellenarListaIncidencias(lista.Result);
     }
 
 
     private void ActualizarListaIncidenciasAdm_Clicked(object sender, EventArgs e)
     {
         TxtBuscarGesInc.Text = null;
-        RellenarListaIncidencias(Mongo.LeerIncidencias());
+        var lista = Mongo.LeerIncidencias();
+        lista.Wait();
+        RellenarListaIncidencias(lista.Result);
     }
 
 
@@ -136,7 +142,9 @@ public partial class VistaAdministradorIncidencias : ContentPage
     private void BtnCrearIncidenciaAdministrador_Clicked(object sender, EventArgs e)
     {
         _ = Navigation.PushModalAsync(new VistaCrearIncidencia(), true);
-        RellenarListaIncidencias(Mongo.LeerIncidencias());
+        var lista = Mongo.LeerIncidencias();
+        lista.Wait();
+        RellenarListaIncidencias(lista.Result);
     }
 
 
@@ -152,28 +160,36 @@ public partial class VistaAdministradorIncidencias : ContentPage
     }
 
 
-    private static async void MFIIncidenciaAsignar_Clicked(object? sender, EventArgs e)
+    private static void MFIIncidenciaAsignar_Clicked(object? sender, EventArgs e)
     {
         ObjectId idIncidencia = new(((Grid)((Microsoft.Maui.Controls.Element)sender!).Parent.Parent).ClassId);
-        Incidencia incidencia = (Incidencia)Mongo.LeerIncidencias().Where(i => i.Id == idIncidencia).First();
+        var lista = Mongo.LeerIncidencias();
+        lista.Wait();
+        Incidencia incidencia = (Incidencia)lista.Result.Where(i => i.Id == idIncidencia).First();
         if (incidencia.Estado != (int)Estado.Resuelta)
         {
-            string nombre = await App.Current!.MainPage!.DisplayActionSheet(
+            var tecnicos = Mongo.LeerPersonas();
+            tecnicos.Wait();
+            string nombre = App.Current!.MainPage!.DisplayActionSheet(
                 App.Current!.Resources.TryGetValue("asignar_tecnico", out object asignar_tecnico) ? (string)asignar_tecnico : "Elige un técnico",
                 null,
                 null,
-                Mongo.LeerPersonas().Where(p => p.Rol == (int)Rol.Tecnico).Select(p => p.NombreCompleto).ToArray());
+                tecnicos.Result.Where(p => p.Rol == (int)Rol.Tecnico).Select(p => p.NombreCompleto).ToArray()
+            ).Result;
+
             if (nombre != null)
             {
-                Persona persona = (Persona)Mongo.LeerPersonas().Where(p => p.NombreCompleto == nombre).First();
+                Persona persona = (Persona)tecnicos.Result.Where(p => p.NombreCompleto == nombre).First();
                 _ = Mongo.AsignarIncidencia(incidencia, persona);
             }
         }
         else
         {
-            await App.Current!.MainPage!.DisplayAlert(App.Current!.Resources.TryGetValue("error_asignar_incidencia_resuelta", out object error_asignar_incidencia_resuelta) ? (string)error_asignar_incidencia_resuelta : "error",
+            App.Current!.MainPage!.DisplayAlert(
+                App.Current!.Resources.TryGetValue("error_asignar_incidencia_resuelta", out object error_asignar_incidencia_resuelta) ? (string)error_asignar_incidencia_resuelta : "error",
                 App.Current.Resources.TryGetValue("error_asignar_incidencia_resuelta_desc", out object error_asignar_incidencia_resuelta_desc) ? (string)error_asignar_incidencia_resuelta_desc : "error",
-                "OK");
+                "OK"
+            );
         }
     }
 
@@ -181,7 +197,9 @@ public partial class VistaAdministradorIncidencias : ContentPage
     private static void MFIIncidenciaResolver_Clicked(object? sender, EventArgs e)
     {
         ObjectId idIncidencia = new(((Grid)((Microsoft.Maui.Controls.Element)sender!).Parent.Parent).ClassId);
-        Incidencia incidencia = (Incidencia)Mongo.LeerIncidencias().Where(i => i.Id == idIncidencia).First();
+        var lista = Mongo.LeerIncidencias();
+        lista.Wait();
+        Incidencia incidencia = (Incidencia)lista.Result.Where(i => i.Id == idIncidencia).First();
         _ = Mongo.ResolverIncidenciaAdmin(incidencia);
     }
 }

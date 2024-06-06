@@ -11,7 +11,9 @@ public partial class VistaAdministradorUsuarios : ContentPage
 	{
 		InitializeComponent();
 
-        //RellenarListaUsuarios(Mongo.LeerPersonas());
+        var lista = Mongo.LeerPersonas();
+        lista.Wait();
+        RellenarListaUsuarios(lista.Result);
     }
 
 
@@ -123,6 +125,10 @@ public partial class VistaAdministradorUsuarios : ContentPage
     private void ActualizarLista_Clicked(object sender, EventArgs e)
     {
         TxtBuscarGesUsu.Text = null;
-        RellenarListaUsuarios(Mongo.LeerPersonas());
+
+        var lista = Mongo.LeerPersonas();
+        lista.Wait();
+
+        RellenarListaUsuarios(lista.Result);
     }
 }

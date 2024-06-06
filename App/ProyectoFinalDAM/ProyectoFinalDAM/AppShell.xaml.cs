@@ -5,12 +5,38 @@ namespace ProyectoFinalDAM
 {
     public partial class AppShell : Shell
     {
-        private readonly ShellContent VIniciarSesion = new() { Title = App.Current!.Resources.TryGetValue("iniciar_sesion", out object iniciar_sesion) ? (string)iniciar_sesion : "error", IsVisible = true, };
-        private readonly ShellContent VIncidencias = new() { Title = App.Current!.Resources.TryGetValue("incidencias", out object incidencias) ? (string)incidencias : "error", IsVisible = true, };
-        private readonly ShellContent VConfiguracion = new() { Title = App.Current.Resources.TryGetValue("configuracion", out object configuracion) ? (string)configuracion : "error", IsVisible = true, };
-        private readonly FlyoutItem VAdiminstrador = new() { Title = App.Current.Resources.TryGetValue("administrador", out object administrador) ? (string)administrador : "error", IsVisible = true, };
-        private readonly ShellContent VAyuda = new() { Title = App.Current.Resources.TryGetValue("ayuda", out object ayuda) ? (string)ayuda : "error", IsVisible = true, };
-        private readonly ShellContent VAcercaDe = new() { Title = App.Current.Resources.TryGetValue("acerca_de", out object acerca_de) ? (string)acerca_de : "error", IsVisible = true, };
+        private readonly ShellContent VIniciarSesion = new()
+        {
+            Title = App.Current!.Resources.TryGetValue("iniciar_sesion", out object iniciar_sesion) ? (string)iniciar_sesion : "error",
+            IsVisible = true,
+            
+        };
+        private readonly ShellContent VIncidencias = new()
+        {
+            Title = App.Current!.Resources.TryGetValue("incidencias", out object incidencias) ? (string)incidencias : "error",
+            IsVisible = true,
+        };
+        private readonly ShellContent VConfiguracion = new()
+        {
+            Title = App.Current.Resources.TryGetValue("configuracion", out object configuracion) ? (string)configuracion : "error",
+            IsVisible = true,
+            Icon = "configuracion.png",
+        };
+        private readonly FlyoutItem VAdiminstrador = new()
+        {
+            Title = App.Current.Resources.TryGetValue("administrador", out object administrador) ? (string)administrador : "error",
+            IsVisible = true,
+        };
+        private readonly ShellContent VAyuda = new()
+        {
+            Title = App.Current.Resources.TryGetValue("ayuda", out object ayuda) ? (string)ayuda : "error",
+            IsVisible = true,
+        };
+        private readonly ShellContent VAcercaDe = new()
+        {
+            Title = App.Current.Resources.TryGetValue("acerca_de", out object acerca_de) ? (string)acerca_de : "error",
+            IsVisible = true,
+        };
 
         private MenuItem MICerrarSesion = new();
 

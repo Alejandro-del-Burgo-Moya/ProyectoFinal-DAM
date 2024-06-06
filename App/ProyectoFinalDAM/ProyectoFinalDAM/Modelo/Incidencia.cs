@@ -7,6 +7,7 @@ namespace ProyectoFinalDAM.Modelo
     public partial class Incidencia() : IRealmObject
     {
         [PrimaryKey]
+        [MapTo("_id")]
         public ObjectId Id { get; set; }
         public string? Nombre { get; set; }
         public string? Decripcion { get; set; }
