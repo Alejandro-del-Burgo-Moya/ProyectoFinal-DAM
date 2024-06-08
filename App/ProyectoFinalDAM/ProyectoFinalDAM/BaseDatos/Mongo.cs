@@ -1,50 +1,50 @@
-﻿using Microsoft.Maui.Controls;
-using MongoDB.Bson;
-using MongoDB.Driver;
+﻿using MongoDB.Bson;
 using ProyectoFinalDAM.Modelo;
 using ProyectoFinalDAM.Modelo.Enums;
 using ProyectoFinalDAM.Modelo.Excepciones;
 using Realms;
 using Realms.Sync;
 using static ProyectoFinalDAM.Servicios.ServicioRealm;
-using MongoClient = MongoDB.Driver.MongoClient;
 
 namespace ProyectoFinalDAM.BaseDatos
 {
-    public static class Mongo
+    public class Mongo(AppShell appShell)
     {
-        //private static readonly string URIConexion = "mongodb+srv://adburgom01:b8nl7320c@proyectofinaldam.q49ehh3.mongodb.net/?retryWrites=true&w=majority&appName=ProyectoFinalDAM";
+        private Realm? realm = null;
 
-        private static User? user;
-        private static Realm? realm;
+        private List<Incidencia> listaIncidencias = [];
+        private List<Persona> listaPersonas = [];
 
-        private static List<Incidencia> listaIncidencias = [];
-        private static List<Persona> listaPersonas = [];
+        private readonly AppShell _appShell = appShell;
 
-        public static async Task IniciarSesion(string email, string contrasena)
+        public async Task IniciarSesion(string email, string contrasena)
         {
-            await CerrarSesion();
-            if (App.RealmApp.CurrentUser == null)
+            _appShell.UsuarioLogueado.NuevoUsuario = true;
+            _appShell.UsuarioLogueado.Email = email;
+            _appShell.UsuarioLogueado.Contrasena = contrasena;
+            await Mongo.CerrarSesion();
+            try
             {
-                try
-                {
-                    await App.RealmApp.EmailPasswordAuth.RegisterUserAsync(email, contrasena);
-                }
-                catch (Exception) { }
+                await App.RealmApp.EmailPasswordAuth.RegisterUserAsync(email, contrasena);
+            }
+            catch (Exception ex)
+            {
+                _appShell.UsuarioLogueado.NuevoUsuario = false;
+#if DEBUG
+                ManejadorExcepciones.Manejar(ex);
+#endif
+            }
 
-                user = await App.RealmApp.LogInAsync(Credentials.EmailPassword(email, contrasena));
-            }
-            else
-            {
-                user = App.RealmApp.CurrentUser;
-            }
+            App.RealmApp.SwitchUser(await App.RealmApp.LogInAsync(Credentials.EmailPassword(email, contrasena)));
+
+            _appShell.UsuarioLogueado.EstaLogueado = true;
         }
 
         public static async Task CerrarSesion()
         {
-            if (user != null)
+            if (App.RealmApp.CurrentUser != null)
             {
-                await user.LogOutAsync();
+                await App.RealmApp.CurrentUser.LogOutAsync();
             }
         }
 
@@ -52,7 +52,7 @@ namespace ProyectoFinalDAM.BaseDatos
 
         #region "Incidencias"
 
-        public static async Task<List<Incidencia>> LeerIncidencias()
+        public async Task<List<Incidencia>> LeerIncidencias()
         {
             realm ??= RealmDatabaseService.GetRealm();
             realm.Subscriptions.Update(() =>
@@ -67,7 +67,7 @@ namespace ProyectoFinalDAM.BaseDatos
             return listaIncidencias;
         }
 
-        public static async Task<List<Incidencia>> LeerIncidenciasFiltroOrdenNombre(int? estado = null, int? prioridad = null, int? orden = null, string? nombre = null)
+        public async Task<List<Incidencia>> BuscarIncidencias(int? estado = null, int? prioridad = null, int? orden = null, string? nombre = null)
         {
             realm ??= RealmDatabaseService.GetRealm();
 
@@ -104,13 +104,38 @@ namespace ProyectoFinalDAM.BaseDatos
             return listaIncidencias;
         }
 
-        public static async Task CrearIncidenciaAsync(Incidencia incidencia)
+        public async Task<Incidencia?> LeerIncidencia(ObjectId id)
         {
             realm ??= RealmDatabaseService.GetRealm();
-            await realm!.WriteAsync(() => { realm.Add(incidencia); });
+            Incidencia? incidencia = null;
+            realm.Subscriptions.Update(() =>
+            {
+                var resultado = realm!.All<Incidencia>().Where(i => i.Id == id);
+                realm.Subscriptions.Add(resultado);
+                incidencia = resultado as Incidencia;
+            });
+
+            await realm.Subscriptions.WaitForSynchronizationAsync();
+
+            return incidencia;
         }
 
-        public static async Task BorrarIncidencia(ObjectId id)
+        public async Task CrearIncidenciaAsync(Incidencia incidencia)
+        {
+            realm ??= RealmDatabaseService.GetRealm();
+            try
+            {
+                await realm!.WriteAsync(() => { realm.Add(incidencia); });
+            }
+            catch (Exception ex)
+            {
+#if DEBUG
+                ManejadorExcepciones.Manejar(ex);
+#endif
+            }
+        }
+
+        public async Task BorrarIncidencia(ObjectId id)
         {
             realm ??= RealmDatabaseService.GetRealm();
 
@@ -121,13 +146,13 @@ namespace ProyectoFinalDAM.BaseDatos
 
         }
 
-        public static async Task BorrarIncidencia(Incidencia incidencia)
+        public async Task BorrarIncidencia(Incidencia incidencia)
         {
             realm ??= RealmDatabaseService.GetRealm();
             await realm!.WriteAsync(() => { realm.Remove(incidencia); });
         }
 
-        public static async Task AsignarIncidencia(Incidencia incidencia, Persona persona)
+        public async Task AsignarIncidencia(Incidencia incidencia, Persona persona)
         {
             realm ??= RealmDatabaseService.GetRealm();
 
@@ -139,7 +164,7 @@ namespace ProyectoFinalDAM.BaseDatos
             });
         }
 
-        public static async Task ResolverIncidenciaAdmin(Incidencia incidencia)
+        public async Task ResolverIncidenciaAdmin(Incidencia incidencia)
         {
             realm ??= RealmDatabaseService.GetRealm();
 
@@ -157,7 +182,7 @@ namespace ProyectoFinalDAM.BaseDatos
 
         #region "Personas"
 
-        public static async Task<List<Persona>> LeerPersonasFiltroNombre(string? nombre = null)
+        public async Task<List<Persona>> BuscarPersonas(string? nombre = null)
         {
             realm ??= RealmDatabaseService.GetRealm();
 
@@ -176,23 +201,40 @@ namespace ProyectoFinalDAM.BaseDatos
             return listaPersonas;
         }
 
-        public static async Task AgregarPersonaAsync(Persona persona)
+        public async Task<Persona?> LeerPersona(ObjectId id)
         {
             realm ??= RealmDatabaseService.GetRealm();
+            Persona? persona = null;
+            realm.Subscriptions.Update(() =>
+            {
+                var resultado = realm!.All<Persona>().Where(p => p.Id == id);
+                realm.Subscriptions.Add(resultado);
+                persona = resultado as Persona;
+            });
+
+            await realm.Subscriptions.WaitForSynchronizationAsync();
+
+            return persona;
+        }
+
+        public async Task AgregarPersonaAsync(Persona persona)
+        {
+            realm ??= RealmDatabaseService.GetRealm();
+
             await realm!.WriteAsync(() => { realm.Add(persona); });
         }
 
-        public static async Task BorrarPersona(ObjectId id)
+        public async Task BorrarPersona(ObjectId id)
         {
             realm ??= RealmDatabaseService.GetRealm();
 
-            var temp = LeerPersonasFiltroNombre().Result;
+            var temp = BuscarPersonas().Result;
             Persona personaBorrar = (Persona)temp.Select(p => p.Id == id);
 
             await realm!.WriteAsync(() => realm.Remove(personaBorrar));
         }
 
-        public static async Task BorrarPersona(Persona persona)
+        public async Task BorrarPersona(Persona persona)
         {
             realm ??= RealmDatabaseService.GetRealm();
             await realm!.WriteAsync(() => realm.Remove(persona));

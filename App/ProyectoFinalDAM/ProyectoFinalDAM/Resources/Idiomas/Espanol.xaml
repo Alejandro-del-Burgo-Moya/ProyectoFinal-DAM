@@ -39,11 +39,11 @@
 
 
     <!-- VistaCrearUsuario -->
-    <x:String x:Key="nombre_persona">Nombre</x:String>
-    <x:String x:Key="apellido1_persona">Primer apellido</x:String>
+    <x:String x:Key="nombre_persona">Nombre*</x:String>
+    <x:String x:Key="apellido1_persona">Primer apellido*</x:String>
     <x:String x:Key="apellido2_persona">Segundo apellido</x:String>
-    <x:String x:Key="contrasena_persona">Contraseña</x:String>
-    <x:String x:Key="email_persona">Email</x:String>
+    <x:String x:Key="contrasena_persona">Contraseña*</x:String>
+    <x:String x:Key="email_persona">Email*</x:String>
     <x:String x:Key="rol_persona">Rol</x:String>
     <x:String x:Key="btn_crear_usuario">Crear usuario</x:String>
     <x:String x:Key="ph_nombre_nuevo_usuario">Nombre del nuevo usuario</x:String>

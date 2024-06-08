@@ -7,15 +7,19 @@ namespace ProyectoFinalDAM.Vista;
 
 public partial class VistaAdministradorUsuarios : ContentPage
 {
-    public VistaAdministradorUsuarios()
+    private readonly AppShell _appShell;
+
+    public VistaAdministradorUsuarios(AppShell appShell)
     {
         InitializeComponent();
+
+        _appShell = appShell;
     }
 
 
-    private async Task RellenarListaUsuarios()
+    private void RellenarListaUsuarios()
     {
-        var lista = await Mongo.LeerPersonasFiltroNombre(TxtBuscarGesUsu.Text);
+        var lista = _appShell.BuscarPersonas(TxtBuscarGesUsu.Text);
         ListaAdministradorUsuarios.Children.Clear();
         foreach (var persona in lista)
         {
@@ -102,21 +106,21 @@ public partial class VistaAdministradorUsuarios : ContentPage
 
     private static void MFIPersonaBorrar_Clicked(object? sender, EventArgs e)
     {
-        _ = Mongo.BorrarPersona(new ObjectId(((Grid)((Microsoft.Maui.Controls.Element)sender!).Parent.Parent).ClassId));
+        //TODO _ = Mongo.BorrarPersona(new ObjectId(((Grid)((Microsoft.Maui.Controls.Element)sender!).Parent.Parent).ClassId));
     }
 
 
     private void BuscarGesUsu_Clicked(object sender, EventArgs e)
     {
-        _ = RellenarListaUsuarios();
+        RellenarListaUsuarios();
     }
 
 
     private void BtnAgregarUsuario_Clicked(object sender, EventArgs e)
     {
-        _ = Navigation.PushModalAsync(new VistaCrearUsuario(), true);
+        _ = Navigation.PushModalAsync(new VistaCrearUsuario(_appShell), true);
 
-        _ = RellenarListaUsuarios();
+        RellenarListaUsuarios();
     }
 
 
@@ -124,6 +128,6 @@ public partial class VistaAdministradorUsuarios : ContentPage
     {
         TxtBuscarGesUsu.Text = null;
 
-        _ = RellenarListaUsuarios();
+        RellenarListaUsuarios();
     }
 }

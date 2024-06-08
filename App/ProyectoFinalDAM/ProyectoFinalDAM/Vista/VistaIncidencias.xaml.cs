@@ -6,13 +6,16 @@ namespace ProyectoFinalDAM.Vista;
 
 public partial class VistaIncidencias : ContentPage
 {
+    private readonly AppShell _appShell;
     private int? estado = null;
     private int? prioridad = null;
     private int? orden = null;
 
-    public VistaIncidencias()
+    public VistaIncidencias(AppShell appShell)
     {
         InitializeComponent();
+
+        _appShell = appShell;
 
         InicializarPickers();
     }
@@ -56,9 +59,9 @@ public partial class VistaIncidencias : ContentPage
     }
 
 
-    private async Task RellenarListaIncidencias()
+    private void RellenarListaIncidencias()
     {
-        var lista = await Mongo.LeerIncidenciasFiltroOrdenNombre(estado, prioridad, orden, TxtBuscar.Text);
+        var lista = _appShell.LeerIncidencias(estado, prioridad, orden, TxtBuscar.Text);
         ListaIncidencias.Children.Clear();
         foreach (var incidencia in lista)
         {
@@ -137,21 +140,21 @@ public partial class VistaIncidencias : ContentPage
     private void PickerFiltroEstado_SelectedIndexChanged(object sender, EventArgs e)
     {
         estado = PickerFiltroEstado.SelectedIndex;
-        _ = RellenarListaIncidencias();
+        RellenarListaIncidencias();
     }
 
 
     private void PickerFiltroPrioridad_SelectedIndexChanged(object sender, EventArgs e)
     {
         prioridad = PickerFiltroPrioridad.SelectedIndex;
-        _ = RellenarListaIncidencias();
+        RellenarListaIncidencias();
     }
 
 
     private void PickerOrden_SelectedIndexChanged(object sender, EventArgs e)
     {
         orden = PickerOrden.SelectedIndex;
-        _ = RellenarListaIncidencias();
+        RellenarListaIncidencias();
     }
 
 
@@ -161,20 +164,20 @@ public partial class VistaIncidencias : ContentPage
         InicializarPickerPrioridad();
         PickerOrden.SelectedIndex = 0;
         TxtBuscar.Text = null;
-        _ = RellenarListaIncidencias();
+        RellenarListaIncidencias();
     }
 
 
     private void BtnCrearIncidencia_Clicked(object sender, EventArgs e)
     {
-        _ = Navigation.PushModalAsync(new VistaCrearIncidencia(), true);
-        _ = RellenarListaIncidencias();
+        _ = Navigation.PushModalAsync(new VistaCrearIncidencia(_appShell), true);
+        RellenarListaIncidencias();
     }
 
 
     private void Buscar_Clicked(object sender, EventArgs e)
     {
-        _ = RellenarListaIncidencias();
+        RellenarListaIncidencias();
     }
 
 
@@ -185,6 +188,6 @@ public partial class VistaIncidencias : ContentPage
         PickerOrden.SelectedIndex = 0;
         TxtBuscar.Text = null;
 
-        _ = RellenarListaIncidencias();
+        RellenarListaIncidencias();
     }
 }

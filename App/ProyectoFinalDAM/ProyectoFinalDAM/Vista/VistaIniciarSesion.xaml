@@ -25,38 +25,49 @@
             HorizontalOptions="Center">
 
             <Image
+                Grid.Column="1" 
+                Grid.Row="0" 
+                Grid.ColumnSpan="1"
                 Source="dotnet_bot.png"
-                WidthRequest="300" HeightRequest="300"
-                Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="1"/>
+                WidthRequest="300" 
+                HeightRequest="300"/>
 
 
             <Entry 
                 x:Name="TxtUsuario"
-                Placeholder="{DynamicResource txt_usuario}"
-                Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="1"/>
+                Grid.Column="1" 
+                Grid.Row="1" 
+                Grid.ColumnSpan="1"
+                Placeholder="{DynamicResource txt_usuario}"/>
 
             <Entry 
                 x:Name="TxtContrasena"
+                Grid.Column="1" 
+                Grid.Row="2" 
+                Grid.ColumnSpan="1"
                 IsPassword="True"
-                Placeholder="{DynamicResource txt_contrasena}" 
-                Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="1"/>
+                Placeholder="{DynamicResource txt_contrasena}" />
 
             <Button
                 x:Name="BtnMostrarOcultar"
+                Grid.Column="1" 
+                Grid.Row="2" 
+                Grid.ColumnSpan="1"
                 WidthRequest="50"
                 HeightRequest="50"
                 Padding="0"
                 ImageSource="dotnet_bot.png"
                 HorizontalOptions="End"
                 Pressed="BtnMostrarOcultar_Pressed"
-                Released="BtnMostrarOcultar_Released"
-                Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="1"/>
+                Released="BtnMostrarOcultar_Released"/>
 
             <Button 
                 x:Name="BtnIniciarSesion"
+                Grid.Column="1" 
+                Grid.Row="3" 
+                Grid.ColumnSpan="1"
                 Text="{DynamicResource btn_iniciar_sesion}"
-                Clicked="BtnIniciarSesion_Clicked"
-                Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="1"/>
+                Clicked="BtnIniciarSesion_Clicked"/>
 
         </Grid>
     </VerticalStackLayout>

@@ -1,8 +1,8 @@
 ﻿namespace ProyectoFinalDAM.Modelo
 {
-    public static class UsuarioLogueado
+    public class UsuarioLogueado : Persona
     {
-        private static Persona? _usuario;
-        public static Persona? Usuario  { get => _usuario; set => _usuario = value; }
+        public bool NuevoUsuario { get; set; }
+        public bool EstaLogueado { get; set; }
     }
 }

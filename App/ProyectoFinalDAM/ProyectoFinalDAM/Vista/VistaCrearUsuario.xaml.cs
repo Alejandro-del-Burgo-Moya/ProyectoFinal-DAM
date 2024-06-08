@@ -7,6 +7,7 @@ namespace ProyectoFinalDAM.Vista;
 
 public partial class VistaCrearUsuario : ContentPage
 {
+    private readonly AppShell _appShell;
     private readonly Persona persona;
 
     [GeneratedRegex("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")]
@@ -15,11 +16,20 @@ public partial class VistaCrearUsuario : ContentPage
     [GeneratedRegex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{6,}$")]
     private static partial Regex RegexContrasena();
 
-    public VistaCrearUsuario()
+    public bool UsuarioCreadoCorrectamente = false;
+
+    public VistaCrearUsuario(AppShell appShell, string? email = null, string? contrasena = null, bool loginNuevoUsuario = false)
     {
         InitializeComponent();
 
         persona = new();
+
+        _appShell = appShell;
+
+        if (loginNuevoUsuario) { BtnCancelar.IsVisible = false; }
+
+        if (!string.IsNullOrWhiteSpace(email)) { TxtEmailUsuario.Text = email; }
+        if (!string.IsNullOrWhiteSpace(contrasena)) { TxtContrasenaUsuario.Text = contrasena; }
 
         List<string> Roles = [.. Enum.GetNames<Rol>()];
         Roles.Remove(Rol.Administrador.ToString());
@@ -71,7 +81,10 @@ public partial class VistaCrearUsuario : ContentPage
                         persona.Contrasena = TxtContrasenaUsuario.Text;
                         persona.Rol = PickerRolUsuario.SelectedIndex;
 
-                        _ = Mongo.AgregarPersonaAsync(persona);
+                        _appShell.AgregarPersona(persona);
+
+                        //var lista = _appShell.LeerPersonas();
+                        UsuarioCreadoCorrectamente = true;// lista.Contains(persona);
 
                         Navigation.PopModalAsync(true);
                     }
@@ -102,5 +115,15 @@ public partial class VistaCrearUsuario : ContentPage
                 App.Current.Resources.TryGetValue("falta_nombre_usuario_desc", out object falta_nombre_usuario_desc) ? (string)falta_nombre_usuario_desc : "error",
                 "OK");
         }
+    }
+
+    private void BtnMostrarOcultar_Pressed(object sender, EventArgs e)
+    {
+        TxtContrasenaUsuario.IsPassword = false;
+    }
+
+    private void BtnMostrarOcultar_Released(object sender, EventArgs e)
+    {
+        TxtContrasenaUsuario.IsPassword = true;
     }
 }

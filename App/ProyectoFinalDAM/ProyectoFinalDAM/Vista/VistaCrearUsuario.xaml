@@ -71,6 +71,19 @@
             Grid.Row="4"
             Placeholder="{DynamicResource ph_contrasena_nuevo_usuario}"/>
 
+        <Button
+                x:Name="BtnMostrarOcultar"
+                Grid.Column="1" 
+                Grid.Row="4" 
+                Grid.ColumnSpan="1"
+                WidthRequest="50"
+                HeightRequest="50"
+                Padding="0"
+                ImageSource="dotnet_bot.png"
+                HorizontalOptions="End"
+                Pressed="BtnMostrarOcultar_Pressed"
+                Released="BtnMostrarOcultar_Released"/>
+
         <Label
             Grid.Column="0"
             Grid.Row="5"

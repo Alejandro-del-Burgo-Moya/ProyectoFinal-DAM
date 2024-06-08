@@ -4,12 +4,12 @@ namespace ProyectoFinalDAM
 {
     public partial class App : Application
     {
-        public static Realms.Sync.App RealmApp;
+        public readonly static Realms.Sync.App RealmApp = Realms.Sync.App.Create(AppConfig.RealmAppId);
+        public readonly static int TiempoEspera = 5000;
         public App()
         {
             InitializeComponent();
 
-            RealmApp = Realms.Sync.App.Create(AppConfig.RealmAppId);
             MainPage = new AppShell();
         }
     }

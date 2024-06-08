@@ -6,11 +6,14 @@ namespace ProyectoFinalDAM.Vista;
 
 public partial class VistaCrearIncidencia : ContentPage
 {
+    private readonly AppShell _appShell;
     private readonly Incidencia incidencia;
 
-    public VistaCrearIncidencia()
+    public VistaCrearIncidencia(AppShell appShell)
     {
         InitializeComponent();
+
+        _appShell = appShell;
 
         this.incidencia = new();
 
@@ -43,7 +46,7 @@ public partial class VistaCrearIncidencia : ContentPage
             incidencia.FCreacion = DateTime.Now;
             //incidencia.Creada = usuarioLogeado    //TODO manejar el usuario logeadop en la aplicación
 
-            _ = Mongo.CrearIncidenciaAsync(incidencia);
+            _appShell.CrearIncidencia(incidencia);
 
             Navigation.PopModalAsync(true);
         }
