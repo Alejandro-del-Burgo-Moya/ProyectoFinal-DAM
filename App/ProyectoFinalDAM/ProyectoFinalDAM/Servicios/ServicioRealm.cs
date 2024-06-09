@@ -16,21 +16,21 @@ namespace ProyectoFinalDAM.Servicios
             /// <exception cref="UsuarioActualRealmException"></exception>
             public static Realm GetRealm()
             {
-                if (App.RealmApp.CurrentUser != null)
-                {
+                //if (App.RealmApp.CurrentUser != null)
+                //{
                     FlexibleSyncConfiguration config = new(App.RealmApp.CurrentUser)
                     {
-                        //PopulateInitialSubscriptions = (realm) =>
-                        //{
-                        //    var incidencias = realm.All<Incidencia>();
-                        //    var personas = realm.All<Persona>();
-                        //    realm.Subscriptions.Add(incidencias);
-                        //    realm.Subscriptions.Add(personas);
-                        //}
+                        PopulateInitialSubscriptions = (realm) =>
+                        {
+                            var incidencias = realm.All<Incidencia>();
+                            var personas = realm.All<Persona>();
+                            realm.Subscriptions.Add(incidencias);
+                            realm.Subscriptions.Add(personas);
+                        }
                     };
                     return Realm.GetInstance(config);
-                }
-                else { throw new UsuarioActualRealmException(); }
+                //}
+                //else { throw new UsuarioActualRealmException(); }
             }
         }
     }

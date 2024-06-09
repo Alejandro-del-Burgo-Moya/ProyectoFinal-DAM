@@ -90,6 +90,12 @@
 	  <MauiXaml Update="Resources\Idiomas\Ingles.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Vista\Modificar\VistaModificarIncidencia.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Vista\Modificar\VistaModificarUsuario.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Vista\Utilidades\PopupCargando.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

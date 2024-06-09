@@ -11,7 +11,7 @@ namespace ProyectoFinalDAM.BaseDatos
     public class Mongo(AppShell appShell)
     {
         private Realm? realm = null;
-        private User? user = null;
+        //private User? user = null;
 
         private List<Incidencia> listaIncidencias = [];
         private List<Persona> listaPersonas = [];
@@ -24,24 +24,17 @@ namespace ProyectoFinalDAM.BaseDatos
 
             try
             {
-                realm ??= RealmDatabaseService.GetRealm();
                 await CerrarSesion();
-
-                var lista = await LeerPersonas();
-                if (lista.Where(p =>
-                    string.Equals(p.Email, email, StringComparison.CurrentCultureIgnoreCase)
-                    && string.Equals(p.Contrasena, contrasena, StringComparison.CurrentCultureIgnoreCase)) == null)
-                {
-                    return false;
-                }
 
                 if (App.RealmApp.CurrentUser == null)
                 {
                     var user = await App.RealmApp.LogInAsync(Credentials.EmailPassword(email, contrasena));
+                    App.RealmApp.SwitchUser(user);
                 }
                 else
                 {
-                    App.RealmApp.SwitchUser(await App.RealmApp.LogInAsync(Credentials.EmailPassword(email, contrasena)));
+                    //App.RealmApp.SwitchUser(await App.RealmApp.LogInAsync(Credentials.EmailPassword(email, contrasena)));
+                    App.RealmApp.SwitchUser(App.RealmApp.CurrentUser);
                 }
                 _appShell.UsuarioLogueado.Email = email;
                 _appShell.UsuarioLogueado.Contrasena = contrasena;
@@ -63,30 +56,38 @@ namespace ProyectoFinalDAM.BaseDatos
             _appShell.UsuarioLogueado.EstaResgistrado = false;
             try
             {
-                ////realm ??= RealmDatabaseService.GetRealm();
-                //await App.RealmApp.EmailPasswordAuth.RegisterUserAsync(email, contrasena);
-                //_appShell.UsuarioLogueado.EstaResgistrado = true;
-
-                ////realm ??= RealmDatabaseService.GetRealm();
-                //if (App.RealmApp.CurrentUser == null)
-                //{
-                //    var user = await App.RealmApp.LogInAsync(Credentials.EmailPassword(email, contrasena));
-                //}
-                //else
-                //{
-                //    App.RealmApp.SwitchUser(await App.RealmApp.LogInAsync(Credentials.EmailPassword(email, contrasena)));
-                //}
-
                 await CerrarSesion();
                 if (App.RealmApp.CurrentUser == null)
                 {
-                    await App.RealmApp.EmailPasswordAuth.RegisterUserAsync(email, contrasena);
-                    _appShell.UsuarioLogueado.EstaResgistrado = true;
-                    user = await App.RealmApp.LogInAsync(Credentials.EmailPassword(email, contrasena));
+                    try
+                    {
+                        //if (App.RealmApp.EmailPasswordAuth.RegisterUserAsync(email, contrasena).IsCompletedSuccessfully)
+                        //{
+                        //    if (App.RealmApp.LogInAsync(Credentials.EmailPassword(email, contrasena)).IsCompletedSuccessfully)
+                        //    {
+                        //        App.RealmApp.SwitchUser(App.RealmApp.CurrentUser);
+                        //        _appShell.UsuarioLogueado.EstaResgistrado = true;
+                        //    }
+                        //}
+                        await App.RealmApp.EmailPasswordAuth.RegisterUserAsync(email, contrasena);
+
+                        var user = await App.RealmApp.LogInAsync(Credentials.EmailPassword(email, contrasena));
+
+                        App.RealmApp.SwitchUser(user);
+                        _appShell.UsuarioLogueado.EstaResgistrado = true;
+
+
+                    }
+                    catch (Exception ex)
+                    {
+#if DEBUG
+                        ManejadorExcepciones.Manejar(ex);
+#endif
+                    }
                 }
                 else
                 {
-                    user = App.RealmApp.CurrentUser;
+                    App.RealmApp.SwitchUser(App.RealmApp.CurrentUser);
                 }
 
                 _appShell.UsuarioLogueado.Email = email;
@@ -108,8 +109,8 @@ namespace ProyectoFinalDAM.BaseDatos
             try
             {
                 realm ??= RealmDatabaseService.GetRealm();
-                //if (App.RealmApp.CurrentUser != null)
-                if (user != null)
+                if (App.RealmApp.CurrentUser != null)
+                //if (user != null)
                 {
                     await App.RealmApp.CurrentUser!.LogOutAsync();
                 }

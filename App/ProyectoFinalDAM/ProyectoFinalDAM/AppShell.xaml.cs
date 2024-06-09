@@ -69,21 +69,23 @@ namespace ProyectoFinalDAM
         internal bool IniciarSesion(string email, string contrasena)
         {
             var task = db_mongo.IniciarSesion(email, contrasena);
-            task.Wait();
-            return task.Result;
+            //task.Wait();
+            //return task.Result;
+            return true;
         }
 
         internal bool RegistrarUsuario(string email, string contrasena)
         {
             var task = db_mongo.RegistrarUsuario(email, contrasena);
-            task.Wait();
-            return task.Result;
+            //task.Wait();
+            //return task.Result;
+            return true;
         }
 
         internal void CerrarSesion()
         {
             var task = db_mongo.CerrarSesion();
-            task.Wait();
+            //task.Wait();
 
             VaciarMenuFlyout();
 
@@ -152,40 +154,40 @@ namespace ProyectoFinalDAM
         internal void AgregarPersona(Persona persona)
         {
             var task = db_mongo.AgregarPersonaAsync(persona);
-            task.Wait();
+            //task.Wait();
         }
 
         internal List<Persona> LeerPersonas()
         {
             var task = db_mongo.LeerPersonas();
-            task.Wait();
+            //task.Wait();
             return [.. task.Result];
         }
 
         internal List<Persona> BuscarPersonas(string? nombre = null)
         {
             var task = db_mongo.LeerPersonas(nombre);
-            task.Wait();
+            //task.Wait();
             return [.. task.Result];
         }
 
         internal void CrearIncidencia(Incidencia incidencia)
         {
             var task = db_mongo.CrearIncidenciaAsync(incidencia);
-            task.Wait();
+            //task.Wait();
         }
 
         internal List<Incidencia> LeerIncidencias()
         {
             var task = db_mongo.LeerIncidencias();
-            task.Wait();
+            //task.Wait();
             return [.. task.Result];
         }
 
         internal List<Incidencia> LeerIncidencias(int? estado = null, int? prioridad = null, int? orden = null, string? nombre = null)
         {
             var task = db_mongo.LeerIncidencias(estado, prioridad, orden, nombre);
-            task.Wait();
+            //task.Wait();
             return [.. task.Result];
         }
     }
