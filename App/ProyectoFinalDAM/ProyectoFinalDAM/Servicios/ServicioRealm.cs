@@ -20,13 +20,13 @@ namespace ProyectoFinalDAM.Servicios
                 {
                     FlexibleSyncConfiguration config = new(App.RealmApp.CurrentUser)
                     {
-                        PopulateInitialSubscriptions = (realm) =>
-                        {
-                            var incidencias = realm.All<Incidencia>();
-                            var personas = realm.All<Persona>();
-                            realm.Subscriptions.Add(incidencias);
-                            realm.Subscriptions.Add(personas);
-                        }
+                        //PopulateInitialSubscriptions = (realm) =>
+                        //{
+                        //    var incidencias = realm.All<Incidencia>();
+                        //    var personas = realm.All<Persona>();
+                        //    realm.Subscriptions.Add(incidencias);
+                        //    realm.Subscriptions.Add(personas);
+                        //}
                     };
                     return Realm.GetInstance(config);
                 }

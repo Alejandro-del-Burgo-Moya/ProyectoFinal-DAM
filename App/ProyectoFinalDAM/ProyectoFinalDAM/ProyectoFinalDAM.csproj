@@ -72,7 +72,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Vista\VistaAdministradorIncidencias.xaml.cs">
+	  <Compile Update="Vista\Administrador\VistaAdministradorIncidencias.xaml.cs">
 	    <DependentUpon>VistaAdministradorIncidencias.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
@@ -96,25 +96,25 @@
 	  <MauiXaml Update="Vista\VistaAcercaDe.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Vista\VistaAdministrador.xaml">
+	  <MauiXaml Update="Vista\Administrador\VistaAdministrador.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Vista\VistaAdministradorIncidencias.xaml">
+	  <MauiXaml Update="Vista\Administrador\VistaAdministradorIncidencias.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Vista\VistaAdministradorUsuarios.xaml">
+	  <MauiXaml Update="Vista\Administrador\VistaAdministradorUsuarios.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Vista\VistaAyuda.xaml">
+	  <MauiXaml Update="Vista\Ayuda\VistaAyuda.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Vista\VistaConfiguracion.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Vista\VistaCrearIncidencia.xaml">
+	  <MauiXaml Update="Vista\Crear\VistaCrearIncidencia.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Vista\VistaCrearUsuario.xaml">
+	  <MauiXaml Update="Vista\Crear\VistaCrearUsuario.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Vista\VistaIncidencias.xaml">
