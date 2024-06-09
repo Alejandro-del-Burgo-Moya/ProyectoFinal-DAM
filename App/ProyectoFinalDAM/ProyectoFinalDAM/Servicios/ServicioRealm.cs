@@ -1,6 +1,7 @@
 ﻿using Realms.Sync;
 using Realms;
 using ProyectoFinalDAM.Modelo;
+using ProyectoFinalDAM.Modelo.Excepciones;
 
 namespace ProyectoFinalDAM.Servicios
 {
@@ -8,20 +9,28 @@ namespace ProyectoFinalDAM.Servicios
     {
         public static class RealmDatabaseService
         {
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <returns></returns>
+            /// <exception cref="UsuarioActualRealmException"></exception>
             public static Realm GetRealm()
             {
-                //PartitionSyncConfiguration config = new($"{App.RealmApp.CurrentUser.Id}", App.RealmApp.CurrentUser);
-                FlexibleSyncConfiguration config = new(App.RealmApp.CurrentUser!)
+                if (App.RealmApp.CurrentUser != null)
                 {
-                    PopulateInitialSubscriptions = (realm) =>
+                    FlexibleSyncConfiguration config = new(App.RealmApp.CurrentUser)
                     {
-                        var incidencias = realm.All<Incidencia>();
-                        var personas = realm.All<Persona>();
-                        realm.Subscriptions.Add(incidencias);
-                        realm.Subscriptions.Add(personas);
-                    }
-                };
-                return Realm.GetInstance(config);
+                        PopulateInitialSubscriptions = (realm) =>
+                        {
+                            var incidencias = realm.All<Incidencia>();
+                            var personas = realm.All<Persona>();
+                            realm.Subscriptions.Add(incidencias);
+                            realm.Subscriptions.Add(personas);
+                        }
+                    };
+                    return Realm.GetInstance(config);
+                }
+                else { throw new UsuarioActualRealmException(); }
             }
         }
     }

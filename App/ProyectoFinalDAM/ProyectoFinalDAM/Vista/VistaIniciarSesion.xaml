@@ -2,73 +2,77 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProyectoFinalDAM.Vista.VistaIniciarSesion"
-             Title="VistaIniciarSesion">
+             Title="{DynamicResource iniciar_sesion}">
 
-    <VerticalStackLayout
-        HorizontalOptions="Center"
-        VerticalOptions="Center">
-        <FlyoutBase.ContextFlyout>
-            <MenuFlyout>
-                <MenuFlyoutItem Text="{DynamicResource btn_iniciar_sesion}" Clicked="BtnIniciarSesion_Clicked">
-                    <MenuFlyoutItem.KeyboardAccelerators>
-                        <KeyboardAccelerator Modifiers="None" Key="Enter"/>
-                    </MenuFlyoutItem.KeyboardAccelerators>
-                </MenuFlyoutItem>
-            </MenuFlyout>
-        </FlyoutBase.ContextFlyout>
-        <Grid 
-            RowDefinitions="Auto,50,50,50"
-            ColumnDefinitions="30,*,30"
-            RowSpacing="10"
-            ColumnSpacing="10"
-            Padding="0,0,0,0"
-            HorizontalOptions="Center">
+    <FlyoutBase.ContextFlyout>
+        <MenuFlyout>
+            <MenuFlyoutItem Text="{DynamicResource btn_iniciar_sesion}" Clicked="BtnIniciarSesion_Clicked">
+                <MenuFlyoutItem.KeyboardAccelerators>
+                    <KeyboardAccelerator Modifiers="None" Key="Enter"/>
+                </MenuFlyoutItem.KeyboardAccelerators>
+            </MenuFlyoutItem>
+        </MenuFlyout>
+    </FlyoutBase.ContextFlyout>
 
-            <Image
-                Grid.Column="1" 
-                Grid.Row="0" 
-                Grid.ColumnSpan="1"
-                Source="dotnet_bot.png"
-                WidthRequest="300" 
-                HeightRequest="300"/>
+    <Grid 
+        RowDefinitions="Auto, Auto, Auto, Auto, Auto"
+        ColumnDefinitions="*, Auto"
+        RowSpacing="10"
+        ColumnSpacing="10"
+        Padding="30,0,30,0"
+        HorizontalOptions="Center">
 
+        <Image
+            Grid.Column="0" 
+            Grid.Row="0" 
+            Grid.ColumnSpan="2"
+            Source="dotnet_bot.png"
+            WidthRequest="300" 
+            HeightRequest="300"/>
 
-            <Entry 
-                x:Name="TxtUsuario"
-                Grid.Column="1" 
-                Grid.Row="1" 
-                Grid.ColumnSpan="1"
-                Placeholder="{DynamicResource txt_usuario}"/>
+        <Entry 
+            x:Name="TxtUsuario"
+            Grid.Column="0" 
+            Grid.Row="1" 
+            Grid.ColumnSpan="2"
+            Placeholder="{DynamicResource txt_usuario}"/>
 
-            <Entry 
-                x:Name="TxtContrasena"
-                Grid.Column="1" 
-                Grid.Row="2" 
-                Grid.ColumnSpan="1"
-                IsPassword="True"
-                Placeholder="{DynamicResource txt_contrasena}" />
+        <Entry 
+            x:Name="TxtContrasena"
+            Grid.Column="0" 
+            Grid.Row="2" 
+            Grid.ColumnSpan="1"
+            IsPassword="True"
+            Placeholder="{DynamicResource txt_contrasena}" />
 
-            <Button
-                x:Name="BtnMostrarOcultar"
-                Grid.Column="1" 
-                Grid.Row="2" 
-                Grid.ColumnSpan="1"
-                WidthRequest="50"
-                HeightRequest="50"
-                Padding="0"
-                ImageSource="dotnet_bot.png"
-                HorizontalOptions="End"
-                Pressed="BtnMostrarOcultar_Pressed"
-                Released="BtnMostrarOcultar_Released"/>
+        <Button
+            x:Name="BtnMostrarOcultar"
+            Grid.Column="1" 
+            Grid.Row="2" 
+            Grid.ColumnSpan="1"
+            WidthRequest="50"
+            HeightRequest="50"
+            Padding="0"
+            ImageSource="dotnet_bot.png"
+            HorizontalOptions="End"
+            Pressed="BtnMostrarOcultar_Pressed"
+            Released="BtnMostrarOcultar_Released"/>
 
-            <Button 
-                x:Name="BtnIniciarSesion"
-                Grid.Column="1" 
-                Grid.Row="3" 
-                Grid.ColumnSpan="1"
-                Text="{DynamicResource btn_iniciar_sesion}"
-                Clicked="BtnIniciarSesion_Clicked"/>
+        <Button 
+            x:Name="BtnIniciarSesion"
+            Grid.Column="0" 
+            Grid.Row="3" 
+            Grid.ColumnSpan="2"
+            Text="{DynamicResource btn_iniciar_sesion}"
+            Clicked="BtnIniciarSesion_Clicked"/>
 
-        </Grid>
-    </VerticalStackLayout>
+        <Button 
+            x:Name="BtnRegistrarUsuario"
+            Grid.Column="0" 
+            Grid.Row="4" 
+            Grid.ColumnSpan="2"
+            Text="{DynamicResource btn_registrar_usuario}"
+            Clicked="BtnRegistrarUsuario_Clicked"/>
+
+    </Grid>
 </ContentPage>

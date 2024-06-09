@@ -5,7 +5,7 @@
              Title="VistaCrearUsuario">
 
     <Grid
-        ColumnDefinitions="Auto, *"
+        ColumnDefinitions="Auto, *, Auto"
         RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, *, Auto"
         ColumnSpacing="10"
         RowSpacing="10"
@@ -20,6 +20,7 @@
             x:Name="TxtNombreUsuario"
             Grid.Column="1"
             Grid.Row="0"
+            Grid.ColumnSpan="2"
             Placeholder="{DynamicResource ph_nombre_nuevo_usuario}"/>
 
         <Label
@@ -29,9 +30,10 @@
             Text="{DynamicResource apellido1_persona}"/>
 
         <Entry
-            x:Name="txtApellido1Usuario"
+            x:Name="TxtApellido1Usuario"
             Grid.Column="1"
             Grid.Row="1"
+            Grid.ColumnSpan="2"
             Placeholder="{DynamicResource ph_apellido1_nuevo_usuario}"/>
 
 
@@ -42,9 +44,10 @@
             Text="{DynamicResource apellido2_persona}"/>
 
         <Entry
-            x:Name="txtApellido2Usuario"
+            x:Name="TxtApellido2Usuario"
             Grid.Column="1"
             Grid.Row="2"
+            Grid.ColumnSpan="2"
             Placeholder="{DynamicResource ph_apellido2_nuevo_usuario}"/>
 
         <Label
@@ -57,6 +60,7 @@
             x:Name="TxtEmailUsuario"
             Grid.Column="1"
             Grid.Row="3"
+            Grid.ColumnSpan="2"
             Placeholder="{DynamicResource ph_email_nuevo_usuario}"/>
 
         <Label
@@ -69,20 +73,19 @@
             x:Name="TxtContrasenaUsuario"
             Grid.Column="1"
             Grid.Row="4"
+            IsPassword="True"
             Placeholder="{DynamicResource ph_contrasena_nuevo_usuario}"/>
 
         <Button
-                x:Name="BtnMostrarOcultar"
-                Grid.Column="1" 
-                Grid.Row="4" 
-                Grid.ColumnSpan="1"
-                WidthRequest="50"
-                HeightRequest="50"
-                Padding="0"
-                ImageSource="dotnet_bot.png"
-                HorizontalOptions="End"
-                Pressed="BtnMostrarOcultar_Pressed"
-                Released="BtnMostrarOcultar_Released"/>
+            x:Name="BtnMostrarOcultar"
+            Grid.Column="2" 
+            Grid.Row="4"
+            WidthRequest="50"
+            HeightRequest="50"
+            ImageSource="dotnet_bot.png"
+            HorizontalOptions="End"
+            Pressed="BtnMostrarOcultar_Pressed"
+            Released="BtnMostrarOcultar_Released"/>
 
         <Label
             Grid.Column="0"
@@ -93,18 +96,19 @@
         <Picker
             x:Name="PickerRolUsuario"
             Grid.Column="1"
-            Grid.Row="5"/>
+            Grid.Row="5"
+            Grid.ColumnSpan="2"/>
 
         <Label
             Grid.Column="0"
             Grid.Row="6"
-            Grid.ColumnSpan="2"
+            Grid.ColumnSpan="3"
             Text="{DynamicResource info_contrasena}"/>
 
         <HorizontalStackLayout
             Grid.Column="0"
             Grid.Row="7"
-            Grid.ColumnSpan="2"
+            Grid.ColumnSpan="3"
             HorizontalOptions="End"
             Spacing="10">
             <Button
@@ -119,7 +123,7 @@
 
             <Button
                 x:Name="BtnCrearUsuario"
-                Text="{DynamicResource btn_crear_usuario}"
+                Text="{DynamicResource btn_guardar_usuario}"
                 Clicked="BtnCrearUsuario_Clicked"/>
 
         </HorizontalStackLayout>

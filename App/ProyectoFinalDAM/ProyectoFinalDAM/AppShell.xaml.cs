@@ -67,16 +67,24 @@ namespace ProyectoFinalDAM
             AgregarCerrarSesion();
         }
 
-        internal void IniciarSesion(string email, string contrasena)
+        internal bool IniciarSesion(string email, string contrasena)
         {
             var task = db_mongo.IniciarSesion(email, contrasena);
-            task.Wait(App.TiempoEspera);
+            task.Wait();
+            return task.Result;
+        }
+
+        internal bool RegistrarUsuario(string email, string contrasena)
+        {
+            var task = db_mongo.RegistrarUsuario(email, contrasena);
+            task.Wait();
+            return task.Result;
         }
 
         internal void CerrarSesion()
         {
-            var task = Mongo.CerrarSesion();
-            task.Wait(App.TiempoEspera);
+            var task = db_mongo.CerrarSesion();
+            task.Wait();
 
             VaciarMenuFlyout();
 
@@ -145,40 +153,40 @@ namespace ProyectoFinalDAM
         internal void AgregarPersona(Persona persona)
         {
             var task = db_mongo.AgregarPersonaAsync(persona);
-            task.Wait(App.TiempoEspera);
+            task.Wait();
         }
 
         internal List<Persona> LeerPersonas()
         {
-            var task = db_mongo.BuscarPersonas();
-            task.Wait(App.TiempoEspera);
+            var task = db_mongo.LeerPersonas();
+            task.Wait();
             return [.. task.Result];
         }
 
         internal List<Persona> BuscarPersonas(string? nombre = null)
         {
-            var task = db_mongo.BuscarPersonas(nombre);
-            task.Wait(App.TiempoEspera);
+            var task = db_mongo.LeerPersonas(nombre);
+            task.Wait();
             return [.. task.Result];
         }
 
         internal void CrearIncidencia(Incidencia incidencia)
         {
             var task = db_mongo.CrearIncidenciaAsync(incidencia);
-            task.Wait(App.TiempoEspera);
+            task.Wait();
         }
 
         internal List<Incidencia> LeerIncidencias()
         {
             var task = db_mongo.LeerIncidencias();
-            task.Wait(App.TiempoEspera);
+            task.Wait();
             return [.. task.Result];
         }
 
         internal List<Incidencia> LeerIncidencias(int? estado = null, int? prioridad = null, int? orden = null, string? nombre = null)
         {
-            var task = db_mongo.BuscarIncidencias(estado, prioridad, orden, nombre);
-            task.Wait(App.TiempoEspera);
+            var task = db_mongo.LeerIncidencias(estado, prioridad, orden, nombre);
+            task.Wait();
             return [.. task.Result];
         }
     }

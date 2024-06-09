@@ -25,7 +25,7 @@ namespace ProyectoFinalDAM.Modelo
             Apellido1 = "";
             Contrasena = "";
             Email = "";
-            Rol = -1;
+            Rol = 0;
         }
         public Persona(string nombre, string apellido1, string contrasena, string email, int rol)
         {

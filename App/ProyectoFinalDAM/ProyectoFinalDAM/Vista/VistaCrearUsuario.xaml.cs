@@ -8,7 +8,8 @@ namespace ProyectoFinalDAM.Vista;
 public partial class VistaCrearUsuario : ContentPage
 {
     private readonly AppShell _appShell;
-    private readonly Persona persona;
+    private readonly bool _registrandoNuevoUsuario;
+    private Persona? persona;
 
     [GeneratedRegex("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")]
     private static partial Regex RegexEmail();
@@ -18,15 +19,12 @@ public partial class VistaCrearUsuario : ContentPage
 
     public bool UsuarioCreadoCorrectamente = false;
 
-    public VistaCrearUsuario(AppShell appShell, string? email = null, string? contrasena = null, bool loginNuevoUsuario = false)
+    public VistaCrearUsuario(AppShell appShell, string? email = null, string? contrasena = null, bool registrandoNuevoUsuario = false)
     {
         InitializeComponent();
 
-        persona = new();
-
         _appShell = appShell;
-
-        if (loginNuevoUsuario) { BtnCancelar.IsVisible = false; }
+        _registrandoNuevoUsuario = registrandoNuevoUsuario;
 
         if (!string.IsNullOrWhiteSpace(email)) { TxtEmailUsuario.Text = email; }
         if (!string.IsNullOrWhiteSpace(contrasena)) { TxtContrasenaUsuario.Text = contrasena; }
@@ -70,16 +68,23 @@ public partial class VistaCrearUsuario : ContentPage
     {
         if (!String.IsNullOrEmpty(TxtNombreUsuario.Text))
         {
-            if (!String.IsNullOrEmpty(txtApellido1Usuario.Text))
+            if (!String.IsNullOrEmpty(TxtApellido1Usuario.Text))
             {
                 if (ValidarEmail())
                 {
                     if (ValidarContrasena())
                     {
-                        persona.Nombre = TxtNombreUsuario.Text;
-                        persona.Email = TxtEmailUsuario.Text;
-                        persona.Contrasena = TxtContrasenaUsuario.Text;
-                        persona.Rol = PickerRolUsuario.SelectedIndex;
+                        persona = new()
+                        {
+                            Nombre = TxtNombreUsuario.Text,
+                            Apellido1 = TxtApellido1Usuario.Text,
+                            Apellido2 = TxtApellido2Usuario.Text,
+                            Email = TxtEmailUsuario.Text,
+                            Contrasena = TxtContrasenaUsuario.Text,
+                            Rol = PickerRolUsuario.SelectedIndex,
+                        };
+
+                        if (_registrandoNuevoUsuario) { _appShell.RegistrarUsuario(persona.Email, persona.Contrasena); }
 
                         _appShell.AgregarPersona(persona);
 

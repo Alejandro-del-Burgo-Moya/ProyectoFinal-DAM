@@ -6,43 +6,27 @@ namespace ProyectoFinalDAM.Vista;
 
 public partial class VistaIniciarSesion : ContentPage
 {
-    private readonly AppShell appShell;
+    private readonly AppShell _appShell;
     public VistaIniciarSesion(AppShell appShell)
     {
         InitializeComponent();
-        this.appShell = appShell;
+        this._appShell = appShell;
         TxtUsuario.Text = "adburgom01@gmail.com";
         TxtContrasena.Text = "";   //TODO borrar antes de subir
     }
 
     private void BtnIniciarSesion_Clicked(object sender, EventArgs e)
     {
-        appShell.IniciarSesion(TxtUsuario.Text, TxtContrasena.Text);
-
-        if (appShell.UsuarioLogueado.NuevoUsuario)
+        if (_appShell.IniciarSesion(TxtUsuario.Text, TxtContrasena.Text))
         {
-            try
-            {
-                if (CrearNuevaPersona())
-                {
-                    appShell.UsuarioLogueado.NuevoUsuario = false;
-                    appShell.CargarMenuUsuario();
-                }
-                else
-                {
-                    throw new CrearUsuarioException();
-                }
-            }
-            catch (Exception ex)
-            {
-#if DEBUG
-                ManejadorExcepciones.Manejar(ex);
-#endif
-            }
+            _appShell.CargarMenuUsuario();
         }
         else
         {
-            appShell.CargarMenuUsuario();
+            Application.Current!.MainPage!.DisplayAlert(
+                "Error de inicio de sesi�n",
+                "El usuario no existe",
+                "OK");
         }
     }
 
@@ -58,10 +42,19 @@ public partial class VistaIniciarSesion : ContentPage
 
     private bool CrearNuevaPersona()
     {
-        VistaCrearUsuario vista = new(appShell, appShell.UsuarioLogueado.Email, appShell.UsuarioLogueado.Contrasena, true);
-        var task = Navigation.PushModalAsync(vista, true);
-        //task.ConfigureAwait(ConfigureAwaitOptions.ForceYielding);
-        //task.Wait();
+        VistaCrearUsuario vista = new(_appShell, TxtUsuario.Text, TxtContrasena.Text, true);
+        _ = Navigation.PushModalAsync(vista, true);
         return vista.UsuarioCreadoCorrectamente;
+    }
+
+    private void BtnRegistrarUsuario_Clicked(object sender, EventArgs e)
+    {
+        if (CrearNuevaPersona())
+        {
+            if (_appShell.RegistrarUsuario(TxtUsuario.Text, TxtContrasena.Text))
+            {
+                _appShell.IniciarSesion(TxtUsuario.Text, TxtContrasena.Text);
+            }
+        }
     }
 }

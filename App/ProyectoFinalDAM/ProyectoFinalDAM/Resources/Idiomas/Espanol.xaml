@@ -45,10 +45,10 @@
     <x:String x:Key="contrasena_persona">Contraseña*</x:String>
     <x:String x:Key="email_persona">Email*</x:String>
     <x:String x:Key="rol_persona">Rol</x:String>
-    <x:String x:Key="btn_crear_usuario">Crear usuario</x:String>
+    <x:String x:Key="btn_guardar_usuario">Guardar usuario</x:String>
     <x:String x:Key="ph_nombre_nuevo_usuario">Nombre del nuevo usuario</x:String>
-    <x:String x:Key="ph_apellido1_nuevo_usuario">Primer apellido del nuevo usuario</x:String>
-    <x:String x:Key="ph_apellido2_nuevo_usuario">Segundo apellido del nuevo usuario</x:String>
+    <x:String x:Key="ph_apellido1_nuevo_usuario">Primer apellido del usuario</x:String>
+    <x:String x:Key="ph_apellido2_nuevo_usuario">Segundo apellido del usuario</x:String>
     <x:String x:Key="ph_contrasena_nuevo_usuario">Contraseña del nuevo usuario</x:String>
     <x:String x:Key="ph_email_nuevo_usuario">Email nuevo usuario</x:String>
     <x:String x:Key="falta_nombre_usuario">Error - Nombre de usuario</x:String>
@@ -76,6 +76,7 @@
     <!--título vista-->
     <x:String x:Key="iniciar_sesion">Incicar Sesión</x:String>
     <x:String x:Key="btn_iniciar_sesion">Iniciar sesión</x:String>
+    <x:String x:Key="btn_registrar_usuario">Registrarme</x:String>
     <x:String x:Key="txt_usuario">Usuario</x:String>
     <x:String x:Key="txt_contrasena">Contraseña</x:String>
     
