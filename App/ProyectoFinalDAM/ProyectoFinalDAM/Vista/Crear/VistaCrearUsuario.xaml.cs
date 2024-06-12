@@ -1,4 +1,3 @@
-using ProyectoFinalDAM.BaseDatos;
 using ProyectoFinalDAM.Modelo;
 using ProyectoFinalDAM.Modelo.Enums;
 using System.Text.RegularExpressions;
@@ -8,8 +7,6 @@ namespace ProyectoFinalDAM.Vista;
 public partial class VistaCrearUsuario : ContentPage
 {
     private readonly AppShell _appShell;
-    private readonly bool _registrandoNuevoUsuario;
-    private Persona? persona;
 
     [GeneratedRegex("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")]
     private static partial Regex RegexEmail();
@@ -17,14 +14,13 @@ public partial class VistaCrearUsuario : ContentPage
     [GeneratedRegex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{6,}$")]
     private static partial Regex RegexContrasena();
 
-    public bool UsuarioCreadoCorrectamente = false;
+    public Persona? personaNueva;
 
-    public VistaCrearUsuario(AppShell appShell, string? email = null, string? contrasena = null, bool registrandoNuevoUsuario = false)
+    public VistaCrearUsuario(AppShell appShell, string? email = null, string? contrasena = null)
     {
         InitializeComponent();
 
         _appShell = appShell;
-        _registrandoNuevoUsuario = registrandoNuevoUsuario;
 
         if (!string.IsNullOrWhiteSpace(email)) { TxtEmailUsuario.Text = email; }
         if (!string.IsNullOrWhiteSpace(contrasena)) { TxtContrasenaUsuario.Text = contrasena; }
@@ -74,7 +70,7 @@ public partial class VistaCrearUsuario : ContentPage
                 {
                     if (ValidarContrasena())
                     {
-                        persona = new()
+                        personaNueva = new()
                         {
                             Nombre = TxtNombreUsuario.Text,
                             Apellido1 = TxtApellido1Usuario.Text,
@@ -84,12 +80,7 @@ public partial class VistaCrearUsuario : ContentPage
                             Rol = PickerRolUsuario.SelectedIndex,
                         };
 
-                        if (_registrandoNuevoUsuario) { _appShell.RegistrarUsuario(persona.Email, persona.Contrasena); }
-
-                        _appShell.AgregarPersona(persona);
-
-                        //var lista = _appShell.LeerPersonas();
-                        UsuarioCreadoCorrectamente = true;// lista.Contains(persona);
+                        _appShell.RegistrarUsuario(personaNueva);
 
                         Navigation.PopModalAsync(true);
                     }

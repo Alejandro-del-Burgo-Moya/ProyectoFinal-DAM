@@ -1,7 +1,3 @@
-using ProyectoFinalDAM.BaseDatos;
-using ProyectoFinalDAM.Modelo;
-using ProyectoFinalDAM.Modelo.Excepciones;
-
 namespace ProyectoFinalDAM.Vista;
 
 public partial class VistaIniciarSesion : ContentPage
@@ -12,7 +8,7 @@ public partial class VistaIniciarSesion : ContentPage
         InitializeComponent();
         this._appShell = appShell;
         TxtUsuario.Text = "adburgom01@gmail.com";
-        TxtContrasena.Text = "";   //TODO borrar antes de subir
+        TxtContrasena.Text = "B8nl7320c";   //TODO borrar antes de subir
     }
 
     private void BtnIniciarSesion_Clicked(object sender, EventArgs e)
@@ -24,7 +20,7 @@ public partial class VistaIniciarSesion : ContentPage
         else
         {
             Application.Current!.MainPage!.DisplayAlert(
-                "Error de inicio de sesi�n",
+                "Error de inicio de sesión",
                 "El usuario no existe",
                 "OK");
         }
@@ -40,21 +36,9 @@ public partial class VistaIniciarSesion : ContentPage
         TxtContrasena.IsPassword = true;
     }
 
-    private bool CrearNuevaPersona()
-    {
-        VistaCrearUsuario vista = new(_appShell, TxtUsuario.Text, TxtContrasena.Text, true);
-        _ = Navigation.PushModalAsync(vista, true);
-        return vista.UsuarioCreadoCorrectamente;
-    }
-
     private void BtnRegistrarUsuario_Clicked(object sender, EventArgs e)
     {
-        if (CrearNuevaPersona())
-        {
-            if (_appShell.RegistrarUsuario(TxtUsuario.Text, TxtContrasena.Text))
-            {
-                _appShell.IniciarSesion(TxtUsuario.Text, TxtContrasena.Text);
-            }
-        }
+        VistaCrearUsuario vista = new(_appShell, TxtUsuario.Text, TxtContrasena.Text);
+        _ = Navigation.PushModalAsync(vista, true);
     }
 }

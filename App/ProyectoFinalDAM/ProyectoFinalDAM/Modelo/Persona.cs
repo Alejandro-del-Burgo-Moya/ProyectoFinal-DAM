@@ -1,15 +1,10 @@
-﻿using Microsoft.Maui.ApplicationModel.Communication;
-using MongoDB.Bson;
-using ProyectoFinalDAM.Modelo.Enums;
+﻿using MongoDB.Bson;
 using Realms;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ProyectoFinalDAM.Modelo
 {
-    public partial class Persona : IRealmObject
+    public partial class Persona
     {
-        [PrimaryKey]
-        [MapTo("_id")]
         public ObjectId Id { get; set; }
         public string Nombre { get; set; }
         public string Apellido1 { get; set; }

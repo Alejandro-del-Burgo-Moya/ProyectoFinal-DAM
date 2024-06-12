@@ -1,5 +1,6 @@
 ﻿using ProyectoFinalDAM.BaseDatos;
 using ProyectoFinalDAM.Modelo;
+using ProyectoFinalDAM.Modelo.Excepciones;
 using ProyectoFinalDAM.Vista;
 
 namespace ProyectoFinalDAM
@@ -49,7 +50,7 @@ namespace ProyectoFinalDAM
         {
             InitializeComponent();
 
-            db_mongo = new(this);
+            db_mongo = new();
 
             VIniciarSesion.Content = new VistaIniciarSesion(this);
             shell.Items.Add(VIniciarSesion);
@@ -68,23 +69,17 @@ namespace ProyectoFinalDAM
 
         internal bool IniciarSesion(string email, string contrasena)
         {
-            var task = db_mongo.IniciarSesion(email, contrasena);
-            //task.Wait();
-            //return task.Result;
-            return true;
+            return db_mongo.IniciarSesion(email, contrasena);
         }
 
-        internal bool RegistrarUsuario(string email, string contrasena)
+        internal void RegistrarUsuario(Persona persona)
         {
-            var task = db_mongo.RegistrarUsuario(email, contrasena);
-            //task.Wait();
-            //return task.Result;
-            return true;
+            db_mongo.RegistrarUsuario(persona);
         }
 
         internal void CerrarSesion()
         {
-            var task = db_mongo.CerrarSesion();
+            //var task = db_mongo.CerrarSesion();
             //task.Wait();
 
             VaciarMenuFlyout();
@@ -153,42 +148,66 @@ namespace ProyectoFinalDAM
 
         internal void AgregarPersona(Persona persona)
         {
-            var task = db_mongo.AgregarPersonaAsync(persona);
-            //task.Wait();
+            db_mongo.CrearPersona(persona);
         }
 
         internal List<Persona> LeerPersonas()
         {
-            var task = db_mongo.LeerPersonas();
-            //task.Wait();
-            return [.. task.Result];
+            return db_mongo.LeerPersonas();
         }
 
         internal List<Persona> BuscarPersonas(string? nombre = null)
         {
-            var task = db_mongo.LeerPersonas(nombre);
-            //task.Wait();
-            return [.. task.Result];
+            if (String.IsNullOrWhiteSpace(nombre))
+            {
+                return db_mongo.LeerPersonas();
+            }
+            else
+            {
+                return db_mongo.LeerPersonas().Where(p => p.Nombre.Contains(nombre, StringComparison.CurrentCultureIgnoreCase)).ToList();
+            }
         }
 
         internal void CrearIncidencia(Incidencia incidencia)
         {
-            var task = db_mongo.CrearIncidenciaAsync(incidencia);
-            //task.Wait();
+            db_mongo.CrearIncidencia(incidencia);
+        }
+
+        internal void ModificarIncidencia(Incidencia incidencia)
+        {
+            db_mongo.ModificarIncidencia(incidencia);
         }
 
         internal List<Incidencia> LeerIncidencias()
         {
-            var task = db_mongo.LeerIncidencias();
-            //task.Wait();
-            return [.. task.Result];
+            return db_mongo.LeerIncidencias();
         }
 
         internal List<Incidencia> LeerIncidencias(int? estado = null, int? prioridad = null, int? orden = null, string? nombre = null)
         {
-            var task = db_mongo.LeerIncidencias(estado, prioridad, orden, nombre);
-            //task.Wait();
-            return [.. task.Result];
+            var lista = db_mongo.LeerIncidencias();
+
+            if (estado != null) { lista = lista.Where(i => i.Estado == estado).ToList(); }
+
+            if (prioridad != null) { lista = lista.Where(i => i.Prioridad == prioridad).ToList(); }
+
+            if (orden != null)
+            {
+                lista = orden switch
+                {
+                    0 => [.. lista.OrderBy(i => i.FCreacion)],
+                    1 => [.. lista.OrderByDescending(i => i.FCreacion)],
+                    2 => [.. lista.OrderByDescending(i => i.Prioridad)],
+                    3 => [.. lista.OrderBy(i => i.Prioridad)],
+                    4 => [.. lista.OrderByDescending(i => i.Estado)],
+                    5 => [.. lista.OrderBy(i => i.Estado)],
+                    _ => throw new OrdenIncidenciasException("Se ha introducido un orden no controlado : " + orden),
+                };
+            }
+
+            if (!string.IsNullOrWhiteSpace(nombre)) { lista = lista.Where(i => i.Nombre!.Contains(nombre, StringComparison.CurrentCultureIgnoreCase)).ToList(); }
+
+            return lista;
         }
     }
 }

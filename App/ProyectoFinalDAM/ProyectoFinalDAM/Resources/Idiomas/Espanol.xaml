@@ -8,12 +8,27 @@
     <x:String x:Key="ordenar">Ordenar por</x:String>
     <x:String x:Key="filtrar">Filtrar</x:String>
     <x:String x:Key="btn_crear_incidencia">Crear incidencia</x:String>
+    <x:String x:Key="btn_moficiar_incidencia">Modificar incidencia</x:String>
     <x:String x:Key="btn_borrar_filtros">Borrar filtros</x:String>
     <x:String x:Key="picker_estado">Estado</x:String>
     <x:String x:Key="picker_prioridad">Prioridad</x:String>
     <x:String x:Key="picker_sin_filtrar">Sin filtrar</x:String>
     <x:String x:Key="buscar_incidencia">Buscar</x:String>
-
+    
+    
+    <!-- Estados -->
+    <x:String x:Key="estado_abierta">Abierta</x:String>
+    <x:String x:Key="estado_asignada">Asignada</x:String>
+    <x:String x:Key="estado_en_progreso">En progreso</x:String>
+    <x:String x:Key="estado_Resuleta">Resuelta</x:String>
+    
+    
+    <!-- Prioridades -->
+    <x:String x:Key="prioridad_baja">Baja</x:String>
+    <x:String x:Key="prioridad_media">Media</x:String>
+    <x:String x:Key="prioridad_alta">Alta</x:String>
+    
+    
 
     <!-- VistaCrearIncidencia -->
     <x:String x:Key="nombre_incidencia">Incidencia</x:String>
@@ -22,6 +37,10 @@
     <x:String x:Key="prioridad_incidencia">Prioridad</x:String>
     <x:String x:Key="falta_nombre">Error - Nombre incidencia</x:String>
     <x:String x:Key="falta_nombre_desc">Debes introducir un nombre descriptivo para la incidencia</x:String>
+
+
+    <!-- VistaModificarIncidencia -->
+    <x:String x:Key="btn_guardar_cambios_incidencia">Guardar cambios</x:String>
 
 
     <!-- VistaConfiguracion -->
@@ -74,7 +93,7 @@
 
     <!-- VistaIniciarSesion -->
     <!--título vista-->
-    <x:String x:Key="iniciar_sesion">Incicar Sesión</x:String>
+    <x:String x:Key="iniciar_sesion">Iniciar Sesión</x:String>
     <x:String x:Key="btn_iniciar_sesion">Iniciar sesión</x:String>
     <x:String x:Key="btn_registrar_usuario">Registrarme</x:String>
     <x:String x:Key="txt_usuario">Usuario</x:String>

@@ -76,7 +76,7 @@
                 SelectedIndexChanged="PickerFiltroPrioridad_SelectedIndexChanged"/>
         </Grid>
 
-        <ScrollView
+        <!--<ScrollView
             Grid.Column="0"
             Grid.Row="1">
             <VerticalStackLayout
@@ -94,7 +94,15 @@
 
             </VerticalStackLayout>
 
-        </ScrollView>
+        </ScrollView>-->
+
+        <ListView
+            x:Name="ListaIncidencias"
+            Grid.Column="0"
+            Grid.Row="1"
+            ItemTapped="ListaIncidencias_ItemTapped">
+            
+        </ListView>
 
         <VerticalStackLayout
             Grid.Column="0"
@@ -103,6 +111,11 @@
             VerticalOptions="End"
             Margin="0,0,10,10"
             Spacing="10">
+            <Button
+                x:Name="BtnModificarIncidencia"
+                Text="{DynamicResource btn_modificar_incidencia}"
+                Clicked="BtnModificarIncidencia_Clicked"/>
+            
             <Button
                 x:Name="BtnBorrarFiltros"
                 Text="{DynamicResource btn_borrar_filtros}"

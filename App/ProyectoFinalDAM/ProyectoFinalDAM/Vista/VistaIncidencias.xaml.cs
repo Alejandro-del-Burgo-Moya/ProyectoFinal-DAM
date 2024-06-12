@@ -1,6 +1,6 @@
-using ProyectoFinalDAM.BaseDatos;
 using ProyectoFinalDAM.Modelo;
 using ProyectoFinalDAM.Modelo.Enums;
+using ProyectoFinalDAM.Vista.Modificar;
 
 namespace ProyectoFinalDAM.Vista;
 
@@ -36,7 +36,7 @@ public partial class VistaIncidencias : ContentPage
             "Menos avanzadas primero",
         ];
         PickerOrden.ItemsSource = filtroOrden;
-        //PickerOrden.SelectedIndex = 0;
+        PickerOrden.SelectedIndex = 0;
 
         InicializarPickerEstado();
         InicializarPickerPrioridad();
@@ -62,11 +62,13 @@ public partial class VistaIncidencias : ContentPage
     private void RellenarListaIncidencias()
     {
         var lista = _appShell.LeerIncidencias(estado, prioridad, orden, TxtBuscar.Text);
-        ListaIncidencias.Children.Clear();
-        foreach (var incidencia in lista)
-        {
-            ListaIncidencias.Add(GenerarFrameIncidencia(incidencia));
-        }
+        //ListaIncidencias.Children.Clear();
+        ListaIncidencias.ItemsSource = null;
+        ListaIncidencias.ItemsSource = lista;
+        //foreach (var incidencia in lista)
+        //{
+        //    ListaIncidencias.Add(GenerarFrameIncidencia(incidencia));
+        //}
     }
 
     public static Frame GenerarFrameIncidencia(Incidencia incidencia)
@@ -107,7 +109,7 @@ public partial class VistaIncidencias : ContentPage
         Label descripcion = new() { Text = App.Current!.Resources.TryGetValue("descripcion_incidencia", out object descripcion_incidencia) ? (string)descripcion_incidencia : "Descripción" };
         grid.Add(descripcion, 0, 1);
 
-        Label descripcionIncidencia = new() { Text = incidencia.Decripcion?.Split("\r")[0] };
+        Label descripcionIncidencia = new() { Text = incidencia.Descripcion?.Split("\r")[0] };
         grid.Add(descripcionIncidencia);
         grid.SetRow(descripcionIncidencia, 1);
         grid.SetColumn(descripcionIncidencia, 1);
@@ -189,5 +191,23 @@ public partial class VistaIncidencias : ContentPage
         TxtBuscar.Text = null;
 
         RellenarListaIncidencias();
+    }
+
+    private void BtnModificarIncidencia_Clicked(object sender, EventArgs e)
+    {
+        if (ListaIncidencias.SelectedItem != null)
+        {
+            Incidencia incidencia = (Incidencia)ListaIncidencias.SelectedItem;
+            _ = Navigation.PushModalAsync(new VistaModificarIncidencia(_appShell, incidencia));
+        }
+        else
+        {
+            Utiles.MostrarAdvertencia("Error", "Debes seleccionar una incidencia de la lista");
+        }
+    }
+
+    private void ListaIncidencias_ItemTapped(object sender, ItemTappedEventArgs e)
+    {
+        Utiles.MostrarAdvertencia("prueba", "tap");
     }
 }

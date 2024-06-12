@@ -1,304 +1,59 @@
-﻿using MongoDB.Bson;
+﻿using MongoDB.Driver;
 using ProyectoFinalDAM.Modelo;
-using ProyectoFinalDAM.Modelo.Enums;
-using ProyectoFinalDAM.Modelo.Excepciones;
-using Realms;
-using Realms.Sync;
-using static ProyectoFinalDAM.Servicios.ServicioRealm;
 
 namespace ProyectoFinalDAM.BaseDatos
 {
-    public class Mongo(AppShell appShell)
+    public class Mongo(/*AppShell appShell*/)
     {
-        private Realm? realm = null;
-        //private User? user = null;
+        /*private readonly AppShell _appShell = appShell;*/
 
-        private List<Incidencia> listaIncidencias = [];
-        private List<Persona> listaPersonas = [];
+        //TODO: borrar antes de subir
+        private static readonly string Uri = "mongodb://adburgom01:b8nl7320c@ac-yjqnrx6-shard-00-00.q49ehh3.mongodb.net:27017,ac-yjqnrx6-shard-00-01.q49ehh3.mongodb.net:27017,ac-yjqnrx6-shard-00-02.q49ehh3.mongodb.net:27017/?ssl=true&replicaSet=atlas-vs2ruz-shard-0&authSource=admin&retryWrites=true&w=majority&appName=ProyectoFinalDAM";
+        private static readonly MongoClientSettings ajustes = MongoClientSettings.FromConnectionString(Uri);
+        private static readonly MongoClient cliente = new(ajustes);
+        private IMongoCollection<Persona> colPersonas = cliente.GetDatabase("ProyectoFinalDAM").GetCollection<Persona>("Persona");
+        private IMongoCollection<Incidencia> colIncidencias = cliente.GetDatabase("ProyectoFinalDAM").GetCollection<Incidencia>("Incidencia");
 
-        private readonly AppShell _appShell = appShell;
-
-        public async Task<bool> IniciarSesion(string email, string contrasena)
+        public bool IniciarSesion(string email, string contrasena)
         {
-            _appShell.UsuarioLogueado.EstaLogueado = false;
-
-            try
-            {
-                await CerrarSesion();
-
-                if (App.RealmApp.CurrentUser == null)
-                {
-                    var user = await App.RealmApp.LogInAsync(Credentials.EmailPassword(email, contrasena));
-                    App.RealmApp.SwitchUser(user);
-                }
-                else
-                {
-                    //App.RealmApp.SwitchUser(await App.RealmApp.LogInAsync(Credentials.EmailPassword(email, contrasena)));
-                    App.RealmApp.SwitchUser(App.RealmApp.CurrentUser);
-                }
-                _appShell.UsuarioLogueado.Email = email;
-                _appShell.UsuarioLogueado.Contrasena = contrasena;
-                _appShell.UsuarioLogueado.EstaLogueado = true;
-            }
-            catch (Exception ex)
-            {
-#if DEBUG
-                ManejadorExcepciones.Manejar(ex);
-#endif
-            }
-
-            return _appShell.UsuarioLogueado.EstaLogueado;
+            return LeerPersonas().Where(p => p.Email == email && p.Contrasena == contrasena).Any();
         }
 
-        public async Task<bool> RegistrarUsuario(string email, string contrasena)
+        public void RegistrarUsuario(Persona persona)
         {
-            _appShell.UsuarioLogueado.EstaLogueado = false;
-            _appShell.UsuarioLogueado.EstaResgistrado = false;
-            try
-            {
-                await CerrarSesion();
-                if (App.RealmApp.CurrentUser == null)
-                {
-                    try
-                    {
-                        //if (App.RealmApp.EmailPasswordAuth.RegisterUserAsync(email, contrasena).IsCompletedSuccessfully)
-                        //{
-                        //    if (App.RealmApp.LogInAsync(Credentials.EmailPassword(email, contrasena)).IsCompletedSuccessfully)
-                        //    {
-                        //        App.RealmApp.SwitchUser(App.RealmApp.CurrentUser);
-                        //        _appShell.UsuarioLogueado.EstaResgistrado = true;
-                        //    }
-                        //}
-                        await App.RealmApp.EmailPasswordAuth.RegisterUserAsync(email, contrasena);
-
-                        var user = await App.RealmApp.LogInAsync(Credentials.EmailPassword(email, contrasena));
-
-                        App.RealmApp.SwitchUser(user);
-                        _appShell.UsuarioLogueado.EstaResgistrado = true;
-
-
-                    }
-                    catch (Exception ex)
-                    {
-#if DEBUG
-                        ManejadorExcepciones.Manejar(ex);
-#endif
-                    }
-                }
-                else
-                {
-                    App.RealmApp.SwitchUser(App.RealmApp.CurrentUser);
-                }
-
-                _appShell.UsuarioLogueado.Email = email;
-                _appShell.UsuarioLogueado.Contrasena = contrasena;
-                _appShell.UsuarioLogueado.EstaLogueado = true;
-            }
-            catch (Exception ex)
-            {
-#if DEBUG
-                ManejadorExcepciones.Manejar(ex);
-#endif
-            }
-
-            return _appShell.UsuarioLogueado.EstaResgistrado && _appShell.UsuarioLogueado.EstaLogueado;
+            CrearPersona(persona);
         }
 
-        public async Task CerrarSesion()
+        public List<Persona> LeerPersonas()
         {
-            try
-            {
-                realm ??= RealmDatabaseService.GetRealm();
-                if (App.RealmApp.CurrentUser != null)
-                //if (user != null)
-                {
-                    await App.RealmApp.CurrentUser!.LogOutAsync();
-                }
-            }
-            catch (Exception ex)
-            {
-                ManejadorExcepciones.Manejar(ex);
-            }
+            colPersonas = cliente.GetDatabase("ProyectoFinalDAM").GetCollection<Persona>("Persona");
+            return colPersonas.Find(_ => true).ToList();
         }
 
-
-
-        #region "Incidencias"
-
-        public async Task<List<Incidencia>> LeerIncidencias(int? estado = null, int? prioridad = null, int? orden = null, string? nombre = null)
+        public List<Incidencia> LeerIncidencias()
         {
-            realm!.Subscriptions.Update(() =>
-            {
-                var lista = realm.All<Incidencia>();
-
-                if (estado != null) { lista = lista.Where(i => i.Estado == estado); }
-
-                if (prioridad != null) { lista = lista.Where(i => i.Prioridad == prioridad); }
-
-                if (orden != null)
-                {
-                    lista = orden switch
-                    {
-                        0 => lista.OrderBy(i => i.FCreacion),
-                        1 => lista.OrderByDescending(i => i.FCreacion),
-                        2 => lista.OrderByDescending(i => i.Prioridad),
-                        3 => lista.OrderBy(i => i.Prioridad),
-                        4 => lista.OrderByDescending(i => i.Estado),
-                        5 => lista.OrderBy(i => i.Estado),
-                        _ => throw new OrdenIncidenciasException("Se ha introducido un orden no controlado : " + orden),
-                    };
-                }
-
-                if (!string.IsNullOrWhiteSpace(nombre)) { lista = lista.Where(i => i.Nombre!.Contains(nombre, StringComparison.CurrentCultureIgnoreCase)); }
-
-                realm.Subscriptions.Add(lista);
-                listaIncidencias = [.. lista];
-            });
-
-            await realm.Subscriptions.WaitForSynchronizationAsync();
-
-            return listaIncidencias;
+            colIncidencias = cliente.GetDatabase("ProyectoFinalDAM").GetCollection<Incidencia>("Incidencia");
+            return colIncidencias.Find(_ => true).ToList();
         }
 
-        public async Task<Incidencia?> LeerIncidencia(ObjectId id)
+        public void CrearPersona(Persona persona)
         {
-            Incidencia? incidencia = null;
-            realm!.Subscriptions.Update(() =>
-            {
-                var resultado = realm.All<Incidencia>().Where(i => i.Id == id);
-                realm.Subscriptions.Add(resultado);
-                incidencia = resultado as Incidencia;
-            });
-
-            await realm.Subscriptions.WaitForSynchronizationAsync();
-
-            return incidencia;
+            colPersonas.InsertOne(persona);
         }
 
-        public async Task<bool> CrearIncidenciaAsync(Incidencia incidencia)
+        public void CrearIncidencia(Incidencia incidencia)
         {
-            try
-            {
-                await realm!.WriteAsync(() => { realm.Add(incidencia); });
-            }
-            catch (Exception ex)
-            {
-#if DEBUG
-                ManejadorExcepciones.Manejar(ex);
-#endif
-            }
-
-            listaIncidencias = await LeerIncidencias();
-
-            return listaIncidencias.Contains(incidencia);
+            colIncidencias.InsertOne(incidencia);
         }
 
-        private async Task BorrarIncidencia(ObjectId id)
+        public void ModificarIncidencia(Incidencia incidencia)
         {
-            var temp = LeerIncidencias().Result;
-            Incidencia incidenciaBorrar = (Incidencia)temp.Select(i => i.Id == id);
-
-            await realm!.WriteAsync(() => { realm.Remove(incidenciaBorrar); });
-
+            var filtro = Builders<Incidencia>.Filter.Eq("Id", incidencia.Id);
+            var cambios = Builders<Incidencia>.Update
+                .Set("Descripcion", incidencia.Descripcion)
+                .Set("Prioridad", incidencia.Prioridad);
+            colIncidencias.UpdateOne(filtro, cambios);
         }
-
-        public async Task<bool> BorrarIncidencia(Incidencia incidencia)
-        {
-            await BorrarIncidencia(incidencia.Id);
-
-            listaIncidencias = await LeerIncidencias();
-
-            return !listaIncidencias.Contains(incidencia);
-        }
-
-        public async Task AsignarIncidencia(Incidencia incidencia, Persona persona)
-        {
-            await realm!.WriteAsync(() =>
-            {
-                incidencia.Asignada = persona;
-                incidencia.FAsignacion = DateTimeOffset.Now;
-                incidencia.Estado = (int)Estado.Asignada;
-            });
-        }
-
-        public async Task ResolverIncidenciaAdmin(Incidencia incidencia)
-        {
-            await realm!.WriteAsync(() =>
-            {
-                incidencia.Resuelta = incidencia.Asignada;
-                incidencia.FResolucion = DateTimeOffset.Now;
-                incidencia.Estado = (int)Estado.Resuelta;
-            });
-        }
-
-        #endregion
-
-
-
-        #region "Personas"
-
-        public async Task<List<Persona>> LeerPersonas(string? nombre = null, string? email = null)
-        {
-            realm!.Subscriptions.Update(() =>
-            {
-                var lista = realm.All<Persona>();
-
-                if (!string.IsNullOrWhiteSpace(nombre)) { lista = lista.Where(p => p.Nombre!.Contains(nombre, StringComparison.CurrentCultureIgnoreCase)); }
-                if (!string.IsNullOrWhiteSpace(email)) { lista = lista.Where(p => string.Equals(p.Email, email, StringComparison.CurrentCultureIgnoreCase)); }
-
-                realm.Subscriptions.Add(lista);
-                listaPersonas = [.. lista];
-            });
-
-            await realm.Subscriptions.WaitForSynchronizationAsync();
-
-            return listaPersonas;
-        }
-
-        public async Task<Persona?> LeerPersona(ObjectId id)
-        {
-            Persona? persona = null;
-            realm!.Subscriptions.Update(() =>
-            {
-                var resultado = realm.All<Persona>().Where(p => p.Id == id);
-                realm.Subscriptions.Add(resultado);
-                persona = resultado as Persona;
-            });
-
-            await realm.Subscriptions.WaitForSynchronizationAsync();
-
-            return persona;
-        }
-
-        public async Task<bool> AgregarPersonaAsync(Persona persona)
-        {
-            realm ??= RealmDatabaseService.GetRealm();
-
-            await realm.WriteAsync(() => { realm.Add(persona); });
-
-            listaPersonas = await LeerPersonas();
-
-            return listaPersonas.Contains(persona);
-        }
-
-        private async Task BorrarPersona(ObjectId id)
-        {
-            var temp = LeerPersonas().Result;
-            Persona personaBorrar = (Persona)temp.Select(p => p.Id == id);
-
-            await realm!.WriteAsync(() => realm.Remove(personaBorrar));
-        }
-
-        public async Task<bool> BorrarPersona(Persona persona)
-        {
-            await BorrarPersona(persona.Id);
-
-            listaPersonas = await LeerPersonas();
-
-            return !listaPersonas.Contains(persona);
-        }
-
-        #endregion
     }
 }
 
