@@ -86,30 +86,22 @@ public partial class VistaCrearUsuario : ContentPage
                     }
                     else
                     {
-                        DisplayAlert(App.Current!.Resources.TryGetValue("falta_contrasena_usuario", out object falta_contrasena_usuario) ? (string)falta_contrasena_usuario : "error",
-                        App.Current.Resources.TryGetValue("falta_contrasena_usuario_desc", out object falta_contrasena_usuario_desc) ? (string)falta_contrasena_usuario_desc : "error",
-                        "OK");
+                        Utiles.MostrarAdvertencia(Utiles.ExtraerValorDiccionario("falta_contrasena_usuario"), Utiles.ExtraerValorDiccionario("falta_contrasena_usuario_desc"));
                     }
                 }
                 else
                 {
-                    DisplayAlert(App.Current!.Resources.TryGetValue("falta_email_usuario", out object falta_email_usuario) ? (string)falta_email_usuario : "error",
-                    App.Current.Resources.TryGetValue("falta_email_usuario_desc", out object falta_email_usuario_desc) ? (string)falta_email_usuario_desc : "error",
-                    "OK");
+                    Utiles.MostrarAdvertencia(Utiles.ExtraerValorDiccionario("falta_email_usuario"), Utiles.ExtraerValorDiccionario("falta_email_usuario_desc"));
                 }
             }
             else
             {
-                DisplayAlert(App.Current!.Resources.TryGetValue("falta_apellido1_usuario", out object falta_apellido1_usuario) ? (string)falta_apellido1_usuario : "error",
-                App.Current.Resources.TryGetValue("falta_apellido1_usuario_desc", out object falta_apellido1_usuario_desc) ? (string)falta_apellido1_usuario_desc : "error",
-                "OK");
+                Utiles.MostrarAdvertencia(Utiles.ExtraerValorDiccionario("falta_apellido1_usuario"), Utiles.ExtraerValorDiccionario("falta_apellido1_usuario_desc"));
             }
         }
         else
         {
-            DisplayAlert(App.Current!.Resources.TryGetValue("falta_nombre_usuario", out object falta_nombre_usuario) ? (string)falta_nombre_usuario : "error",
-                App.Current.Resources.TryGetValue("falta_nombre_usuario_desc", out object falta_nombre_usuario_desc) ? (string)falta_nombre_usuario_desc : "error",
-                "OK");
+            Utiles.MostrarAdvertencia(Utiles.ExtraerValorDiccionario("falta_nombre_usuario"), Utiles.ExtraerValorDiccionario("falta_nombre_usuario_desc"));
         }
     }
 

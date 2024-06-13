@@ -14,6 +14,7 @@ public partial class VistaAdministradorUsuarios : ContentPage
         _appShell = appShell;
 
         InicializarPickerRol();
+        RellenarListaUsuarios();
     }
 
 

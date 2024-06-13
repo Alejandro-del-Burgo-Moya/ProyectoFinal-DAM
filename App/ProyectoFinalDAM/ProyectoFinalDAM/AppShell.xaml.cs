@@ -13,34 +13,34 @@ namespace ProyectoFinalDAM
 
         private readonly ShellContent VIniciarSesion = new()
         {
-            Title = App.Current!.Resources.TryGetValue("iniciar_sesion", out object iniciar_sesion) ? (string)iniciar_sesion : "error",
+            Title = Utiles.ExtraerValorDiccionario("iniciar_sesion"),
             IsVisible = true,
 
         };
         private readonly ShellContent VIncidencias = new()
         {
-            Title = App.Current!.Resources.TryGetValue("incidencias", out object incidencias) ? (string)incidencias : "error",
+            Title = Utiles.ExtraerValorDiccionario("incidencias"),
             IsVisible = true,
         };
         private readonly ShellContent VConfiguracion = new()
         {
-            Title = App.Current.Resources.TryGetValue("configuracion", out object configuracion) ? (string)configuracion : "error",
+            Title = Utiles.ExtraerValorDiccionario("configuracion"),
             IsVisible = true,
             Icon = "configuracion.png",
         };
         private readonly FlyoutItem VAdiminstrador = new()
         {
-            Title = App.Current.Resources.TryGetValue("administrador", out object administrador) ? (string)administrador : "error",
+            Title = Utiles.ExtraerValorDiccionario("administrador"),
             IsVisible = true,
         };
         private readonly ShellContent VAyuda = new()
         {
-            Title = App.Current.Resources.TryGetValue("ayuda", out object ayuda) ? (string)ayuda : "error",
+            Title = Utiles.ExtraerValorDiccionario("ayuda"),
             IsVisible = true,
         };
         private readonly ShellContent VAcercaDe = new()
         {
-            Title = App.Current.Resources.TryGetValue("acerca_de", out object acerca_de) ? (string)acerca_de : "error",
+            Title = Utiles.ExtraerValorDiccionario("acerca_de"),
             IsVisible = true,
         };
 
@@ -56,7 +56,7 @@ namespace ProyectoFinalDAM
             shell.Items.Add(VIniciarSesion);
             shell.FlyoutBehavior = FlyoutBehavior.Disabled;
 
-            MICerrarSesion.Text = App.Current.Resources.TryGetValue("btn_cerrar_sesion", out object btn_cerrar_sesion) ? (string)btn_cerrar_sesion : "error";
+            MICerrarSesion.Text = Utiles.ExtraerValorDiccionario("btn_cerrar_sesion");
             MICerrarSesion.Clicked += CerrarSesion_Clicked;
         }
 
@@ -67,21 +67,8 @@ namespace ProyectoFinalDAM
             AgregarCerrarSesion();
         }
 
-        internal bool IniciarSesion(string email, string contrasena)
-        {
-            return db_mongo.IniciarSesion(email, contrasena);
-        }
-
-        internal void RegistrarUsuario(Persona persona)
-        {
-            db_mongo.RegistrarUsuario(persona);
-        }
-
         internal void CerrarSesion()
         {
-            //var task = db_mongo.CerrarSesion();
-            //task.Wait();
-
             VaciarMenuFlyout();
 
             VIniciarSesion.Content = new VistaIniciarSesion(this);
@@ -96,8 +83,8 @@ namespace ProyectoFinalDAM
 
             VConfiguracion.Content = new VistaConfiguracion();
 
-            VAdiminstrador.Items.Add(new ShellContent() { Content = new VistaAdministradorUsuarios(this), Title = App.Current!.Resources.TryGetValue("ges_usuarios", out object ges_usuarios) ? (string)ges_usuarios : "error" });
-            VAdiminstrador.Items.Add(new ShellContent() { Content = new VistaIncidencias(this), Title = App.Current.Resources.TryGetValue("ges_incidencias", out object ges_incidencias) ? (string)ges_incidencias : "error" });
+            VAdiminstrador.Items.Add(new ShellContent() { Content = new VistaAdministradorUsuarios(this), Title = Utiles.ExtraerValorDiccionario("ges_usuarios") });
+            VAdiminstrador.Items.Add(new ShellContent() { Content = new VistaIncidencias(this), Title = Utiles.ExtraerValorDiccionario("ges_incidencias") });
 
             VAyuda.Content = new VistaAyuda();
 
@@ -119,8 +106,8 @@ namespace ProyectoFinalDAM
 
             VConfiguracion.Content = null;
 
-            VAdiminstrador.Items.Add(new ShellContent() { Content = null, Title = App.Current!.Resources.TryGetValue("ges_usuarios", out object ges_usuarios) ? (string)ges_usuarios : "error" });
-            VAdiminstrador.Items.Add(new ShellContent() { Content = null, Title = App.Current.Resources.TryGetValue("ges_incidencias", out object ges_incidencias) ? (string)ges_incidencias : "error" });
+            VAdiminstrador.Items.Add(new ShellContent() { Content = null, Title = Utiles.ExtraerValorDiccionario("ges_usuarios") });
+            VAdiminstrador.Items.Add(new ShellContent() { Content = null, Title = Utiles.ExtraerValorDiccionario("ges_incidencias") });
 
             VAyuda.Content = null;
 
@@ -146,6 +133,16 @@ namespace ProyectoFinalDAM
             shell.Items.Add(MICerrarSesion);
         }
 
+
+        internal bool IniciarSesion(string email, string contrasena)
+        {
+            return db_mongo.IniciarSesion(email, contrasena);
+        }
+
+        internal void RegistrarUsuario(Persona persona)
+        {
+            db_mongo.RegistrarUsuario(persona);
+        }
 
         internal List<Incidencia> LeerIncidencias()
         {
