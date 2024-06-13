@@ -2,11 +2,70 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProyectoFinalDAM.Vista.VistaAyuda"
-             Title="VistaAyuda">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             Title="{DynamicResource ayuda}">
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="10"
+            Spacing="10">
+            <Label Text="{DynamicResource ayuda_contenido}"/>
+            <Label/>
+            
+            <Label Text="{DynamicResource ayuda_registrar_usuario_t}" Padding="20,0,0,0"/>
+            <Label/>
+            <Label Text="{DynamicResource ayuda_registrar_usuario_c1}"/>
+            <Label Text="{DynamicResource ayuda_registrar_usuario_c2}"/>
+            <Label Text="{DynamicResource ayuda_registrar_usuario_c3}"/>
+            <Label Text="{DynamicResource ayuda_registrar_usuario_c4}"/>
+            <Label/>
+
+            <Label Text="{DynamicResource ayuda_iniciar_sesion_t}" Padding="20,0,0,0"/>
+            <Label/>
+            <Label Text="{DynamicResource ayuda_iniciar_sesion_c1}"/>
+            <Label Text="{DynamicResource ayuda_iniciar_sesion_c2}"/>
+            <Label Text="{DynamicResource ayuda_iniciar_sesion_c3}"/>
+            <Label Text="{DynamicResource ayuda_iniciar_sesion_c4}"/>
+            <Label/>
+
+            <Label Text="{DynamicResource ayuda_crear_incidencia_t}" Padding="20,0,0,0"/>
+            <Label/>
+            <Label Text="{DynamicResource ayuda_crear_incidencia_c1}"/>
+            <Label Text="{DynamicResource ayuda_crear_incidencia_c2}"/>
+            <Label/>
+
+            <Label Text="{DynamicResource ayuda_busar_incidencia_t}" Padding="20,0,0,0"/>
+            <Label/>
+            <Label Text="{DynamicResource ayuda_busar_incidencia_c1}"/>
+            <Label Text="{DynamicResource ayuda_busar_incidencia_c2}"/>
+            <Label/>
+
+            <Label Text="{DynamicResource ayuda_filtrar_incidencias_t}" Padding="20,0,0,0"/>
+            <Label/>
+            <Label Text="{DynamicResource ayuda_filtrar_incidencias_c1}"/>
+            <Label Text="{DynamicResource ayuda_filtrar_incidencias_c2}"/>
+            <Label Text="{DynamicResource ayuda_filtrar_incidencias_c3}"/>
+            <Label Text="{DynamicResource ayuda_filtrar_incidencias_c4}"/>
+            <Label/>
+
+            <Label Text="{DynamicResource ayuda_modificar_incidencias_t}" Padding="20,0,0,0"/>
+            <Label/>
+            <Label Text="{DynamicResource ayuda_modificar_incidencias_c1}"/>
+            <Label Text="{DynamicResource ayuda_modificar_incidencias_c2}"/>
+            <Label/>
+
+            <Label Text="{DynamicResource ayuda_buscar_usuarios_t}" Padding="20,0,0,0"/>
+            <Label/>
+            <Label Text="{DynamicResource ayuda_buscar_usuarios_c}"/>
+            <Label/>
+
+            <Label Text="{DynamicResource ayuda_filtrar_usuarios_t}" Padding="20,0,0,0"/>
+            <Label/>
+            <Label Text="{DynamicResource ayuda_filtrar_usuarios_c}"/>
+            <Label/>
+
+            <Label Text="{DynamicResource ayuda_modificar_usuarios_t}" Padding="20,0,0,0"/>
+            <Label/>
+            <Label Text="{DynamicResource ayuda_modificar_usuarios_c}"/>
+            <Label/>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

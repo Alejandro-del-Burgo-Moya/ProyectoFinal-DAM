@@ -42,5 +42,16 @@
 
             return prioridades;
         }
+
+        public static List<string> NombreRol()
+        {
+            List<string> roles =
+            [
+                ExtraerValorDiccionario("roll_normal"),
+                ExtraerValorDiccionario("roll_tecnico"),
+            ];
+
+            return roles;
+        }
     }
 }

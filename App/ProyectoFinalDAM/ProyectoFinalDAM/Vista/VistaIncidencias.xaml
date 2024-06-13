@@ -22,10 +22,10 @@
                 Grid.Column="0"
                 Grid.Row="0"
                 Grid.ColumnSpan="3"
-                Placeholder="{DynamicResource buscar_incidencia}">
+                Placeholder="{DynamicResource buscar}">
                 <FlyoutBase.ContextFlyout>
                     <MenuFlyout>
-                        <MenuFlyoutItem Text="{DynamicResource buscar_incidencia}" Clicked="Buscar_Clicked">
+                        <MenuFlyoutItem Text="{DynamicResource buscar}" Clicked="Buscar_Clicked">
                             <MenuFlyoutItem.KeyboardAccelerators>
                                 <KeyboardAccelerator Modifiers="None" Key="Enter"/>
                             </MenuFlyoutItem.KeyboardAccelerators>
@@ -38,7 +38,7 @@
                 x:Name="BtnBuscar"
                 Grid.Column="3"
                 Grid.Row="0"
-                Text="{DynamicResource buscar_incidencia}"
+                Text="{DynamicResource buscar}"
                 Clicked="Buscar_Clicked"/>
 
             <Label
@@ -76,31 +76,10 @@
                 SelectedIndexChanged="PickerFiltroPrioridad_SelectedIndexChanged"/>
         </Grid>
 
-        <!--<ScrollView
-            Grid.Column="0"
-            Grid.Row="1">
-            <VerticalStackLayout
-                x:Name="ListaIncidencias"
-                Spacing="10">
-                <FlyoutBase.ContextFlyout>
-                    <MenuFlyout>
-                        <MenuFlyoutItem Text="{DynamicResource actualizar_lista}" Clicked="ActualizarListaIncidencias_Clicked">
-                            <MenuFlyoutItem.KeyboardAccelerators>
-                                <KeyboardAccelerator Modifiers="None" Key="F5"/>
-                            </MenuFlyoutItem.KeyboardAccelerators>
-                        </MenuFlyoutItem>
-                    </MenuFlyout>
-                </FlyoutBase.ContextFlyout>
-
-            </VerticalStackLayout>
-
-        </ScrollView>-->
-
         <ListView
             x:Name="ListaIncidencias"
             Grid.Column="0"
-            Grid.Row="1"
-            ItemTapped="ListaIncidencias_ItemTapped">
+            Grid.Row="1">
             
         </ListView>
 

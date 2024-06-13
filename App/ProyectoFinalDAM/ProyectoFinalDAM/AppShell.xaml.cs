@@ -146,14 +146,35 @@ namespace ProyectoFinalDAM
             shell.Items.Add(MICerrarSesion);
         }
 
-        internal void AgregarPersona(Persona persona)
+
+        internal List<Incidencia> LeerIncidencias()
         {
-            db_mongo.CrearPersona(persona);
+            return db_mongo.LeerIncidencias();
         }
 
         internal List<Persona> LeerPersonas()
         {
             return db_mongo.LeerPersonas();
+        }
+
+        internal void AgregarPersona(Persona persona)
+        {
+            db_mongo.CrearPersona(persona);
+        }
+
+        internal void CrearIncidencia(Incidencia incidencia)
+        {
+            db_mongo.CrearIncidencia(incidencia);
+        }
+
+        internal void ModificarPersona(Persona persona)
+        {
+            db_mongo.ModificarPersona(persona);
+        }
+
+        internal void ModificarIncidencia(Incidencia incidencia)
+        {
+            db_mongo.ModificarIncidencia(incidencia);
         }
 
         internal List<Persona> BuscarPersonas(string? nombre = null)
@@ -166,21 +187,6 @@ namespace ProyectoFinalDAM
             {
                 return db_mongo.LeerPersonas().Where(p => p.Nombre.Contains(nombre, StringComparison.CurrentCultureIgnoreCase)).ToList();
             }
-        }
-
-        internal void CrearIncidencia(Incidencia incidencia)
-        {
-            db_mongo.CrearIncidencia(incidencia);
-        }
-
-        internal void ModificarIncidencia(Incidencia incidencia)
-        {
-            db_mongo.ModificarIncidencia(incidencia);
-        }
-
-        internal List<Incidencia> LeerIncidencias()
-        {
-            return db_mongo.LeerIncidencias();
         }
 
         internal List<Incidencia> LeerIncidencias(int? estado = null, int? prioridad = null, int? orden = null, string? nombre = null)

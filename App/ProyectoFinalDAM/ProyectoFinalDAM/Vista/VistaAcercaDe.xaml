@@ -2,11 +2,27 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProyectoFinalDAM.Vista.VistaAcercaDe"
-             Title="VistaAcercaDe">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             Title="{DynamicResource acerca_de}">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="10"
+            Spacing="10">
+            <Label Text="{DynamicResource acerca_de1}"/>
+            <Label/>
+            <Label Text="{DynamicResource acerca_de2}"/>
+            <Label/>
+            <Label Text="{DynamicResource acerca_de3}"/>
+            <Label/>
+            <Label Text="{DynamicResource acerca_de4}"/>
+            <Label/>
+            <Label Text="{DynamicResource acerca_de5}"/>
+            <Label/>
+            <Label Text="{DynamicResource acerca_de6}"/>
+            <Label/>
+            <Label Text="{DynamicResource acerca_de_autoria}"/>
+            <Label/>
+            <Label Text="{DynamicResource acerca_de_disclaimer}"/>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

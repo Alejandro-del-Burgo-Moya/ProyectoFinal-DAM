@@ -1,28 +1,32 @@
 using ProyectoFinalDAM.Modelo;
-using ProyectoFinalDAM.Modelo.Enums;
 
 namespace ProyectoFinalDAM.Vista.Modificar;
 
 public partial class VistaModificarIncidencia : ContentPage
 {
-	private readonly AppShell _appShell;
-	private readonly Incidencia incidencia;
+    private readonly AppShell _appShell;
+    private readonly Incidencia _incidencia;
 
-	public VistaModificarIncidencia(AppShell appShell, Incidencia incidencia)
-	{
-		InitializeComponent();
+    public VistaModificarIncidencia(AppShell appShell, Incidencia incidencia)
+    {
+        InitializeComponent();
 
-		_appShell = appShell;
-		this.incidencia = incidencia;
+        _appShell = appShell;
+        _incidencia = incidencia;
 
+        InicializarPickerPrioridad();
+
+        TxtIncidencia.Text = _incidencia.Nombre;
+        TxtDescripcion.Text = _incidencia.Descripcion;
+        PickerPrioridad.SelectedIndex = _incidencia.Prioridad;
+    }
+
+    private void InicializarPickerPrioridad()
+    {
         PickerPrioridad.ItemsSource = null;
         PickerPrioridad.ItemsSource = Utiles.NombresPrioridad();
         PickerPrioridad.SelectedIndex = 0;
-
-        TxtIncidencia.Text = this.incidencia.Nombre;
-        TxtDescripcion.Text = this.incidencia.Descripcion;
-        PickerPrioridad.SelectedIndex = this.incidencia.Prioridad;
-	}
+    }
 
     private void BtnBorrarCampos_Clicked(object sender, EventArgs e)
     {
@@ -37,12 +41,12 @@ public partial class VistaModificarIncidencia : ContentPage
 
     private void BtnGuardarCambiosIncidencia_Clicked(object sender, EventArgs e)
     {
-        incidencia.Descripcion = TxtDescripcion.Text;
-        incidencia.Prioridad = PickerPrioridad.SelectedIndex;
+        _incidencia.Descripcion = TxtDescripcion.Text;
+        _incidencia.Prioridad = PickerPrioridad.SelectedIndex;
 
         //incidencia.Creada = usuarioLogeado    //TODO manejar el usuario logeadop en la aplicación
 
-        _appShell.ModificarIncidencia(incidencia);
+        _appShell.ModificarIncidencia(_incidencia);
 
         Navigation.PopModalAsync(true);
     }

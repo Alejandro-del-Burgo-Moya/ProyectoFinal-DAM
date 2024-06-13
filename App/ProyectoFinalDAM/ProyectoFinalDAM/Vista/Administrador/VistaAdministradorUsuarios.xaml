@@ -6,73 +6,92 @@
 
     <Grid
         ColumnDefinitions="*, Auto"
-        RowDefinitions="Auto, *"
+        RowDefinitions="Auto, Auto, *"
         ColumnSpacing="10"
         RowSpacing="10"
         Padding="10">
-        <Entry
-            x:Name="TxtBuscarGesUsu"
+        <Grid
             Grid.Column="0"
             Grid.Row="0"
-            Placeholder="{DynamicResource buscar_incidencia}">
-            <FlyoutBase.ContextFlyout>
-                <MenuFlyout>
-                    <MenuFlyoutItem Text="{DynamicResource buscar_incidencia}" Clicked="BuscarGesUsu_Clicked">
-                        <MenuFlyoutItem.KeyboardAccelerators>
-                            <KeyboardAccelerator Modifiers="None" Key="Enter"/>
-                        </MenuFlyoutItem.KeyboardAccelerators>
-                    </MenuFlyoutItem>
-                </MenuFlyout>
-            </FlyoutBase.ContextFlyout>
-        </Entry>
-
-        <Button
-            x:Name="BtnBuscarGesUsu"
-            Grid.Column="1"
-            Grid.Row="0"
-            Text="{DynamicResource buscar_incidencia}"
-            Clicked="BuscarGesUsu_Clicked"/>
-
-        <ScrollView
-            Grid.Column="0"
-            Grid.Row="1"
-            Grid.ColumnSpan="2">
-            <VerticalStackLayout
-                x:Name="ListaAdministradorUsuarios"
-                Padding="10"
-                Spacing="10">
+            ColumnDefinitions="Auto, *, Auto"
+            RowDefinitions="Auto, Auto, Auto"
+            ColumnSpacing="10"
+            RowSpacing="10">
+            <Entry
+                x:Name="TxtBuscarGesUsu"
+                Grid.Column="0"
+                Grid.Row="0"
+                Grid.ColumnSpan="2"
+                Placeholder="{DynamicResource buscar}">
                 <FlyoutBase.ContextFlyout>
                     <MenuFlyout>
-                        <MenuFlyoutItem Text="{DynamicResource actualizar_lista}" Clicked="ActualizarLista_Clicked">
+                        <MenuFlyoutItem Text="{DynamicResource buscar}" Clicked="BuscarGesUsu_Clicked">
                             <MenuFlyoutItem.KeyboardAccelerators>
-                                <KeyboardAccelerator Modifiers="None" Key="F5"/>
+                                <KeyboardAccelerator Modifiers="None" Key="Enter"/>
                             </MenuFlyoutItem.KeyboardAccelerators>
                         </MenuFlyoutItem>
                     </MenuFlyout>
                 </FlyoutBase.ContextFlyout>
+            </Entry>
 
-            </VerticalStackLayout>
+            <Button
+                x:Name="BtnBuscarGesUsu"
+                Grid.Column="2"
+                Grid.Row="0"
+                Text="{DynamicResource buscar}"
+                Clicked="BuscarGesUsu_Clicked"/>
 
-        </ScrollView>
+            <Label
+                Grid.Column="0"
+                Grid.Row="1"
+                Text="{DynamicResource filtrar}"
+                VerticalOptions="Center"/>
+
+            <Picker
+                x:Name="PickerRol"
+                Grid.Column="1"
+                Grid.Row="1"
+                Grid.ColumnSpan="2"
+                Title="{DynamicResource picker_rol}"
+                HorizontalOptions="Fill"/>
+
+        </Grid>
+
+        <ListView
+            x:Name="ListaAdministradorUsuarios"
+            Grid.Column="0"
+            Grid.Row="2"
+            Grid.ColumnSpan="2">
+            
+        </ListView>
 
         <VerticalStackLayout
             Grid.Column="0"
-            Grid.Row="1"
+            Grid.Row="2"
             Grid.ColumnSpan="2"
             HorizontalOptions="End"
             VerticalOptions="End"
             Margin="0,0,10,10"
             Spacing="10">
             <Button
+                x:Name="BtnBorrarUsuario"
+                Text="{DynamicResource btn_borrar_usuario}"
+                Clicked="BtnBorrarUsuario_Clicked"/>
+            
+            <Button
+                x:Name="BtnModificarUsuario"
+                Text="{DynamicResource btn_modificar_usuario}"
+                Clicked="BtnModificarUsuario_Clicked"/>
+
+            <Button
+                x:Name="BtnBorrarFiltros"
+                Text="{DynamicResource btn_borrar_filtros}"
+                Clicked="BtnBorrarFiltros_Clicked"/>
+
+            <Button
                 x:Name="BtnAgregarUsuario"
                 Text="{DynamicResource btn_agregar_usuario}"
                 Clicked="BtnAgregarUsuario_Clicked"/>
-
-            <!--<Button
-                Text="{DynamicResource btn_borrar_usuario}"/>
-
-            <Button
-                Text="{DynamicResource btn_modificar_usuario}"/>-->
 
         </VerticalStackLayout>
     </Grid>

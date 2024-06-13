@@ -13,22 +13,27 @@
     <x:String x:Key="picker_estado">Estado</x:String>
     <x:String x:Key="picker_prioridad">Prioridad</x:String>
     <x:String x:Key="picker_sin_filtrar">Sin filtrar</x:String>
-    <x:String x:Key="buscar_incidencia">Buscar</x:String>
-    
-    
+    <x:String x:Key="fecha_creacion">Fecha de creación</x:String>
+
+
     <!-- Estados -->
     <x:String x:Key="estado_abierta">Abierta</x:String>
     <x:String x:Key="estado_asignada">Asignada</x:String>
     <x:String x:Key="estado_en_progreso">En progreso</x:String>
     <x:String x:Key="estado_Resuleta">Resuelta</x:String>
-    
-    
+
+
     <!-- Prioridades -->
     <x:String x:Key="prioridad_baja">Baja</x:String>
     <x:String x:Key="prioridad_media">Media</x:String>
     <x:String x:Key="prioridad_alta">Alta</x:String>
-    
-    
+
+
+    <!-- Roles -->
+    <x:String x:Key="rol_normal">Normal</x:String>
+    <x:String x:Key="rol_tecnico">Técnico</x:String>
+    <x:String x:Key="rol_admin">Administrador</x:String>
+
 
     <!-- VistaCrearIncidencia -->
     <x:String x:Key="nombre_incidencia">Incidencia</x:String>
@@ -55,9 +60,13 @@
     <x:String x:Key="btn_agregar_usuario">Agregar usuario</x:String>
     <x:String x:Key="btn_borrar_usuario">Borrar usuario</x:String>
     <x:String x:Key="btn_modificar_usuario">Modificar usuario</x:String>
+    <x:String x:Key="picker_rol">Rol</x:String>
 
 
     <!-- VistaCrearUsuario -->
+    <x:String x:Key="nombre_per">Nombre</x:String>
+    <x:String x:Key="email_per">Email</x:String>
+    <x:String x:Key="rol_per">Rol</x:String>
     <x:String x:Key="nombre_persona">Nombre*</x:String>
     <x:String x:Key="apellido1_persona">Primer apellido*</x:String>
     <x:String x:Key="apellido2_persona">Segundo apellido</x:String>
@@ -98,18 +107,66 @@
     <x:String x:Key="btn_registrar_usuario">Registrarme</x:String>
     <x:String x:Key="txt_usuario">Usuario</x:String>
     <x:String x:Key="txt_contrasena">Contraseña</x:String>
-    
-    
+
+
     <!-- CerrarSesion -->
     <x:String x:Key="btn_cerrar_sesion">Cerrar sesión</x:String>
-    
+
 
     <!-- VistaAyuda -->
     <x:String x:Key="ayuda">Ayuda</x:String>
+    <x:String x:Key="ayuda_contenido">En esta sección se detallarán las diferentes acciones que se pueden hacer en la aplicación</x:String>
+    
+    <x:String x:Key="ayuda_registrar_usuario_t">Registrar nuevo usuario</x:String>
+    <x:String x:Key="ayuda_registrar_usuario_c1">Al iniciar la aplicación el usuario podrá registrar una nueva cuenta. Para ello deberá pulsar sobre el botón “Registrarme”.</x:String>
+    <x:String x:Key="ayuda_registrar_usuario_c2">*Antes de pulsar el botón se pueden rellenar los campos “Email” y “Contraseña” si se desea (estos aparecerán rellenos en el formulario posterior si se han rellenado).</x:String>
+    <x:String x:Key="ayuda_registrar_usuario_c3">Al pulsar sobre el botón “Registrarme” aparecerá un formulario donde el usuario deberá introducir obligatoriamente su nombre, primer apellido, email y contraseña, además de seleccionar el rol que tendrá dentro de la organización. En este formulario también se puede introducir un segundo apellido si se desea.</x:String>
+    <x:String x:Key="ayuda_registrar_usuario_c4">Durante este proceso el usuario tiene a su disposición 3 botones en la parte inferior: “Borrar”, “Cancelar” y “Crear usuario”. El botón “Borrar” borrar todos los datos introducidos en los campos del formulario. El botón “Cancelar” cerrará el formulario sin guardar ningún cambio. El botón “Crear usuario” registrará el usuario en el sistema e iniciará sesión con este nuevo usuario si los datos introducidos cumplen los requisitos.</x:String>
+    
+    <x:String x:Key="ayuda_iniciar_sesion_t">Iniciar sesión</x:String>
+    <x:String x:Key="ayuda_iniciar_sesion_c1">Para iniciar sesión el usuario deberá haber registrado su cuenta previamente como se describe en la sección "Registrar nuevo usuario".</x:String>
+    <x:String x:Key="ayuda_iniciar_sesion_c2">Al iniciar la aplicación el usuario podrá rellenar los campos de “Email” y “Contraseña” presentes en la pantalla. Cuando se hayan rellenado los campos el usuario deberá pulsar el botón “Iniciar sesión”.</x:String>
+    <x:String x:Key="ayuda_iniciar_sesion_c3">Si lo datos de los campos con correctos, se iniciará sesión en la aplicación con la cuenta especificada.</x:String>
+    <x:String x:Key="ayuda_iniciar_sesion_c4">Si los datos no son correctos, la aplicación mostrará un aviso al usuario indicando que los datos introducidos no son correctos y permitirá volver a intentar iniciar sesión.</x:String>
+
+    <x:String x:Key="ayuda_crear_incidencia_t">Dar de alta una incidencia</x:String>
+    <x:String x:Key="ayuda_crear_incidencia_c1">En la vista de “Incidencias” el usuario puede crear una nueva incidencia pulsando sobre el botón “Crear incidencia”. Al pulsar el botón aparecerá un formulario en el que el usuario podrá rellenar los datos relativos a una incidencias: nombre de la incidencia, descripción de la incidencia y prioridad de la incidencia.</x:String>
+    <x:String x:Key="ayuda_crear_incidencia_c2">En la parte inferior de este formulario hay 3 botones: “Borrar”, “Cancelar”, “Crear incidencia”. Los botones “Borrar” y “Cancelar” tiene el mismo comportamiento descrito en la sección "Registrar nuevo usuario". El botón “Crear incidencia” creará la incidencia con los datos introducidos en el formulario (la descripción es opcional, pero es recomendable escribirla para facilitar la resolución de la incidencia). Si falta algún dato obligatorio la aplicación lo indicará con un mensaje informativo.</x:String>
+    
+    <x:String x:Key="ayuda_busar_incidencia_t">Buscar incidencias</x:String>
+    <x:String x:Key="ayuda_busar_incidencia_c1">En la vista de “Incidencias” el usuario podrá introducir un nombre de incidencia (completo o parcial) y al pulsar sobré el botón “Buscar” la aplicación actualizará la lista de incidencias mostradas para mostrar sólo aquellas que contengan el nombre introducido por el usuario.</x:String>
+    <x:String x:Key="ayuda_busar_incidencia_c2">En la parte inferior derecha de la vista está el botón “Borrar filtros”. Al pulsarlo se borrará la búsqueda que se haya realizado y se actualizará la lista de incendias para mostrar todas las incidencias.</x:String>
+
+    <x:String x:Key="ayuda_filtrar_incidencias_t">Filtrar incidencias</x:String>
+    <x:String x:Key="ayuda_filtrar_incidencias_c1">En la vista “Incidencias” el usuario podrá seleccionar un valor de la lista desplegable “Estado” y la aplicación actualizará la lista de incidencias para mostrar sólo aquellas que tengan actualmente ese estado.</x:String>
+    <x:String x:Key="ayuda_filtrar_incidencias_c2">De igual manera, en la misma vista, el usuario podrá seleccionar un valor de la lista desplegable “Prioridad” y la aplicación actualizará la lista de incidencias para mostrar sólo aquellas incidencias que tengan actualmente esa prioridad.</x:String>
+    <x:String x:Key="ayuda_filtrar_incidencias_c3">Si el usuario selecciona un valor en cada una de las listas desplegables la aplicación actualizará la lista de incidencias para mostrar sólo aquellas que tenga el estado y la prioridad indicadas.</x:String>
+    <x:String x:Key="ayuda_filtrar_incidencias_c4">Para reiniciar cualquiera de estos filtros el usuario dispone del botón “Borrar filtros”, que deseleccionará los valores seleccionados en las lista desplegables y borrará el texto indicado en la caja de búsqueda, y después actualizará la lista de incidencias para mostrar todas.</x:String>
+
+    <x:String x:Key="ayuda_modificar_incidencias_t">Modificar una incidencia</x:String>
+    <x:String x:Key="ayuda_modificar_incidencias_c1">En la vista “Incidencias” el usuario podrá seleccionar una incidencia de la lista de incidencias haciendo click sobre ella y a su disposición estará el botón ”Modificar incidencia”. Al pulsar sobre el botón la aplicación mostrará un formulario con los datos actuales de la incidencia. El usuario podrá modificarlos en este formulario.</x:String>
+    <x:String x:Key="ayuda_modificar_incidencias_c2">En la parte inferior del formulario habrá 2 botones: “Cancelar” y “Guardar cambios”. El botón “Cancelar” tiene el mismo funcionamiento que su homónimo definido en la sección "Dar de alta una incidencia". El botón “Guardar cambios” guardará los cambios realizados en la incidencia y los registrará en el sistema.</x:String>
+    
+    <x:String x:Key="ayuda_buscar_usuarios_t">Buscar usuarios</x:String>
+    <x:String x:Key="ayuda_buscar_usuarios_c">Igual que "Buscar incidencias", con la salvedad de que se realiza sobre la vista de “Usuarios” y lo que se actualiza en la lista de usuarios mostrada.</x:String>
+    
+    <x:String x:Key="ayuda_filtrar_usuarios_t">Filtrar usuarios</x:String>
+    <x:String x:Key="ayuda_filtrar_usuarios_c">Igual que "Filtrar incidencias", con la salvedad de que se realiza sobre la vista de “Usuarios”, lo que se actualiza es la lista de usuarios y la lista desplegable se denomina “Rol”.</x:String>
+    
+    <x:String x:Key="ayuda_modificar_usuarios_t">Modificar un usuario</x:String>
+    <x:String x:Key="ayuda_modificar_usuarios_c">Igual que "Modificar una incidencia", con la salvedad de que se realiza sobre un usuario seleccionado sobre la lista de usuarios de la vista “Usuarios” y los campos que se pueden modificar son los relativos al usuario.</x:String>
 
 
     <!-- VistaAcercaDe-->
     <x:String x:Key="acerca_de">Acerca de</x:String>
+    <x:String x:Key="acerca_de1">El gestor de incidencias es una herramienta fundamental en el entorno laboral. Su objetivo principal es facilitar la atención y resolución de problemas que puedan surgir con el equipo o las instalaciones del lugar de trabajo. A través de esta herramienta, los empleados pueden reportar cualquier inconveniente, desde fallos en el hardware hasta problemas con el software o incluso situaciones relacionadas con la infraestructura física.</x:String>
+    <x:String x:Key="acerca_de2">El proceso de gestión de incidencias comienza cuando un empleado detecta un problema. Puede ser algo tan simple como una impresora que no funciona correctamente o algo más complejo, como una caída del sistema. En cualquier caso, el empleado debe registrar la incidencia en el sistema. Esto implica proporcionar detalles específicos sobre el problema, como la descripción del error, la ubicación y la fecha en que ocurrió.</x:String>
+    <x:String x:Key="acerca_de3">Una vez registrada la incidencia, el gestor de incidencias asigna un nivel de prioridad. Esto ayuda a los equipos de soporte a determinar qué problemas deben abordarse primero. Por ejemplo, una interrupción completa del sistema tendría una prioridad alta, mientras que un problema menor podría esperar un poco más.</x:String>
+    <x:String x:Key="acerca_de4">El siguiente paso es asignar la incidencia al equipo o persona responsable de su resolución. Esto garantiza que el problema se aborde de manera eficiente y que no se pierda en el proceso.</x:String>
+    <x:String x:Key="acerca_de5">Una vez que se resuelve la incidencia, se cierra en el sistema. Es importante hacer un seguimiento para asegurarse de que el problema no vuelva a ocurrir y, si es necesario, implementar medidas preventivas.</x:String>
+    <x:String x:Key="acerca_de6">En resumen, el gestor de incidencias es una herramienta esencial para mantener la eficiencia y la productividad en el lugar de trabajo. Facilita la comunicación entre los empleados y el equipo de soporte, garantizando que los problemas se resuelvan de manera oportuna y eficaz.</x:String>
+    <x:String x:Key="acerca_de_autoria">Aplicación desarrollada por Alejandro del Burgo Moya como proyecto final del Ciclo Formativo de Grado Superior en Desarrollo de Aplicaciones Multiplataforma realizado en los cursos 2022/2023 y 2023/2024 en el Centro Integrado de Formación Profesional Número 1 de Cuenca, Castilla-La Mancha.</x:String>
+    <x:String x:Key="acerca_de_disclaimer">Proyecto realizado con fines educativos.</x:String>
 
 
     <!-- Botones -->
@@ -117,10 +174,11 @@
     <x:String x:Key="btn_cancelar">Cancelar</x:String>
     <x:String x:Key="btn_borrar">Borrar</x:String>
     <x:String x:Key="actualizar_lista">Actualizar lista</x:String>
+    <x:String x:Key="buscar">Buscar</x:String>
 
 
     <!-- Footer -->
     <x:String x:Key="creador_app">Alejadro del Burgo Moya</x:String>
-    <x:String x:Key="version_app">Versión 0.1</x:String>
+    <x:String x:Key="version_app">Versión 0.2</x:String>
 
 </ResourceDictionary>

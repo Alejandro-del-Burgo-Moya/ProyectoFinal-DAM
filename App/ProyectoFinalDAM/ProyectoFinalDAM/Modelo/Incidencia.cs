@@ -1,5 +1,4 @@
 ﻿using MongoDB.Bson;
-using Realms;
 
 namespace ProyectoFinalDAM.Modelo
 {
@@ -52,8 +51,13 @@ namespace ProyectoFinalDAM.Modelo
                 2 => Utiles.ExtraerValorDiccionario("prioridad_alta"),
                 _ => "error",
             };
+            string fechaInc = Utiles.ExtraerValorDiccionario("fecha_creacion");
 
-            return $"{nombreInc}: {Nombre}\n{estadoInc}: {valorEstado}\n{prioridadInc}: {valorPrioridad}\n";
+            return 
+                $"{nombreInc}: {Nombre}\n" +
+                $"{estadoInc}: {valorEstado}\n" +
+                $"{prioridadInc}: {valorPrioridad}\n" +
+                $"{fechaInc}: {FCreacion.Date.ToShortDateString()}\n";
         }
     }
 }

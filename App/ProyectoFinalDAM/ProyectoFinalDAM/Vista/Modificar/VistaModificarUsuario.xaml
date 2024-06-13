@@ -3,10 +3,128 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProyectoFinalDAM.Vista.Modificar.VistaModificarUsuario"
              Title="VistaModificarUsuario">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <Grid
+        ColumnDefinitions="Auto, *, Auto"
+        RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, *, Auto"
+        ColumnSpacing="10"
+        RowSpacing="10"
+        Padding="20">
+        <Label
+            Grid.Column="0"
+            Grid.Row="0"
+            VerticalOptions="Center"
+            Text="{DynamicResource nombre_persona}"/>
+
+        <Entry
+            x:Name="TxtNombreUsuario"
+            Grid.Column="1"
+            Grid.Row="0"
+            Grid.ColumnSpan="2"
+            IsReadOnly="True"
+            Placeholder="{DynamicResource ph_nombre_nuevo_usuario}"/>
+
+        <Label
+            Grid.Column="0"
+            Grid.Row="1"
+            VerticalOptions="Center"
+            Text="{DynamicResource apellido1_persona}"/>
+
+        <Entry
+            x:Name="TxtApellido1Usuario"
+            Grid.Column="1"
+            Grid.Row="1"
+            Grid.ColumnSpan="2"
+            IsReadOnly="True"
+            Placeholder="{DynamicResource ph_apellido1_nuevo_usuario}"/>
+
+
+        <Label
+            Grid.Column="0"
+            Grid.Row="2"
+            VerticalOptions="Center"
+            Text="{DynamicResource apellido2_persona}"/>
+
+        <Entry
+            x:Name="TxtApellido2Usuario"
+            Grid.Column="1"
+            Grid.Row="2"
+            Grid.ColumnSpan="2"
+            IsReadOnly="True"
+            Placeholder="{DynamicResource ph_apellido2_nuevo_usuario}"/>
+
+        <Label
+            Grid.Column="0"
+            Grid.Row="3"
+            VerticalOptions="Center"
+            Text="{DynamicResource email_persona}"/>
+
+        <Entry
+            x:Name="TxtEmailUsuario"
+            Grid.Column="1"
+            Grid.Row="3"
+            Grid.ColumnSpan="2"
+            Placeholder="{DynamicResource ph_email_nuevo_usuario}"/>
+
+        <Label
+            Grid.Column="0"
+            Grid.Row="4"
+            VerticalOptions="Center"
+            Text="{DynamicResource contrasena_persona}"/>
+
+        <Entry
+            x:Name="TxtContrasenaUsuario"
+            Grid.Column="1"
+            Grid.Row="4"
+            IsPassword="True"
+            Placeholder="{DynamicResource ph_contrasena_nuevo_usuario}"/>
+
+        <Button
+            x:Name="BtnMostrarOcultar"
+            Grid.Column="2" 
+            Grid.Row="4"
+            WidthRequest="50"
+            HeightRequest="50"
+            ImageSource="dotnet_bot.png"
+            HorizontalOptions="End"
+            Pressed="BtnMostrarOcultar_Pressed"
+            Released="BtnMostrarOcultar_Released"/>
+
+        <Label
+            Grid.Column="0"
+            Grid.Row="5"
+            VerticalOptions="Center"
+            Text="{DynamicResource rol_persona}"/>
+
+        <Picker
+            x:Name="PickerRol"
+            Grid.Column="1"
+            Grid.Row="5"
+            Grid.ColumnSpan="2"/>
+
+        <Label
+            Grid.Column="0"
+            Grid.Row="6"
+            Grid.ColumnSpan="3"
+            Text="{DynamicResource info_contrasena}"/>
+
+        <HorizontalStackLayout
+            Grid.Column="0"
+            Grid.Row="7"
+            Grid.ColumnSpan="3"
+            HorizontalOptions="End"
+            Spacing="10">
+
+            <Button
+                x:Name="BtnCancelar"
+                Text="{DynamicResource btn_cancelar}"
+                Clicked="BtnCancelar_Clicked"/>
+
+            <Button
+                x:Name="BtnGuardarCambiosUsuario"
+                Text="{DynamicResource btn_guardar_usuario}"
+                Clicked="BtnGuardarCambiosUsuario_Clicked"/>
+
+        </HorizontalStackLayout>
+
+    </Grid>
 </ContentPage>

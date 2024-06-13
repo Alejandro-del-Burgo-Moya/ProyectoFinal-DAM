@@ -13,7 +13,7 @@
     </Shell.FlyoutHeader>
 
     <Shell.ToolbarItems>
-        <ToolbarItem x:Name="usuarioLogeado" Text="Hola" Order="Primary" IsEnabled="False"/>
+        <ToolbarItem x:Name="mensajeUsuarioLogueado" Text="Hola" Order="Primary" IsEnabled="False"/>
     </Shell.ToolbarItems>
 
     <Shell.FlyoutFooter>

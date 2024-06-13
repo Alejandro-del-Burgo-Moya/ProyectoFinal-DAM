@@ -3,10 +3,8 @@ using ProyectoFinalDAM.Modelo;
 
 namespace ProyectoFinalDAM.BaseDatos
 {
-    public class Mongo(/*AppShell appShell*/)
+    public class Mongo()
     {
-        /*private readonly AppShell _appShell = appShell;*/
-
         //TODO: borrar antes de subir
         private static readonly string Uri = "mongodb://adburgom01:b8nl7320c@ac-yjqnrx6-shard-00-00.q49ehh3.mongodb.net:27017,ac-yjqnrx6-shard-00-01.q49ehh3.mongodb.net:27017,ac-yjqnrx6-shard-00-02.q49ehh3.mongodb.net:27017/?ssl=true&replicaSet=atlas-vs2ruz-shard-0&authSource=admin&retryWrites=true&w=majority&appName=ProyectoFinalDAM";
         private static readonly MongoClientSettings ajustes = MongoClientSettings.FromConnectionString(Uri);
@@ -53,6 +51,16 @@ namespace ProyectoFinalDAM.BaseDatos
                 .Set("Descripcion", incidencia.Descripcion)
                 .Set("Prioridad", incidencia.Prioridad);
             colIncidencias.UpdateOne(filtro, cambios);
+        }
+
+        public void ModificarPersona(Persona persona)
+        {
+            var filtro = Builders<Persona>.Filter.Eq("Id", persona.Id);
+            var cambios = Builders<Persona>.Update
+                .Set("Email", persona.Email)
+                .Set("Contrasena", persona.Contrasena)
+                .Set("Rol", persona.Rol);
+            colPersonas.UpdateOne(filtro, cambios);
         }
     }
 }

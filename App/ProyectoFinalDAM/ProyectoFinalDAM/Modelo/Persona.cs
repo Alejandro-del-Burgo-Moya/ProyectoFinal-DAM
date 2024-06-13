@@ -1,5 +1,4 @@
 ﻿using MongoDB.Bson;
-using Realms;
 
 namespace ProyectoFinalDAM.Modelo
 {
@@ -29,6 +28,24 @@ namespace ProyectoFinalDAM.Modelo
             Contrasena = contrasena;
             Email = email;
             Rol = rol;
+        }
+
+        public override string ToString()
+        {
+            string nombreCompletoPersona = Utiles.ExtraerValorDiccionario("nombre_per");
+            string emailPersona = Utiles.ExtraerValorDiccionario("email_per");
+            string textoRol = Utiles.ExtraerValorDiccionario("rol_per");
+            string rolPersona = Rol switch
+            {
+                0 => Utiles.ExtraerValorDiccionario("rol_normal"),
+                1 => Utiles.ExtraerValorDiccionario("rol_tecnico"),
+                2 => Utiles.ExtraerValorDiccionario("rol_admin"),
+                _ => "error",
+            };
+            return 
+                $"{nombreCompletoPersona}: {NombreCompleto}\n" +
+                $"{emailPersona}: {Email}\n" +
+                $"{textoRol}: {rolPersona}\n";
         }
     }
 }
