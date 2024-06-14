@@ -21,6 +21,11 @@ namespace ProyectoFinalDAM.BaseDatos
                 lista = lista.Where(p => p.Email.Equals(email, StringComparison.CurrentCultureIgnoreCase) && p.Contrasena.Equals(contrasena)).ToList();
                 return lista.First();
             }
+            catch (TimeoutException)
+            {
+                Utiles.MostrarAdvertencia(Utiles.ExtraerValorDiccionario("error"), Utiles.ExtraerValorDiccionario("error_timeout"));
+                return null;
+            }
             catch (Exception)
             {
                 return null;

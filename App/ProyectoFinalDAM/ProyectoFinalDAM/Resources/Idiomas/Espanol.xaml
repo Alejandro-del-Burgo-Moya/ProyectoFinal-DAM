@@ -194,6 +194,7 @@
 
     <x:String x:Key="error">Error</x:String>
     <x:String x:Key="error_no_seleccionado">Debes seleccionar un elemento de la lista</x:String>
+    <x:String x:Key="error_timeout">No se ha podido conectar con el servidor, revisa que tengas conexión a internet.</x:String>
 
 
     <!-- Footer -->

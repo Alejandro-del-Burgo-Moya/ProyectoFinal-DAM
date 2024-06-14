@@ -9,8 +9,6 @@ public partial class VistaIniciarSesion : ContentPage
     {
         InitializeComponent();
         this._appShell = appShell;
-        TxtUsuario.Text = "adburgom01@gmail.com";
-        TxtContrasena.Text = "B8nl7320c";   //TODO borrar antes de subir
     }
 
     private void BtnIniciarSesion_Clicked(object sender, EventArgs e)
