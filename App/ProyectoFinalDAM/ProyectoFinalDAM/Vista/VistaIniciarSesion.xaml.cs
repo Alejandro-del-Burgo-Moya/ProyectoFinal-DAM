@@ -1,3 +1,5 @@
+using ProyectoFinalDAM.Modelo;
+
 namespace ProyectoFinalDAM.Vista;
 
 public partial class VistaIniciarSesion : ContentPage
@@ -19,20 +21,19 @@ public partial class VistaIniciarSesion : ContentPage
         }
         else
         {
-            Application.Current!.MainPage!.DisplayAlert(
-                "Error de inicio de sesión",
-                "El usuario no existe",
-                "OK");
+            Utiles.MostrarAdvertencia(Utiles.ExtraerValorDiccionario("error_inicio_sesion"), Utiles.ExtraerValorDiccionario("error_usuario_no_existe"));
         }
     }
 
     private void BtnMostrarOcultar_Pressed(object sender, EventArgs e)
     {
+        BtnMostrarOcultar.ImageSource = "mostrar.png";
         TxtContrasena.IsPassword = false;
     }
 
     private void BtnMostrarOcultar_Released(object sender, EventArgs e)
     {
+        BtnMostrarOcultar.ImageSource = "ocultar.png";
         TxtContrasena.IsPassword = true;
     }
 

@@ -1,5 +1,4 @@
 using ProyectoFinalDAM.Modelo;
-using ProyectoFinalDAM.Modelo.Enums;
 using System.Text.RegularExpressions;
 
 namespace ProyectoFinalDAM.Vista;
@@ -25,8 +24,13 @@ public partial class VistaCrearUsuario : ContentPage
         if (!string.IsNullOrWhiteSpace(email)) { TxtEmailUsuario.Text = email; }
         if (!string.IsNullOrWhiteSpace(contrasena)) { TxtContrasenaUsuario.Text = contrasena; }
 
-        List<string> Roles = [.. Enum.GetNames<Rol>()];
-        Roles.Remove(Rol.Administrador.ToString());
+        InicializarPicker();
+    }
+
+    private void InicializarPicker()
+    {
+        List<string> Roles = Utiles.NombreRol();
+        if (_appShell.UsuarioLogueado == null || _appShell.UsuarioLogueado.Rol != 2) Roles.RemoveAt(2);
         PickerRolUsuario.ItemsSource = null;
         PickerRolUsuario.ItemsSource = Roles;
         PickerRolUsuario.SelectedIndex = 0;
@@ -51,7 +55,10 @@ public partial class VistaCrearUsuario : ContentPage
     private void BtnBorrarCamposUsuario_Clicked(object sender, EventArgs e)
     {
         TxtNombreUsuario.Text = null;
+        TxtApellido1Usuario.Text = null;
+        TxtApellido2Usuario.Text = null;
         TxtEmailUsuario.Text = null;
+        TxtContrasenaUsuario.Text = null;
         PickerRolUsuario.SelectedIndex = 0;
     }
 
@@ -70,19 +77,25 @@ public partial class VistaCrearUsuario : ContentPage
                 {
                     if (ValidarContrasena())
                     {
-                        personaNueva = new()
+                        personaNueva = new(
+
+                             TxtNombreUsuario.Text,
+                             TxtApellido1Usuario.Text,
+                             TxtApellido2Usuario.Text,
+                             TxtEmailUsuario.Text,
+                             TxtContrasenaUsuario.Text,
+                             PickerRolUsuario.SelectedIndex
+                        );
+
+                        if (_appShell.RegistrarUsuario(personaNueva))
                         {
-                            Nombre = TxtNombreUsuario.Text,
-                            Apellido1 = TxtApellido1Usuario.Text,
-                            Apellido2 = TxtApellido2Usuario.Text,
-                            Email = TxtEmailUsuario.Text,
-                            Contrasena = TxtContrasenaUsuario.Text,
-                            Rol = PickerRolUsuario.SelectedIndex,
-                        };
+                            Navigation.PopModalAsync(true);
+                        }
+                        else
+                        {
+                            Utiles.MostrarAdvertencia(Utiles.ExtraerValorDiccionario("error_registrar_usuario"), Utiles.ExtraerValorDiccionario("error_registrar_usuario_desc"));
+                        }
 
-                        _appShell.RegistrarUsuario(personaNueva);
-
-                        Navigation.PopModalAsync(true);
                     }
                     else
                     {
@@ -107,11 +120,13 @@ public partial class VistaCrearUsuario : ContentPage
 
     private void BtnMostrarOcultar_Pressed(object sender, EventArgs e)
     {
+        BtnMostrarOcultar.ImageSource = "mostrar.png";
         TxtContrasenaUsuario.IsPassword = false;
     }
 
     private void BtnMostrarOcultar_Released(object sender, EventArgs e)
     {
+        BtnMostrarOcultar.ImageSource = "ocultar.png";
         TxtContrasenaUsuario.IsPassword = true;
     }
 }

@@ -2,33 +2,16 @@
 
 namespace ProyectoFinalDAM.Modelo
 {
-    public partial class Persona
+    public partial class Persona(string nombre, string apellido1, string? apellido2, string email, string contrasena, int rol)
     {
         public ObjectId Id { get; set; }
-        public string Nombre { get; set; }
-        public string Apellido1 { get; set; }
-        public string? Apellido2 { get; set; }
+        public string Nombre { get; set; } = nombre;
+        public string Apellido1 { get; set; } = apellido1;
+        public string? Apellido2 { get; set; } = apellido2;
         public string? NombreCompleto { get => $"{Nombre} {Apellido1} {Apellido2}"; }
-        public string Contrasena { get; set; }
-        public string Email { get; set; }
-        public int Rol { get; set; }
-
-        public Persona()
-        {
-            Nombre = "";
-            Apellido1 = "";
-            Contrasena = "";
-            Email = "";
-            Rol = 0;
-        }
-        public Persona(string nombre, string apellido1, string contrasena, string email, int rol)
-        {
-            Nombre = nombre;
-            Apellido1 = apellido1;
-            Contrasena = contrasena;
-            Email = email;
-            Rol = rol;
-        }
+        public string Contrasena { get; set; } = contrasena;
+        public string Email { get; set; } = email;
+        public int Rol { get; set; } = rol;
 
         public override string ToString()
         {
@@ -42,10 +25,26 @@ namespace ProyectoFinalDAM.Modelo
                 2 => Utiles.ExtraerValorDiccionario("rol_admin"),
                 _ => "error",
             };
-            return 
+            return
                 $"{nombreCompletoPersona}: {NombreCompleto}\n" +
                 $"{emailPersona}: {Email}\n" +
                 $"{textoRol}: {rolPersona}\n";
+        }
+
+        public override bool Equals(object? obj)
+        {
+            if (obj == null) return false;
+            try
+            {
+                Persona persona = (Persona)obj;
+                return Id.Equals(persona.Id);
+            }
+            catch (Exception) { return false; }
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Id, Nombre, Apellido1, Apellido2, NombreCompleto);
         }
     }
 }

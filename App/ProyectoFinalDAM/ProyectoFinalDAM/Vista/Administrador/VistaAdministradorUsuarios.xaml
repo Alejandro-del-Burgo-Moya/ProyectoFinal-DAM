@@ -53,7 +53,8 @@
                 Grid.Row="1"
                 Grid.ColumnSpan="2"
                 Title="{DynamicResource picker_rol}"
-                HorizontalOptions="Fill"/>
+                HorizontalOptions="Fill"
+                SelectedIndexChanged="PickerRol_SelectedIndexChanged"/>
 
         </Grid>
 

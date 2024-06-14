@@ -28,9 +28,14 @@ public partial class VistaAdministradorUsuarios : ContentPage
 
     private void RellenarListaUsuarios()
     {
-        var lista = _appShell.BuscarPersonas(TxtBuscarGesUsu.Text);
+        var lista = _appShell.LeerPersonas(TxtBuscarGesUsu.Text, PickerRol.SelectedIndex);
         ListaAdministradorUsuarios.ItemsSource = null;
         ListaAdministradorUsuarios.ItemsSource = lista;
+    }
+
+    private static void MostrarErrorNoSeleccionado()
+    {
+        Utiles.MostrarAdvertencia(Utiles.ExtraerValorDiccionario("error"), Utiles.ExtraerValorDiccionario("error_no_seleccionado"));
     }
 
 
@@ -50,7 +55,16 @@ public partial class VistaAdministradorUsuarios : ContentPage
 
     private void BtnBorrarUsuario_Clicked(object sender, EventArgs e)
     {
-
+        if (ListaAdministradorUsuarios.SelectedItem != null)
+        {
+            Persona persona = (Persona)ListaAdministradorUsuarios.SelectedItem;
+            _appShell.BorrarPersona(persona);
+            RellenarListaUsuarios();
+        }
+        else
+        {
+            VistaAdministradorUsuarios.MostrarErrorNoSeleccionado();
+        }
     }
 
 
@@ -60,10 +74,11 @@ public partial class VistaAdministradorUsuarios : ContentPage
         {
             Persona persona = (Persona)ListaAdministradorUsuarios.SelectedItem;
             _ = Navigation.PushModalAsync(new VistaModificarUsuario(_appShell, persona));
+            RellenarListaUsuarios();
         }
         else
         {
-            Utiles.MostrarAdvertencia("Error", "Debes seleccionar una persona de la lista");
+            VistaAdministradorUsuarios.MostrarErrorNoSeleccionado();
         }
     }
 
@@ -72,6 +87,11 @@ public partial class VistaAdministradorUsuarios : ContentPage
     {
         InicializarPickerRol();
         TxtBuscarGesUsu.Text = null;
+        RellenarListaUsuarios();
+    }
+
+    private void PickerRol_SelectedIndexChanged(object sender, EventArgs e)
+    {
         RellenarListaUsuarios();
     }
 }

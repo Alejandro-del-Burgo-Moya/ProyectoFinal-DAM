@@ -82,7 +82,7 @@
             Grid.Row="4"
             WidthRequest="50"
             HeightRequest="50"
-            ImageSource="dotnet_bot.png"
+            ImageSource="ocultar.png"
             HorizontalOptions="End"
             Pressed="BtnMostrarOcultar_Pressed"
             Released="BtnMostrarOcultar_Released"/>

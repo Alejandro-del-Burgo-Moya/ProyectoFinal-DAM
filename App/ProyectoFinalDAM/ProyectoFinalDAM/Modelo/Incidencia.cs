@@ -59,5 +59,26 @@ namespace ProyectoFinalDAM.Modelo
                 $"{prioridadInc}: {valorPrioridad}\n" +
                 $"{fechaInc}: {FCreacion.Date.ToShortDateString()}\n";
         }
+
+        public override bool Equals(object? obj)
+        {
+            if (obj == null) return false;
+            try
+            {
+                Incidencia incidencia = (Incidencia)obj;
+                return Id.Equals(incidencia.Id);
+            }
+            catch (Exception) { return false; }
+        }
+
+        public override int GetHashCode()
+        {
+            HashCode hash = new();
+            hash.Add(Id);
+            hash.Add(Nombre);
+            hash.Add(FCreacion);
+            hash.Add(Creada);
+            return hash.ToHashCode();
+        }
     }
 }

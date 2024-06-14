@@ -91,6 +91,18 @@
             Margin="0,0,10,10"
             Spacing="10">
             <Button
+                x:Name="BtnResolverIncidencia"
+                IsVisible="False"
+                Text="{DynamicResource btn_resolver_incidencia}"
+                Clicked="BtnResolverIncidencia_Clicked" />
+            
+            <Button
+                x:Name="BtnAsignarmeIncidencia"
+                IsVisible="False"
+                Text="{DynamicResource btn_asignarme_incidencia}"
+                Clicked="BtnAsignarmeIncidencia_Clicked" />
+            
+            <Button
                 x:Name="BtnModificarIncidencia"
                 Text="{DynamicResource btn_modificar_incidencia}"
                 Clicked="BtnModificarIncidencia_Clicked"/>
@@ -102,6 +114,7 @@
 
             <Button
                 x:Name="BtnCrearIncidencia"
+                IsVisible="False"
                 Text="{DynamicResource btn_crear_incidencia}"
                 Clicked="BtnCrearIncidencia_Clicked"/>
 

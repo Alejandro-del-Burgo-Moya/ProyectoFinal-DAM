@@ -19,6 +19,7 @@ public partial class VistaModificarIncidencia : ContentPage
         TxtIncidencia.Text = _incidencia.Nombre;
         TxtDescripcion.Text = _incidencia.Descripcion;
         PickerPrioridad.SelectedIndex = _incidencia.Prioridad;
+        TxtEstadoincidencia.Text = Utiles.NombresEstado()[_incidencia.Estado];
     }
 
     private void InicializarPickerPrioridad()
@@ -44,9 +45,8 @@ public partial class VistaModificarIncidencia : ContentPage
         _incidencia.Descripcion = TxtDescripcion.Text;
         _incidencia.Prioridad = PickerPrioridad.SelectedIndex;
 
-        //incidencia.Creada = usuarioLogeado    //TODO manejar el usuario logeadop en la aplicación
-
         _appShell.ModificarIncidencia(_incidencia);
+
 
         Navigation.PopModalAsync(true);
     }

@@ -1,5 +1,4 @@
 using ProyectoFinalDAM.Modelo;
-using ProyectoFinalDAM.Modelo.Enums;
 
 namespace ProyectoFinalDAM.Vista;
 
@@ -38,11 +37,11 @@ public partial class VistaCrearIncidencia : ContentPage
             {
                 Nombre = TxtIncidencia.Text,
                 Descripcion = TxtDescripcion.Text,
-                Estado = (int)Estado.Abierta,
+                Estado = 0,
                 Prioridad = PickerPrioridad.SelectedIndex,
+                Creada = _appShell.UsuarioLogueado,
                 FCreacion = DateTime.Now
             };
-            //incidencia.Creada = usuarioLogeado    //TODO manejar el usuario logeadop en la aplicación
 
             _appShell.CrearIncidencia(incidencia);
 

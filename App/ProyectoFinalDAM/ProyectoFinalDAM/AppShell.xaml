@@ -9,11 +9,11 @@
     Title="ProyectoFinalDAM">
 
     <Shell.FlyoutHeader>
-        <Label Text="Aquí irá una imagen del proyecto o de la organiación"/>
+        <Image Source="logo.jpg"/>
     </Shell.FlyoutHeader>
 
     <Shell.ToolbarItems>
-        <ToolbarItem x:Name="mensajeUsuarioLogueado" Text="Hola" Order="Primary" IsEnabled="False"/>
+        <ToolbarItem x:Name="mensajeUsuarioLogueado" Order="Primary" IsEnabled="False"/>
     </Shell.ToolbarItems>
 
     <Shell.FlyoutFooter>

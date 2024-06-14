@@ -57,9 +57,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\acerca_de.png" />
 	  <None Remove="Resources\Images\administrador.png" />
+	  <None Remove="Resources\Images\ayuda.png" />
+	  <None Remove="Resources\Images\cerrar_sesion.png" />
 	  <None Remove="Resources\Images\configuracion.png" />
 	  <None Remove="Resources\Images\incidencia.png" />
+	  <None Remove="Resources\Images\iniciar_sesion.png" />
+	  <None Remove="Resources\Images\logo.jpg" />
+	  <None Remove="Resources\Images\mostrar.png" />
+	  <None Remove="Resources\Images\ocultar.png" />
 	</ItemGroup>
 
 	<ItemGroup>

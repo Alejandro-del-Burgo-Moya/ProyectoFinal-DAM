@@ -26,7 +26,7 @@
             Grid.Column="0" 
             Grid.Row="0" 
             Grid.ColumnSpan="2"
-            Source="dotnet_bot.png"
+            Source="logo.jpg"
             WidthRequest="300" 
             HeightRequest="300"/>
 
@@ -53,7 +53,7 @@
             WidthRequest="50"
             HeightRequest="50"
             Padding="0"
-            ImageSource="dotnet_bot.png"
+            ImageSource="ocultar.png"
             HorizontalOptions="End"
             Pressed="BtnMostrarOcultar_Pressed"
             Released="BtnMostrarOcultar_Released"/>

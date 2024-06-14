@@ -47,8 +47,9 @@
         {
             List<string> roles =
             [
-                ExtraerValorDiccionario("roll_normal"),
-                ExtraerValorDiccionario("roll_tecnico"),
+                ExtraerValorDiccionario("rol_normal"),
+                ExtraerValorDiccionario("rol_tecnico"),
+                ExtraerValorDiccionario("rol_admin"),
             ];
 
             return roles;

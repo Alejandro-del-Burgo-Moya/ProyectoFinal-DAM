@@ -5,6 +5,8 @@
 
     <!-- VistaIncidencias -->
     <x:String x:Key="incidencias">Incidencias</x:String>
+    <x:String x:Key="incidencias_creadas_por_mi">Mis incidencias</x:String>
+    <x:String x:Key="mis_incidencias">Mis incidencias asignadas</x:String>
     <x:String x:Key="ordenar">Ordenar por</x:String>
     <x:String x:Key="filtrar">Filtrar</x:String>
     <x:String x:Key="btn_crear_incidencia">Crear incidencia</x:String>
@@ -14,13 +16,26 @@
     <x:String x:Key="picker_prioridad">Prioridad</x:String>
     <x:String x:Key="picker_sin_filtrar">Sin filtrar</x:String>
     <x:String x:Key="fecha_creacion">Fecha de creación</x:String>
+    <x:String x:Key="btn_asignarme_incidencia">Asignarme incidencia</x:String>
+    <x:String x:Key="btn_resolver_incidencia">Resolver incidencia</x:String>
+
+    <x:String x:Key="picker_orden_incidencias1">Más recientes primero</x:String>
+    <x:String x:Key="picker_orden_incidencias2">Más antiguas primero</x:String>
+    <x:String x:Key="picker_orden_incidencias3">Más prioritarias primero</x:String>
+    <x:String x:Key="picker_orden_incidencias4">Menos prioritarias primero</x:String>
+    <x:String x:Key="picker_orden_incidencias5">Más avanzadas primero</x:String>
+    <x:String x:Key="picker_orden_incidencias6">Menos avanzadas primero</x:String>
+
+    <x:String x:Key="error_modificar_incidencia_resuelta">No se puede modificar una incidencia resuelta</x:String>
+    <x:String x:Key="error_asignar_incidencia_resuelta">No se puede asignar una incidencia resuelta</x:String>
+    <x:String x:Key="error_resolver_incidencia_resuelta">La incidencia ya está resuelta</x:String>
 
 
     <!-- Estados -->
     <x:String x:Key="estado_abierta">Abierta</x:String>
     <x:String x:Key="estado_asignada">Asignada</x:String>
     <x:String x:Key="estado_en_progreso">En progreso</x:String>
-    <x:String x:Key="estado_Resuleta">Resuelta</x:String>
+    <x:String x:Key="estado_resuelta">Resuelta</x:String>
 
 
     <!-- Prioridades -->
@@ -88,6 +103,8 @@
     <x:String x:Key="falta_email_usuario">Error - Email de usuario</x:String>
     <x:String x:Key="falta_email_usuario_desc">Debes introducir un correo electrónico válido para el nuevo usuario</x:String>
     <x:String x:Key="info_contrasena">La contraseña debe tener al menos 6 caracteres, 1 mayúscula, 1 minúscula y 1 número.</x:String>
+    <x:String x:Key="error_registrar_usuario">Error de registro</x:String>
+    <x:String x:Key="error_registrar_usuario_desc">Ese correo electrónico ya existe, no se puede crear un usuario nuevo con una cuenta existente.</x:String>
 
 
     <!-- VistaAdministradorIncidencias -->
@@ -96,17 +113,16 @@
     <x:String x:Key="btn_borrar_incidencia">Borrar incidencia</x:String>
     <x:String x:Key="btn_modificar_incidencia">Modificar incidencia</x:String>
     <x:String x:Key="asignar_tecnico">Elige un técnico</x:String>
-    <x:String x:Key="error_asignar_incidencia_resuelta">Error - Asignar incidencia</x:String>
-    <x:String x:Key="error_asignar_incidencia_resuelta_desc">No se puede volver a asignar una incidencia resulta.</x:String>
 
 
     <!-- VistaIniciarSesion -->
-    <!--título vista-->
     <x:String x:Key="iniciar_sesion">Iniciar Sesión</x:String>
     <x:String x:Key="btn_iniciar_sesion">Iniciar sesión</x:String>
     <x:String x:Key="btn_registrar_usuario">Registrarme</x:String>
     <x:String x:Key="txt_usuario">Usuario</x:String>
     <x:String x:Key="txt_contrasena">Contraseña</x:String>
+    <x:String x:Key="error_inicio_sesion">Error de inicio de sesión</x:String>
+    <x:String x:Key="error_usuario_no_existe">El usuario no existe</x:String>
 
 
     <!-- CerrarSesion -->
@@ -176,9 +192,16 @@
     <x:String x:Key="actualizar_lista">Actualizar lista</x:String>
     <x:String x:Key="buscar">Buscar</x:String>
 
+    <x:String x:Key="error">Error</x:String>
+    <x:String x:Key="error_no_seleccionado">Debes seleccionar un elemento de la lista</x:String>
+
 
     <!-- Footer -->
-    <x:String x:Key="creador_app">Alejadro del Burgo Moya</x:String>
+    <x:String x:Key="creador_app">Creada por Alejadro del Burgo Moya</x:String>
     <x:String x:Key="version_app">Versión 0.2</x:String>
+    
+    
+    <!-- Mensaje usuario logueado-->
+    <x:String x:Key="mensaje">Hola, </x:String>
 
 </ResourceDictionary>

@@ -12,14 +12,39 @@ namespace ProyectoFinalDAM.BaseDatos
         private IMongoCollection<Persona> colPersonas = cliente.GetDatabase("ProyectoFinalDAM").GetCollection<Persona>("Persona");
         private IMongoCollection<Incidencia> colIncidencias = cliente.GetDatabase("ProyectoFinalDAM").GetCollection<Incidencia>("Incidencia");
 
-        public bool IniciarSesion(string email, string contrasena)
+        public Persona? IniciarSesion(string email, string contrasena)
         {
-            return LeerPersonas().Where(p => p.Email == email && p.Contrasena == contrasena).Any();
+            try
+            {
+                //return LeerPersonas().Where(p => p.Email.Equals(email, StringComparison.CurrentCultureIgnoreCase) && p.Contrasena.Equals(contrasena)).First();
+                var lista = LeerPersonas();
+                lista = lista.Where(p => p.Email.Equals(email, StringComparison.CurrentCultureIgnoreCase) && p.Contrasena.Equals(contrasena)).ToList();
+                return lista.First();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
-        public void RegistrarUsuario(Persona persona)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="persona"></param>
+        /// <returns>Devuelve el rol de la persona que se ha registrado (2 -> admin, 1 -> tecnico, 0 -> normal, -1 -> ya existe ese email)</returns>
+        public int RegistrarUsuario(Persona persona)
         {
+            //Si es el pirmie usuario se crea como admin
+            var lista = LeerPersonas();
+            bool hayAdmin = lista.Where(p => p.Rol == 2).Any();
+            if (!hayAdmin) persona.Rol = 2;
+
+            //Si ya existe ese email no se puede crear un usuario
+            bool yaExiste = lista.Where(p => p.Email.Equals(persona.Email, StringComparison.CurrentCultureIgnoreCase)).Any();
+            if (yaExiste) return -1;
+
             CrearPersona(persona);
+            return persona.Rol;
         }
 
         public List<Persona> LeerPersonas()
@@ -44,13 +69,20 @@ namespace ProyectoFinalDAM.BaseDatos
             colIncidencias.InsertOne(incidencia);
         }
 
-        public void ModificarIncidencia(Incidencia incidencia)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="incidencia"></param>
+        /// <returns>Devuelve true si se modifica la incidencia y false si la incidencia está resulta</returns>
+        public bool ModificarIncidencia(Incidencia incidencia)
         {
+            if (incidencia.Estado == 3) { return false; }
             var filtro = Builders<Incidencia>.Filter.Eq("Id", incidencia.Id);
             var cambios = Builders<Incidencia>.Update
                 .Set("Descripcion", incidencia.Descripcion)
                 .Set("Prioridad", incidencia.Prioridad);
             colIncidencias.UpdateOne(filtro, cambios);
+            return true;
         }
 
         public void ModificarPersona(Persona persona)
@@ -61,6 +93,40 @@ namespace ProyectoFinalDAM.BaseDatos
                 .Set("Contrasena", persona.Contrasena)
                 .Set("Rol", persona.Rol);
             colPersonas.UpdateOne(filtro, cambios);
+        }
+
+        public void BorrarUsuario(Persona persona)
+        {
+            var filtro = Builders<Persona>.Filter.Eq("Id", persona.Id);
+            colPersonas.DeleteOne(filtro);
+        }
+
+        public void AsignarIncidencia(Incidencia incidencia, Persona persona)
+        {
+            incidencia.Asignada = persona;
+            incidencia.FAsignacion = DateTime.Now;
+            incidencia.Estado = 1;
+
+            var filtro = Builders<Incidencia>.Filter.Eq("Id", incidencia.Id);
+            var cambios = Builders<Incidencia>.Update
+                .Set("Asignada", incidencia.Asignada)
+                .Set("FAsignacion", incidencia.FAsignacion)
+                .Set("Estado", incidencia.Estado);
+            colIncidencias.UpdateOne(filtro, cambios);
+        }
+
+        public void ResolverIncidencia(Incidencia incidencia, Persona persona)
+        {
+            incidencia.Resuelta = persona;
+            incidencia.FResolucion = DateTime.Now;
+            incidencia.Estado = 3;
+
+            var filtro = Builders<Incidencia>.Filter.Eq("Id", incidencia.Id);
+            var cambios = Builders<Incidencia>.Update
+                .Set("Asignada", incidencia.Asignada)
+                .Set("FAsignacion", incidencia.FAsignacion)
+                .Set("Estado", incidencia.Estado);
+            colIncidencias.UpdateOne(filtro, cambios);
         }
     }
 }

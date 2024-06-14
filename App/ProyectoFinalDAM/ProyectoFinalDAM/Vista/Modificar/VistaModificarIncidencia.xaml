@@ -6,7 +6,7 @@
 
     <Grid
         ColumnDefinitions="Auto, *"
-        RowDefinitions="Auto, *, Auto, Auto"
+        RowDefinitions="Auto, *, Auto, Auto, Auto"
         ColumnSpacing="10"
         RowSpacing="10"
         Padding="20">
@@ -48,9 +48,21 @@
             Grid.Column="1"
             Grid.Row="2"/>
 
-        <HorizontalStackLayout
+        <Label
             Grid.Column="0"
             Grid.Row="3"
+            VerticalOptions="Center"
+            Text="{DynamicResource estado_incidencia}"/>
+
+        <Entry
+            x:Name="TxtEstadoincidencia"
+            Grid.Column="1"
+            Grid.Row="3"
+            IsReadOnly="True"/>
+
+        <HorizontalStackLayout
+            Grid.Column="0"
+            Grid.Row="4"
             Grid.ColumnSpan="2"
             HorizontalOptions="End"
             Spacing="10">
